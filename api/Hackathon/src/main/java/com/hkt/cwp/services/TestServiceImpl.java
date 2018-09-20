@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 
 import com.hkt.cwp.bean.ResultBean;
-import com.hkt.cwp.bean.response.TestResponse;
 import com.hkt.cwp.models.Test;
 
 @Service

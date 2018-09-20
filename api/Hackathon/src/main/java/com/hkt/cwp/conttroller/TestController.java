@@ -12,7 +12,11 @@ import com.hkt.cwp.bean.ResultBean;
 import com.hkt.cwp.services.TestService;
 
 
-
+/**
+ * 
+ * @author thuan
+ *
+ */
 @RestController
 @RequestMapping("/test")
 public class TestController {
@@ -26,7 +30,6 @@ public class TestController {
 	 public ResponseEntity<ResultBean> getAllTest(){
 		 ResultBean resultBean = null;
 		 resultBean = testService.getAllTest();
-		 System.out.println("a");
 		 return new ResponseEntity<>(resultBean, HttpStatus.OK);
 	 }
 	   
