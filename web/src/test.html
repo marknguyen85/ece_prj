@@ -2,9 +2,9 @@
 <!--
 * CoreUI - Free Bootstrap Admin Template
 * @version v2.0.0
-* @link https://coreui.io
+* @link http://13.251.131.35
 * Copyright (c) 2018 creativeLabs Łukasz Holeczek
-* Licensed under MIT (https://coreui.io/license)
+* Licensed under MIT (http://13.251.131.35/license)
 -->
 
 <html lang="en">
@@ -13,10 +13,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="description" content="ECE system">
     <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>CoreUI Free Bootstrap Admin Template</title>
+    <meta name="keyword" content="ECE system">
+    <title>ECE system</title>
     <!-- Icons-->
     <link href="node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
     <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -127,189 +127,67 @@
       </div>
       <main class="main">
         <!-- Breadcrumb-->
-
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">
+            <a href="#">Admin</a>
+          </li>
+          <li class="breadcrumb-item active">Thi năng lực</li>
+          <!-- Breadcrumb Menu-->
+        </ol>
         <div class="container-fluid">
-          <div class="animated fadeIn">
-            <div class="card">
-              <div class="card-header">
-
-                <div class="img-profile">
-                  <img class="prof-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <strong>Thi năng lực </strong>
+                          <small>tháng 10</small>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-lg btn-danger" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">
+                                <i class="fa fa-dot-circle-o"></i> Bắt đầu</button>
+                        </div>
+                      </div>
+                    </div>
                 </div>
-                <div class="info-profile">
-                  <h5>Vi Văn Thức</h5>
-                  <b>Developer</b>
+            </div>
+            <div class="modal fade" id="test-start-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-max" role="document">
+                <div class="modal-content modal-content-max">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="q-title">Bạn yêu thích ngôn ngữ nào</h4>
+                    <button class="close" type="button">
+                    <span id="q-stt">1</span>/<span id="q-total">60</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group row">
+                          <div class="col-md-9 col-form-label" id="q-answer">
+                            <div class="form-check">
+                              <input class="form-check-input" id="radio1" type="radio" value="radio1" name="radios">
+                              <label class="form-check-label" for="radio1">C#</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" id="radio2" type="radio" value="radio2" name="radios">
+                              <label class="form-check-label" for="radio2">Java</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" id="radio3" type="radio" value="radio2" name="radios">
+                              <label class="form-check-label" for="radio3">PHP</label>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" id="q-prev" type="button">Prev</button>
+                    <button class="btn btn-primary" id="q-next" type="button">Next</button>
+                    <button class="btn btn-primary" id="q-save" style="display: none;" type="button">Save changes</button>
+                    <button class="btn btn-secondary" id="q-close" type="button" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
-              </div>
-              <div class="card-body">
-                <ol class="navSkill">
-                  <li class="breadcrumb-item">
-                    <a href="/profile.html">Năng lực</a>
-                  </li>
-                  <li class="breadcrumb-item">
-                    <a href="/history.html">Lịch sử</a>
-                  </li>
-                  <li class="breadcrumb-item active">
-                    <a href="/sosanh.html">So Sánh</a>
-                  </li>
-
-                  <li class="breadcrumb-item active">
-                    <a href="/lotrinh.html">Lộ trình công danh</a>
-                  </li>
-                </ol>
-
-
               </div>
             </div>
-            <div class="card">
-              <div class="card-header">
-                <div class="">
-                  <b>Năng lực</b>
-
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-wrapper">
-
-                  <canvas id="canvasCapaci"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Năng lực</div>
-              <div class="card-body">
-                <div class="form-inline search-container" >
-                  <input id="searcRank" type="text" class="form-control" placeholder="Tìm kiếm" name="" value="">
-                  <button class="form-control"><i class="fa fa-search">Search</i></button>
-                </div>
-                <div class="wrapperRank">
-                 <table class="tblRank">
-                   <thead>
-                     <tr>
-                       <th>Rank</th>
-                       <th>Username</th>
-                       <th>Coding</th>
-                       <th>Database</th>
-                       <th>IQ</th>
-                       <th>Attitude</th>
-                       <th>Manager</th>
-                     </tr>
-                   </thead>
-                   <tbody>
-                     <tr>
-                         <td class="rank">1</td>
-                         <td class="team">Vi Văn Thức</td>
-                         <td class="points">90</td>
-                         <td class="up-down">92</td>
-                         <td class="points">100</td>
-                         <td class="up-down">91</td>
-                         <td class="up-down">98</td>
-                      </tr>
-                    <tr>
-                      <td class="rank">2</td>
-                      <td class="team">Nguyễn Văn A</td>
-                      <td class="points">76</td>
-                      <td class="up-down">92</td>
-                      <td class="points">69</td>
-                      <td class="up-down">91</td>
-                      <td class="up-down">98</td>
-                     </tr>
-                      <tr>
-                       <td class="rank">3</td>
-                       <td class="team">Nguyễn Văn B</td>
-                       <td class="points">90</td>
-                       <td class="up-down">92</td>
-                       <td class="points">67</td>
-                       <td class="up-down">97</td>
-                       <td class="up-down">78</td>
-                      </tr>
-                      <tr>
-                        <td class="rank">4</td>
-                        <td class="team">Nguyễn Văn C</td>
-                        <td class="points">90</td>
-                        <td class="up-down">92</td>
-                        <td class="points">67</td>
-                        <td class="up-down">97</td>
-                        <td class="up-down">78</td>
-                       </tr>
-                       <tr>
-                         <td class="rank">5</td>
-                         <td class="team">Nguyễn Văn D</td>
-                         <td class="points">90</td>
-                         <td class="up-down">92</td>
-                         <td class="points">67</td>
-                         <td class="up-down">97</td>
-                         <td class="up-down">78</td>
-                      </tr>
-                      <tr>
-                        <td class="rank">6</td>
-                        <td class="team">Nguyễn Văn E</td>
-                        <td class="points">90</td>
-                        <td class="up-down">92</td>
-                        <td class="points">67</td>
-                        <td class="up-down">97</td>
-                        <td class="up-down">78</td>
-                     </tr>
-                     <tr>
-                       <td class="rank">7</td>
-                       <td class="team">Nguyễn Văn G</td>
-                       <td class="points">90</td>
-                       <td class="up-down">92</td>
-                       <td class="points">67</td>
-                       <td class="up-down">97</td>
-                       <td class="up-down">78</td>
-                    </tr>
-                    <tr>
-                      <td class="rank">8</td>
-                      <td class="team">Nguyễn Văn G</td>
-                      <td class="points">90</td>
-                      <td class="up-down">92</td>
-                      <td class="points">67</td>
-                      <td class="up-down">97</td>
-                      <td class="up-down">78</td>
-                   </tr>
-                   <tr>
-                     <td class="rank">9</td>
-                     <td class="team">Nguyễn Văn G</td>
-                     <td class="points">90</td>
-                     <td class="up-down">92</td>
-                     <td class="points">67</td>
-                     <td class="up-down">97</td>
-                     <td class="up-down">78</td>
-                  </tr>
-                      <tr>
-                        <td class="rank">10</td>
-                        <td class="team">Nguyễn Văn G</td>
-                        <td class="points">90</td>
-                        <td class="up-down">92</td>
-                        <td class="points">67</td>
-                        <td class="up-down">97</td>
-                        <td class="up-down">78</td>
-                     </tr>
-                     <tr>
-                       <td class="rank">...</td>
-                       <td class="team">...</td>
-                       <td class="points">...</td>
-                       <td class="up-down">...</td>
-                       <td class="points">...</td>
-                       <td class="up-down">...</td>
-                       <td class="up-down">...</td>
-                    </tr>
-                    <tr>
-                      <td class="rank">101</td>
-                      <td class="team">Nguyễn Văn F</td>
-                      <td class="points">90</td>
-                      <td class="up-down">92</td>
-                      <td class="points">67</td>
-                      <td class="up-down">97</td>
-                      <td class="up-down">78</td>
-                   </tr>
-                   </tbody>
-                 </table>
-               </div>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
       <aside class="aside-menu">
@@ -600,12 +478,12 @@
     </div>
     <footer class="app-footer">
       <div>
-        <a href="https://coreui.io">CoreUI</a>
+        <a href="http://13.251.131.35">ECE system</a>
         <span>&copy; 2018 creativeLabs.</span>
       </div>
       <div class="ml-auto">
         <span>Powered by</span>
-        <a href="https://coreui.io">CoreUI</a>
+        <a href="http://13.251.131.35">ECE system</a>
       </div>
     </footer>
     <!-- CoreUI and necessary plugins-->
@@ -615,10 +493,11 @@
     <script src="node_modules/pace-progress/pace.min.js"></script>
     <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
     <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
-
-    <!-- chart -->
-    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
-    <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
-    <script src="js/charts.js"></script>
+    <script src="js/test.js"></script>
+    <script>
+      $(document).ready(function(){
+        TestModule.init();
+      })
+    </script>
   </body>
 </html>

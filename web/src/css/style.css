@@ -4437,8 +4437,6 @@ input[type="button"].btn-block {
   margin-bottom: 0;
   background-color: #f0f3f5;
   border-bottom: 1px solid #c8ced3;
-  display: flex;
-  flex-direction: row;
 }
 
 .card-header:first-child {
@@ -4448,16 +4446,7 @@ input[type="button"].btn-block {
 .card-header + .list-group .list-group-item:first-child {
   border-top: 0;
 }
-.card-header .img-profile .prof-avatar{
-  width: 100%;
-  height: 100%;
-  padding: 5px;
-}
-.card-header .info-profile{
 
-  margin-left: 10px;
-
-}
 .card-footer {
   padding: 0.75rem 1.25rem;
   background-color: #f0f3f5;
@@ -4489,12 +4478,6 @@ input[type="button"].btn-block {
   padding: 1.25rem;
 }
 
-.img-profile{
-  width: 100px;
-  height: 100px;
-
-  border: 1px solid #c8ced3;;
-}
 .card-img {
   width: 100%;
   border-radius: calc(0.25rem - 1px);
@@ -4656,55 +4639,7 @@ input[type="button"].btn-block {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.navSkill{
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
 
-  list-style: none;
-  background-color: #fff;
-  border-radius: 0;
-  padding: 0.15rem 0.15rem;
-  margin-bottom: 0.12rem;
-}
-.wrapperRank{
-  line-height: 1.5em;
-	margin: 0 auto;
-	padding: 2em 0 3em;
-	width: 90%;
-	max-width: 2000px;
-	overflow: hidden;
-  margin-left: -0.1em;
-}
-.wrapperRank .tblRank {
-  border-collapse: collapse;
-  width: 100%;
-  background: #fff;
-}
-.wrapperRank .tblRank th{
-  background-color: #326295;
-   font-weight: bold;
-   color: #fff;
-   white-space: nowrap;
-}
-.wrapperRank .tblRank td,th{
-  padding: 1em 1.5em;
-  text-align: left;
-}
-.wrapperRank .tblRank tbody,th{
-  background-color: #2ea879;
-}
-.wrapperRank .tblRank tbody tr:nth-child(2n-1) {
-    background-color: #f5f5f5;
-    transition: all .125s ease-in-out;
-}
-.wrapperRank .tblRank tbody tr:hover {
-    background-color: rgba(50,98,149,.3);
-}
-.wrapperRank .tblRank td.rank {
-	text-transform: capitalize;
-}
 .breadcrumb {
   display: -ms-flexbox;
   display: flex;
@@ -14239,5 +14174,24 @@ body {
   breakpoint-md: 768px;
   breakpoint-lg: 992px;
   breakpoint-xl: 1200px;
+}
+
+.modal-dialog-max {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.modal-content-max {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+}
+
+#q-answer .form-check {
+  padding-bottom: 10px;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */
