@@ -124,7 +124,31 @@ var radarChart = new Chart($('#canvas-4'), {
     responsive: true
   }
 }); // eslint-disable-next-line no-unused-vars
+//radar Char capacity
 
+var radarChartCapa = new Chart($('#canvasCapaci'), {
+  type: 'radar',
+  data: {
+    labels: ['Chuyên môn', 'IQ', 'ABC', 'Chuyên cần', 'Thái độ', 'Ngoại ngữ'],
+    datasets: [{
+      label: 'Nguyễn Văn A',
+      backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      borderColor: 'black',
+      pointBackgroundColor: 'black',
+      pointBorderColor: '#fff',
+      pointHighlightFill: '#fff',
+      pointHighlightStroke: 'rgba(220, 220, 220, 1)'
+
+    }]
+  },
+  options: {
+    responsive: true
+  }
+}); // eslint-disable-next-line no-unused-vars
+//Load data and update data in dataset---------------------------------
+console.log(radarChartCapa.data.datasets[0].data = [65, 59, 90, 81, 56, 56]);
+radarChartCapa.update();
+//----------------------------------------------------------------------------
 var pieChart = new Chart($('#canvas-5'), {
   type: 'pie',
   data: {
