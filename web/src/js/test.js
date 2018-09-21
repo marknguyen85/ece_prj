@@ -149,6 +149,9 @@
     }
 
     appName.init = function(){
+        if (!Common.checkAuthen()) {
+            Common.redirect('/login.html');
+        }
         initArray();
         $(document).on("click", '#test-start', function() {
             var dialog = $(this).attr('ref')
