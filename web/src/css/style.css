@@ -14194,4 +14194,84 @@ body {
   padding-bottom: 10px;
   cursor: pointer;
 }
+
+.profile .card-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.card-header .img-profile .prof-avatar {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+
+.card-header .info-profile {
+  margin-left: 10px;
+}
+
+.img-profile {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #c8ced3;
+}
+
+.navSkill {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  list-style: none;
+  background-color: #fff;
+  border-radius: 0;
+  padding: 0.15rem 0.15rem;
+  margin-bottom: 0.12rem;
+}
+
+.wrapperRank {
+  line-height: 1.5em;
+  margin: 0 auto;
+  padding: 2em 0 3em;
+  width: 90%;
+  max-width: 2000px;
+  overflow: hidden;
+  margin-left: -0.1em;
+}
+
+.wrapperRank .tblRank {
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+}
+
+.wrapperRank .tblRank th {
+  background-color: #326295;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.wrapperRank .tblRank td, th {
+  padding: 1em 1.5em;
+  text-align: left;
+}
+
+.wrapperRank .tblRank tbody, th {
+  background-color: #2ea879;
+}
+
+.wrapperRank .tblRank tbody tr:nth-child(2n-1) {
+  background-color: #f5f5f5;
+  transition: all .125s ease-in-out;
+}
+
+.wrapperRank .tblRank tbody tr:hover {
+  background-color: rgba(50, 98, 149, 0.3);
+}
+
+.wrapperRank .tblRank td.rank {
+  text-transform: capitalize;
+}
 /*# sourceMappingURL=style.css.map */
