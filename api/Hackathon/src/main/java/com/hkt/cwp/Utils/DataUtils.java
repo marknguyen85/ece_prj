@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -220,7 +222,6 @@ public class DataUtils {
     }
 
     /**
-     * yyyymmdd hhmmss の文字列をTimestamp型へ変換
      *
      * @param strDate
      * @param str
@@ -349,7 +350,6 @@ public class DataUtils {
     /**
      * validate format input
      *
-     * @author NgocND
      * @param value
      * @param format
      * @return
@@ -361,7 +361,6 @@ public class DataUtils {
     /**
      * replace param in error message
      *
-     * @author SonLV
      * @param value
      * @param param
      * @return
@@ -386,7 +385,7 @@ public class DataUtils {
     public static JsonObject getJsonObject(String strJson) throws Exception {
         JsonObject json = null;
         try {
-            json = SoundboxJsonUtil.createJsonObject(strJson);
+            json = JsonDataUtil.createJsonObject(strJson);
             json = json.getAsJsonObject("data");
         } catch (JsonSyntaxException ex) {
             json = null;
@@ -432,9 +431,9 @@ public class DataUtils {
                         continue;
                     }
                 } else if (val instanceof Timestamp && field.getType() == String.class) {
-                    val = SoundboxJsonUtil.timestampToString((Timestamp) val);
+                    val = JsonDataUtil.timestampToString((Timestamp) val);
                 } else if (val instanceof Date && field.getType() == String.class) {
-                    val = SoundboxJsonUtil.dateToString((Date) val);
+                    val = JsonDataUtil.dateToString((Date) val);
                 } else if (field.getType() != val.getClass()) {
                     Class<?> ft = field.getType();
 
@@ -481,4 +480,18 @@ public class DataUtils {
 
         return new Date(cal.getTimeInMillis());
     }
+    
+    /**
+	 *
+	 * @param value
+	 * @return
+	 */
+	public static boolean isInteger(String value) {
+		final Pattern ptnInteger = Pattern.compile("^\\d+$");
+		try {
+			return ptnInteger.matcher(value).matches();
+		} catch (PatternSyntaxException e) {
+			return false;
+		}
+	}
 }

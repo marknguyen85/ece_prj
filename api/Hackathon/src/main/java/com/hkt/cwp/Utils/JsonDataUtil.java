@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2018 Co-Well Asia. All rights reserved.
- * CO-WELL PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.hkt.cwp.Utils;
 
 import java.sql.Timestamp;
@@ -18,13 +14,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-/**
- * @author kamimura
- *
- */
-public class SoundboxJsonUtil {
+public class JsonDataUtil {
 
-	protected static final Logger logger = LoggerFactory.getLogger(SoundboxJsonUtil.class);
+	protected static final Logger logger = LoggerFactory.getLogger(JsonDataUtil.class);
 
 	protected static final SimpleDateFormat YYYYMMDD_FORMAT = new SimpleDateFormat("yyyyMMdd");
 	protected static final SimpleDateFormat HHMMSS_FORMAT = new SimpleDateFormat("HHmmss");
@@ -267,7 +259,7 @@ public class SoundboxJsonUtil {
         JsonObject json = null;
         try {
             if (null != strJson && 0 != strJson.length()) {
-                json = SoundboxJsonUtil.createJsonObject(strJson);
+                json = JsonDataUtil.createJsonObject(strJson);
             }
             if (json != null) {
                 json = json.getAsJsonObject("data");

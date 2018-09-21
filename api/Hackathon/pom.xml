@@ -54,6 +54,33 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate4 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate4</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>1.5.9.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-entitymanager</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.10.Final</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -65,6 +92,30 @@
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		 <!-- https://mvnrepository.com/artifact/org.jasypt/jasypt-spring31 -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt-spring31</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+        <!-- exclude tomcat Spring Boot will use HikariCP automatically -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+		
 	</dependencies>
 
 	<build>

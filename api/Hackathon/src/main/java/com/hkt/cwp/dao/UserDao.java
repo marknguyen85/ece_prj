@@ -3,7 +3,7 @@
  */
 package com.hkt.cwp.dao;
 
-import com.hkt.cwp.models.User;
+import com.hkt.cwp.models.Employee;
 
 /**
  * @author HP
@@ -11,5 +11,5 @@ import com.hkt.cwp.models.User;
  */
 public interface UserDao {
 
-	User getUser(String name, String password) throws Exception;
+	Employee getUser(String name, String password) throws Exception;
 }
