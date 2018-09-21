@@ -34,12 +34,13 @@ public class TokenAuthentication {
 	 */
 	public static String addAuthentication(Employee user) {
 		String id = String.valueOf(user.getId());
-		String userName = user.getName();
+		String name = user.getName();
+		String userName = user.getUsername();
 		String password = user.getPassword();
 		String code = user.getCode();
 
 		String JWT = Jwts.builder().claim(Constants.USER_ID, id).claim(Constants.USER_NAME, userName)
-				.claim(Constants.PASSWORD, password).claim(Constants.CODE, code)
+				.claim(Constants.PASSWORD, password).claim(Constants.CODE, code).claim(Constants.NAME, name)
 				.setExpiration(new Date(System.currentTimeMillis() + Constants.EXPIRATIONTIME))
 				.signWith(SignatureAlgorithm.HS512, Constants.SECRET).compact();
 		return JWT;
@@ -61,13 +62,15 @@ public class TokenAuthentication {
 				Claims claims = Jwts.parser().setSigningKey(Constants.SECRET).parseClaimsJws(token).getBody();
 				Integer id = (Integer)claims.get(Constants.USER_ID);
 				String userName = (String)claims.get(Constants.USER_NAME);
+				String name = (String)claims.get(Constants.NAME);
 				String password = (String)claims.get(Constants.PASSWORD);
 				String code = (String)claims.get(Constants.CODE);
 				
 				if (id != null && userName != null && password != null && code != null) {
 					Employee authorizeData = new Employee();
 					authorizeData.setId(id);
-					authorizeData.setName(userName);
+					authorizeData.setName(name);
+					authorizeData.setUsername(userName);
 					authorizeData.setPassword(password);
 					authorizeData.setCode(code);
 					request.setAttribute(Constants.USER, authorizeData);
