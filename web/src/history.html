@@ -151,7 +151,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="typography.html">
-                <i class="nav-icon icon-pencil"></i> Typography</a>
+                <i class="nav-icon icon-pencil"></i> Thông tin cá nhân</a>
             </li>
             <li class="nav-title">Components</li>
             <li class="nav-item nav-dropdown">
@@ -338,112 +338,49 @@
       </div>
       <main class="main">
         <!-- Breadcrumb-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">
-            <a href="#">Admin</a>
-          </li>
-          <li class="breadcrumb-item active">Dashboard</li>
-          <!-- Breadcrumb Menu-->
-          <li class="breadcrumb-menu d-md-down-none">
-            <div class="btn-group" role="group" aria-label="Button group">
-              <a class="btn" href="#">
-                <i class="icon-speech"></i>
-              </a>
-              <a class="btn" href="./">
-                <i class="icon-graph"></i>  Dashboard</a>
-              <a class="btn" href="#">
-                <i class="icon-settings"></i>  Settings</a>
-            </div>
-          </li>
-        </ol>
+
         <div class="container-fluid">
           <div class="animated fadeIn">
-            <div class="card-columns cols-2">
-              <div class="card">
-                <div class="card-header">Line Chart
-                  <div class="card-header-actions">
-                    <a class="card-header-action" href="http://www.chartjs.org" target="_blank">
-                      <small class="text-muted">docs</small>
-                    </a>
-                  </div>
+            <div class="card">
+              <div class="card-header">
+
+                <div class="img-profile">
+                  <img class="prof-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
                 </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="canvas-1"></canvas>
-                  </div>
+                <div class="info-profile">
+                  <h5>Vi Văn Thức</h5>
+                  <b>Developer</b>
                 </div>
               </div>
-              <!-- <div class="card">
-                <div class="card-header">Bar Chart
-                  <div class="card-header-actions">
-                    <a class="card-header-action" href="http://www.chartjs.org" target="_blank">
-                      <small class="text-muted">docs</small>
-                    </a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="canvas-2"></canvas>
-                  </div>
-                </div>
-              </div> -->
-              <!-- <div class="card">
-                <div class="card-header">Doughnut Chart
-                  <div class="card-header-actions">
-                    <a class="card-header-action" href="http://www.chartjs.org" target="_blank">
-                      <small class="text-muted">docs</small>
-                    </a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="canvas-3"></canvas>
-                  </div>
-                </div>
-              </div> -->
-              <div class="card">
-                <div class="card-header">Radar Chart
-                  <div class="card-header-actions">
-                    <a class="card-header-action" href="http://www.chartjs.org" target="_blank">
-                      <small class="text-muted">docs</small>
-                    </a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="canvas-4"></canvas>
-                  </div>
+              <div class="card-body">
+                <ol class="navSkill">
+                  <li class="breadcrumb-item">Năng lực</li>
+                  <li class="breadcrumb-item">
+                    <a href="#">Lịch sử</a>
+                  </li>
+                  <li class="breadcrumb-item active">So sánh</li>
+                  <li class="breadcrumb-item active">Lộ trình công danh</li>
+                </ol>
+
+
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">Trình độ tháng 6 </div>
+              <div class="card-body">
+                <div class="chart-wrapper">
+                  <canvas id="canvas-4"></canvas>
                 </div>
               </div>
-              <!-- <div class="card">
-                <div class="card-header">Pie Chart
-                  <div class="card-header-actions">
-                    <a class="card-header-action" href="http://www.chartjs.org" target="_blank">
-                      <small class="text-muted">docs</small>
-                    </a>
-                  </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Trình độ chuyên môn  </div>
+              <div class="card-body">
+                <div class="chart-wrapper">
+                  <canvas id="canvas-1"></canvas>
                 </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="canvas-5"></canvas>
-                  </div>
-                </div>
-              </div> -->
-              <!-- <div class="card">
-                <div class="card-header">Polar Area Chart
-                  <div class="card-header-actions">
-                    <a class="card-header-action" href="http://www.chartjs.org" target="_blank">
-                      <small class="text-muted">docs</small>
-                    </a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="canvas-6"></canvas>
-                  </div>
-                </div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -751,7 +688,7 @@
     <script src="node_modules/pace-progress/pace.min.js"></script>
     <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
     <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
-    <!-- Plugins and scripts required by this view-->
+
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
     <script src="js/charts.js"></script>
