@@ -8,8 +8,8 @@ import javax.persistence.*;
  * @author thuan
  *
  */
-@Entity
-@Table(name = "user")
+//@Entity
+//@Table(name = "user")
 public class User implements Serializable {
 
 	/**
@@ -17,14 +17,14 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Column(name = "id")
 	private int id;
-	@Column(name = "name")
+//	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "password")
+//	@Column(name = "password")
 	private String password;
 	
 	public User() {}
