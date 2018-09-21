@@ -9,8 +9,8 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "test")
-public class Test implements Serializable {
+@Table(name = "user")
+public class User implements Serializable {
 
 	/**
 	 * 
@@ -23,9 +23,13 @@ public class Test implements Serializable {
 	private int id;
 	@Column(name = "name")
 	private String name;
-	public Test() {}
 	
-	public Test(int id, String name) {
+	@Column(name = "password")
+	private String password;
+	
+	public User() {}
+	
+	public User(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,7 +47,20 @@ public class Test implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 
 }

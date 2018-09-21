@@ -16,4 +16,6 @@ public class Constants {
     public static final String BUSINESS_CONFIG = "configuration";
     public static final String YYYYMMDD_WITH_HYPHEN_FORMAT = "yyyy-MM-dd";
     public static String ERR_ID_INTERNAL_SERVER_ERROR = "Server error!";
+    
+    public static final String USER_PATH = "/api/user";
 }

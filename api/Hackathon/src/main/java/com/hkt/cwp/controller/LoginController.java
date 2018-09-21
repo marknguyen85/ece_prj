@@ -3,8 +3,6 @@
  */
 package com.hkt.cwp.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,7 @@ import com.hkt.cwp.services.LoginService;
  *
  */
 @RestController
+@RequestMapping(Constants.USER_PATH)
 public class LoginController {
 
 	private ResultBean resultBean;
