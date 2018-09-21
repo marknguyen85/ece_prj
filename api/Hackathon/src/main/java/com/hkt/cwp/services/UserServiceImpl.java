@@ -30,6 +30,10 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService{
 	public ResultBean getUser(String userName, String password) throws MessageListException, Exception {
 		resultBean = new ResultBean();
 		Employee user = userDao.getUser(userName, password);
+		if (user == null) {
+			status = HttpStatus.NO_CONTENT;
+			return resultBean;
+		}
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
 		resultBean.setData(user);

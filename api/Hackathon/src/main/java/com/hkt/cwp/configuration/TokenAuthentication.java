@@ -60,7 +60,7 @@ public class TokenAuthentication {
 			// parse the token.
 			try {
 				Claims claims = Jwts.parser().setSigningKey(Constants.SECRET).parseClaimsJws(token).getBody();
-				Integer id = (Integer)claims.get(Constants.USER_ID);
+				String id = (String)claims.get(Constants.USER_ID);
 				String userName = (String)claims.get(Constants.USER_NAME);
 				String name = (String)claims.get(Constants.NAME);
 				String password = (String)claims.get(Constants.PASSWORD);
@@ -68,7 +68,7 @@ public class TokenAuthentication {
 				
 				if (id != null && userName != null && password != null && code != null) {
 					Employee authorizeData = new Employee();
-					authorizeData.setId(id);
+					authorizeData.setId(Integer.parseInt(id));
 					authorizeData.setName(name);
 					authorizeData.setUsername(userName);
 					authorizeData.setPassword(password);
