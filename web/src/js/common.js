@@ -21,6 +21,11 @@
     };
 
 
+    appName.removeToken = () => {
+        localStorage.removeItem('_token');
+    };
+
+
     appName.getToken = () => {
         return getToken();
     };
