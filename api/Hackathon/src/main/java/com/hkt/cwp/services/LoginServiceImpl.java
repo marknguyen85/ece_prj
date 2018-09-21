@@ -30,7 +30,7 @@ public class LoginServiceImpl extends AbstractServiceBase implements LoginServic
 		resultBean.setMessage("Successfully!");
 		resultBean.setData(user);
 		status = HttpStatus.OK;
-		return resultBean;
+		return resultBean; 
 	}
 	
 	
