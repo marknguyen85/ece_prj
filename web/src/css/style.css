@@ -14176,6 +14176,15 @@ body {
   breakpoint-xl: 1200px;
 }
 
+.logo {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.logo img {
+  height: 80%;
+}
+
 .modal-dialog-max {
   width: 100%;
   height: 100%;
