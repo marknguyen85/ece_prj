@@ -1,41 +1,55 @@
 package com.hkt.cwp.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.List;
 
 /**
  * The persistent class for the employee_skill_test database table.
  * 
  */
 @Entity
-@Table(name = "employee_skill_test")
-@NamedQuery(name = "EmployeeSkillTest.findAll", query = "SELECT e FROM EmployeeSkillTest e")
+@Table(name="employee_skill_test")
+@NamedQuery(name="EmployeeSkillTest.findAll", query="SELECT e FROM EmployeeSkillTest e")
 public class EmployeeSkillTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private int point;
 
-	// bi-directional many-to-one association to Employee
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date starttime;
+
+	//bi-directional many-to-one association to Employee
 	@JsonIgnore
 	@ManyToOne
 	private Employee employee;
 
-	// bi-directional many-to-one association to Skill
+	//bi-directional many-to-one association to Skill
 	@JsonIgnore
 	@ManyToOne
 	private Skill skill;
 
-	// bi-directional many-to-one association to EmployeeTestDetail
+	//bi-directional many-to-one association to EmployeeTestDetail
 	@JsonIgnore
-	@OneToMany(mappedBy = "employeeSkillTest")
+	@OneToMany(mappedBy="employeeSkillTest")
 	private List<EmployeeTestDetail> employeeTestDetails;
 
 	public EmployeeSkillTest() {
@@ -55,6 +69,14 @@ public class EmployeeSkillTest implements Serializable {
 
 	public void setPoint(int point) {
 		this.point = point;
+	}
+
+	public Date getStarttime() {
+		return this.starttime;
+	}
+
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
 	}
 
 	public Employee getEmployee() {

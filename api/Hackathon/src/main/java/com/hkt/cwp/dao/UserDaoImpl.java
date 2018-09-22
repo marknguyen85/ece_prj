@@ -26,6 +26,8 @@ import static org.hibernate.hql.internal.antlr.HqlSqlTokenTypes.LIKE;
 @Repository
 public class UserDaoImpl extends AbstractBaseDao implements UserDao {
 
+	private static String LIKE = "%";
+	
     @Override
     public Employee getUser(String userName, String password) throws Exception {
         List<Employee> result = new ArrayList<>();

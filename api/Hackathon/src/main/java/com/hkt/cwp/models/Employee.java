@@ -1,11 +1,18 @@
 package com.hkt.cwp.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.List;
 
 
 /**
@@ -19,7 +26,8 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 
 	private String code;
 
@@ -47,11 +55,11 @@ public class Employee implements Serializable {
 	public Employee() {
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -10,6 +10,7 @@ public interface EmployeeSkillTestDao {
 	EmployeeSkillTest getListTest(Integer skillTest_id) throws Exception;
 	int insertEmployeeSkillTest(EmployeeSkillTest employeeSkillTest) throws Exception;
 	int updateEmployeeSkillTest(EmployeeSkillTest employeeSkillTest) throws Exception;
-	EmployeeSkillTest getEmployeeSkillTestBySkill(Integer skill_id) throws Exception;
 	
+	List<EmployeeSkillTest> getAll() throws Exception;
+	List<EmployeeSkillTest> getESTBySkillId(Integer skillId) throws Exception;
 }

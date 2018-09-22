@@ -24,15 +24,6 @@ public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements Employe
 	}
 
 	@Override
-	public EmployeeSkillTest getEmployeeSkillTestBySkill(Integer skill_id) throws Exception {
-//		Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest WHERE id= :skillTest_id");
-//		query.setParameter("skil6lTest_id", skillTest_id);
-//		EmployeeSkillTest emp6loyeeSkillTest = new EmployeeSkillTest();
-//		return employeeSkillTest;
-		return null;
-	}
-
-	@Override
 	public int insertEmployeeSkillTest(EmployeeSkillTest employeeSkillTest) throws Exception {
 		try {
 			 entityManager.persist(employeeSkillTest);
@@ -48,6 +39,33 @@ public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements Employe
 	public int updateEmployeeSkillTest(EmployeeSkillTest employeeSkillTest) throws Exception {
 		entityManager.merge(employeeSkillTest);
 		return employeeSkillTest.getId();
+	}
+	
+	@Override
+	public List<EmployeeSkillTest> getAll() throws Exception {
+		List<EmployeeSkillTest> listEmployeeSkillTest = new ArrayList<>();
+		try {
+			Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest e");
+			listEmployeeSkillTest = query.getResultList();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return listEmployeeSkillTest;
+	}
+
+	@Override
+	public List<EmployeeSkillTest> getESTBySkillId(Integer skillId) throws Exception {
+		List<EmployeeSkillTest> listEmployeeSkillTest = new ArrayList<>();
+		try {
+			Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest e WHERE e.skill.id = :skillId order by point desc");
+			query.setParameter("skillId", skillId);
+			listEmployeeSkillTest = query.getResultList();
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return listEmployeeSkillTest;
 	}
 
 }
