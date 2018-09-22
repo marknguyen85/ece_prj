@@ -3,6 +3,8 @@ package com.hkt.cwp.models;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the employee_test_detail database table.
@@ -40,6 +42,7 @@ public class EmployeeTestDetail implements Serializable {
 	//bi-directional many-to-one association to EmployeeSkillTest
 	@ManyToOne
 	@JoinColumn(name="est_id")
+	@JsonIgnore
 	private EmployeeSkillTest employeeSkillTest;
 
 	public EmployeeTestDetail() {

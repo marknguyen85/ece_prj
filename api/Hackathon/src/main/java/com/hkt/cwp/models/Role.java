@@ -2,6 +2,9 @@ package com.hkt.cwp.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -23,6 +26,7 @@ public class Role implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Employee
+	@JsonIgnore
 	@OneToMany(mappedBy="role")
 	private List<Employee> employees;
 

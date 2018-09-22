@@ -2,6 +2,9 @@ package com.hkt.cwp.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -21,14 +24,17 @@ public class EmployeeSkillTest implements Serializable {
 	private int point;
 
 	//bi-directional many-to-one association to Employee
+	@JsonIgnore
 	@ManyToOne
 	private Employee employee;
 
 	//bi-directional many-to-one association to Skill
+	@JsonIgnore
 	@ManyToOne
 	private Skill skill;
 
 	//bi-directional many-to-one association to EmployeeTestDetail
+	@JsonIgnore
 	@OneToMany(mappedBy="employeeSkillTest")
 	private List<EmployeeTestDetail> employeeTestDetails;
 
