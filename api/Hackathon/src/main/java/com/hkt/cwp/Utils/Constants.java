@@ -21,6 +21,8 @@ public class Constants {
     public static final String AUTH_MANAGE = "M";
     public static final String ALL = "A";
     
+    public static final int LIMIT = 2;
+    
     /* JWT Authen Constant */
     // public static final long EXPIRATIONTIME = 169200000; // 2 days
     public static final long EXPIRATIONTIME = 259200000; // 1 day 86400000
@@ -49,5 +51,11 @@ public class Constants {
     // Employee Skill Test
     
     public static final String EMPLOYEE_SKILL_TEST = "/api/skilltest";
+    
+    //Skill
+    public static final String SKILL_PATH = "/api/skill";
+    
+    //Technique
+    public static final String TECHNIQUE_PATH = "/api/technique";
     
 }

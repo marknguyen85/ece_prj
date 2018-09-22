@@ -11,10 +11,12 @@ import com.google.gson.JsonObject;
 import com.hkt.cwp.Utils.BundleUtils;
 import com.hkt.cwp.Utils.Constants;
 import com.hkt.cwp.Utils.JsonDataUtil;
+import com.hkt.cwp.Utils.StringUtil;
 import com.hkt.cwp.bean.MessageListException;
 import com.hkt.cwp.bean.ResultBean;
 import com.hkt.cwp.dao.UserDao;
 import com.hkt.cwp.models.Employee;
+import java.util.List;
 
 /**
  * @author HP
@@ -93,4 +95,23 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService{
 		
 	}
 	
+        //Search Employee
+	@Override
+	public ResultBean searchEmp(String key, String page) throws MessageListException, Exception {
+		resultBean = new ResultBean();
+		int offset = 0;
+		if (!StringUtil.isEmpty(page)) {
+			offset = Integer.parseInt(page) * Constants.LIMIT -1; 
+		}
+		List<Employee> lstEmp = userDao.searchEmp(key, offset);
+		if (lstEmp == null || lstEmp.size() == 0) {
+			status = HttpStatus.NO_CONTENT;
+			return resultBean;
+		}
+		resultBean.setResult(Constants.RESULT_SUCCESS);
+		resultBean.setMessage(Constants.MSG_SUCCESS);
+		resultBean.setData(lstEmp);
+		status = HttpStatus.OK;
+		return resultBean;
+	}
 }
