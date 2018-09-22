@@ -46,4 +46,8 @@ public class Constants {
     public static final String USER = "user";
     public static final String ERR_ID_REQUEST_TIMEOUT = "505";
     
+    // Employee Skill Test
+    
+    public static final String EMPLOYEE_SKILL_TEST = "/api/skilltest";
+    
 }
