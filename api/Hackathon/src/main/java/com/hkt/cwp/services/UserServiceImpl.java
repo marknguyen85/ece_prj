@@ -137,7 +137,6 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		Integer techId = techEmpCurent.getTechnique_id();
 		Technique technique = techDao.getTechniqueById(techId);
 		List<Employee> lstEmp = technique.getEmployees();
-		HashMap<String, Object> mapResult = new HashMap<>();
 		HashMap<String, Object> mapData = new HashMap<>();
 		mapData.put("skills", lstSkill);
 		List<TechniqueEmp> lstTechMoreEmp = new ArrayList<>();
@@ -148,11 +147,10 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 			lstTechMoreEmp.add(techEmp);
 		}
 		mapData.put("employees", lstTechMoreEmp);
-		mapResult.put("data", mapData);
 		status = HttpStatus.OK;
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
-		resultBean.setData(mapResult);
+		resultBean.setData(mapData);
 		return resultBean;
 	}
 
