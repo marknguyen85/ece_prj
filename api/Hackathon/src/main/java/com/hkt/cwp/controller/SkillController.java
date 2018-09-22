@@ -29,13 +29,31 @@ public class SkillController {
 
 	@Autowired
 	private SkillService skillService;
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value ="",method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<ResultBean> getListKPI(HttpServletRequest request) {
 		resultBean = new ResultBean();
 		String kpi_id = request.getParameter("kpi_id");
 		try {
 			resultBean = skillService.getListKPI(kpi_id);
+		} catch (MessageListException e) {
+			resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
+			return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			resultBean = new ResultBean(Constants.RESULT_FAIL,
+					BundleUtils.getString(Constants.ERR_ID_INTERNAL_SERVER_ERROR));
+			return new ResponseEntity<>(resultBean, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(resultBean, skillService.getStatus());
+	}
+	@RequestMapping(value="/kpibytime",method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<ResultBean> getListKPIByTime(HttpServletRequest request) {
+		resultBean = new ResultBean();
+		String kpi_id = request.getParameter("kpi_id");
+		String user_id = request.getParameter("user_id");
+		try {
+			resultBean = skillService.getListKPIByTime(user_id,kpi_id);
 		} catch (MessageListException e) {
 			resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
 			return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);

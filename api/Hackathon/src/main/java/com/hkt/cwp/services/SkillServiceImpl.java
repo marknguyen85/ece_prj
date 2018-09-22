@@ -16,6 +16,7 @@ import com.hkt.cwp.bean.ResultBean;
 import com.hkt.cwp.dao.EmployeeSkillTestDao;
 import com.hkt.cwp.dao.SkillDao;
 import com.hkt.cwp.dao.UserDao;
+import com.hkt.cwp.models.Employee;
 import com.hkt.cwp.models.EmployeeSkillTest;
 import com.hkt.cwp.models.Skill;
 
@@ -56,6 +57,7 @@ public class SkillServiceImpl extends AbstractServiceBase implements SkillServic
 			resultSkillTest.put("employee_id", employeeSkillTest.getEmployee().getId());
 			resultSkillTest.put("employee_name", employeeSkillTest.getEmployee().getName());
 			resultSkillTest.put("point", employeeSkillTest.getPoint());
+			resultSkillTest.put("starttime", employeeSkillTest.getStarttime());
 			listEmployeeSkillTest.add(resultSkillTest);
 		}
 		result.put("skill_id", skill.getId());
@@ -70,8 +72,39 @@ public class SkillServiceImpl extends AbstractServiceBase implements SkillServic
 
 	@Override
 	public ResultBean getListKPIByTime(String user_id, String kpi_id) throws MessageListException, Exception {
-		// TODO Auto-generated method stub
-		return null;
+		resultBean = new ResultBean();
+		Employee employee = new Employee();
+		employee = userDao.getById(Integer.parseInt(user_id));
+		Integer kpiId = Integer.parseInt(kpi_id);
+		List<EmployeeSkillTest> listSkill = employee.getEmployeeSkillTests();
+		List<Map<String, Object>> listEmployeeSkillTest = new ArrayList<>();
+		String name = null;
+		for (int i =0 ;i<listSkill.size();i++)
+		{
+			Map<String, Object> result = new HashMap<>();
+			Skill skill = new Skill();
+			skill = listSkill.get(i).getSkill();
+			if(skill.getId() == kpiId)
+			{
+				name = skill.getName();
+				result.put("point", listSkill.get(i).getPoint());
+				result.put("starttime", listSkill.get(i).getStarttime());
+				listEmployeeSkillTest.add(result);
+			}
+		}
+		Map<String, Object> result1 = new HashMap<>();
+		result1.put("employee_id",employee.getId());
+		result1.put("skill_id",kpiId);
+		result1.put("employee_name", employee.getName());
+		result1.put("skill_name", name);
+		result1.put("info", listEmployeeSkillTest);
+		resultBean.setData(result1);
+		
+		
+		resultBean.setResult(Constants.RESULT_SUCCESS);
+		resultBean.setMessage(Constants.MSG_SUCCESS);
+		status = HttpStatus.OK;
+		return resultBean;
 	}
 
 }

@@ -34,7 +34,7 @@ public class EmployeeSkillTest implements Serializable {
 
 	private int point;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date starttime;
 
 	//bi-directional many-to-one association to Employee

@@ -2,6 +2,7 @@ package com.hkt.cwp.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,8 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		employeeSkillTest.setEmployee(employee);
 		employeeSkillTest.setSkill(skill);
 		employeeSkillTest.setPoint(0);
+		Date date = new Date();
+		employeeSkillTest.setStarttime(date);
 		employeeSkillTest.setEmployeeTestDetails(null);
 
 		int result = employeeSkillTestDao.insertEmployeeSkillTest(employeeSkillTest);
