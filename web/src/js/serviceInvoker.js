@@ -14,45 +14,69 @@
         var ajaxRequest = function (httpVerb, method, dataRequest, callbacks, paramName, keepOriginal) {
             var dataToSend = keepOriginal === true ? dataRequest : JSON.stringify(dataRequest);
             dataToSend = paramName ? paramName + '=' + dataToSend : dataToSend;
-            var options = {
-                url: getSvcUrl(method),
-                type: httpVerb,
-                data: dataToSend,
-                dataType: "json",
-                contentType: "application/json",
-                headers: {
-                    // '_token' : Common.getToken() 
-                }
-            };
+            
+            return $.get(getSvcUrl(method), function(response){
+                console.log(response);
 
-            options.success = function (response) {
                 try {
-                    if (callbacks && callbacks.success) {
-                        callbacks.success(response);
+                    if (!response) {
+                        if (callbacks && callbacks.success) {
+                            callbacks.error('error');
+                        }
+                    }
+                    else {
+                        if (callbacks && callbacks.success) {
+                            callbacks.success(response);
+                        }
                     }
                 } catch (e) {
                     console.log(e);
                 }
-            };
-            options.error = function (response) {
-                try {
-                    if (callbacks && callbacks.error) {
-                        callbacks.error(response);
-                    }
-                } catch (e) {
-                    console.log(e);
-                }
-            };
-            options.complete = function (response) {
-                try {
-                    if (callbacks && callbacks.complete) {
-                        callbacks.complete(response);
-                    }
-                } catch (e) {
-                    console.log(e);
-                }
-            };
-            return $.ajax(options);
+            }, 'json');
+
+            // var options = {
+            //     url: getSvcUrl(method),
+            //     type: httpVerb,
+            //     data: dataToSend,
+            //     dataType: "json",
+            //     contentType: "application/json",
+            //     xhrFields: {
+            //         withCredentials: true
+            //     },
+            //     headers: {
+            //         '_token' : Common.getToken(),
+            //         'Access-Control-Allow-Origin': '*'
+            //     }
+            // };
+
+            // options.success = function (response) {
+            //     try {
+            //         if (callbacks && callbacks.success) {
+            //             callbacks.success(response);
+            //         }
+            //     } catch (e) {
+            //         console.log(e);
+            //     }
+            // };
+            // options.error = function (response) {
+            //     try {
+            //         if (callbacks && callbacks.error) {
+            //             callbacks.error(response);
+            //         }
+            //     } catch (e) {
+            //         console.log(e);
+            //     }
+            // };
+            // options.complete = function (response) {
+            //     try {
+            //         if (callbacks && callbacks.complete) {
+            //             callbacks.complete(response);
+            //         }
+            //     } catch (e) {
+            //         console.log(e);
+            //     }
+            // };
+            // return $.ajax(options);
         },
         get = function (method, request, callback, paramName, keepOriginal) {
             /// <summary>Perform a get request to web api</summary>
