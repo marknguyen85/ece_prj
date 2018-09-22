@@ -46,14 +46,14 @@ var barChart = new Chart($('#canvas-2'), {
   data: {
     labels: ['Coding', 'Database', 'IQ', 'Attitude', 'Language'],
     datasets: [{
-      label: 'Nguy?n V�n A',
+      label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(220, 220, 220, 0.5)',
       borderColor: 'rgba(220, 220, 220, 0.8)',
       highlightFill: 'rgba(220, 220, 220, 0.75)',
       highlightStroke: 'rgba(220, 220, 220, 1)',
       data: [random(), random(), random(), random(), random()]
     }, {
-      label: 'Nguy?n V�n A',
+      label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(151, 187, 205, 0.5)',
       borderColor: 'rgba(151, 187, 205, 0.8)',
       highlightFill: 'rgba(151, 187, 205, 0.75)',
@@ -143,7 +143,7 @@ var myRadarChart = new Chart($('#canvas-9'), {
   data: {
     labels: ['Coding', 'Database', 'IQ', 'Attitude', 'Language'],
     datasets: [{
-      label: 'Nguy?n V�n A',
+      label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(220, 220, 220, 0.2)',
       borderColor: 'rgba(220, 220, 220, 1)',
       pointBackgroundColor: 'rgba(220, 220, 220, 1)',
@@ -152,7 +152,7 @@ var myRadarChart = new Chart($('#canvas-9'), {
       pointHighlightStroke: 'rgba(220, 220, 220, 1)',
       data: []
     }, {
-      label: 'Nguy?n V�n B',
+      label: 'Nguyễn Văn B',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
       borderColor: 'rgba(151, 187, 205, 1)',
       pointBackgroundColor: 'rgba(151, 187, 205, 1)',
