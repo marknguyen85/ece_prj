@@ -1,15 +1,17 @@
 (function ($, appName) {
     /// <param name="appName">namespace of application.</param>
     'use strict';
+
     var login = () => {
         var formData = {
-            username: $('#username').val(),
-            password: $('#password').val()
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val()
+            }
         }
 
-        var url = '/user?user_name=' + formData.username + '&password=' + formData.password;
-
-        serviceInvoker.get(url, {}, {
+        var url = '/user/authorize';
+        serviceInvoker.post(url, formData, {
             error: function(response){
                 alert('login error');
             },
@@ -17,7 +19,7 @@
                 Common.storeToken(response.data);
                 Common.redirect('/index.html');
             }
-        }, null, true)
+        })
 
         return false;
     }

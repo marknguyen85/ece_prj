@@ -33,6 +33,10 @@
         return getToken();
     };
 
+    appName.currentUser = () => {
+        return getToken();
+    };
+
     appName.checkAuthen = () => {
         var token = getToken();
         if (token) {
@@ -53,7 +57,7 @@
     appName.loadAccountInfo = () => {
         $.get('/userinfo.html', function(html){
             var accInfo = getToken();
-            console.log('==========================', accInfo);
+            //console.log('==========================', accInfo);
             $('#account-info').html(html);
             $('.header-account').html(accInfo.name);
         });

@@ -4,6 +4,9 @@
     var questions = [];
     var answers = [];
     var currentIndex = 1;
+    var skill_id = 0;
+    var $dialog = {};
+    var starting  = false;
 
     var getRadioItem = function(stt, item_count){
         var item = {
@@ -43,18 +46,45 @@
         return item;
     };
     
-    var initArray = function(){
+    var parseArray = (data, callback) => {
+        console.log('==========parseArray', data);
+
         for (var i = 1; i <= 10; i++) { 
             var rand = Math.floor((Math.random() * 2) + 1);
             switch(rand) {
                 case 1:
                     questions.push(getCheckboxItem(i, 3))
                     break;
-                case 2:
+                default:
                     questions.push(getRadioItem(i, 3))
                     break;
             } 
         }
+
+        if (callback){
+            callback();
+        }
+    }
+
+    var initData = function(callback){
+        var formData = {
+            employee_id: currentUser.id,
+            skill_id: skill_id
+        }
+
+        var url = '/test/index?employee_id=' + formData.employee_id + '&skill_id=' + formData.skill_id;
+        serviceInvoker.get(url, {}, {
+            error: function(response){
+                console.log('=================initData', response);
+            },
+            success: function(response){
+                console.log('=================initData success', response);
+                if (response && response.data) {
+                    parseArray(response.data, callback);
+                }
+            }
+        }, null, true)
+
     }
     
     var generateRadio = (item) => {
@@ -199,7 +229,6 @@
         countdownArray.push(x);
     }
 
-    var starting  = false;
     var closeDialog = () => {
         for (var i = 0; i < countdownArray.length; i++) {
             clearInterval(countdownArray[i]);
@@ -214,16 +243,11 @@
         starting = false;
     }
 
-    var $dialog = {};
-
-    appName.init = function(){
-        // if (!Common.checkAuthen()) {
-        //     Common.redirect('/login.html');
-        // }
-        initArray();
+    var bindEvents = () => {
         $(document).on("click", '#test-start', function(e) {
             e.preventDefault();
             var dialog = $(this).attr('ref');
+            skill_id = $(this).attr('skill_id');
             $dialog = $(dialog);
             $dialog.modal('show');
 
@@ -250,14 +274,17 @@
             if (!confirm("Bắt đầu làm bài thi?")) {
                 return false;
             }
-            //set flag
-            starting  = true;
 
-            $('#q-start, #q-close').hide();
-            $('#q-prev, #q-next, #q-save').show();
+            initData(function(response){
+                //set flag
+                starting  = true;
 
-            countDownStart('#count-down-time', 10);
-            bindQuestion();
+                $('#q-start, #q-close').hide();
+                $('#q-prev, #q-next, #q-save').show();
+
+                countDownStart('#count-down-time', 10);
+                bindQuestion();
+            });
          });
          
         $('#test-start-dialog').on("click", "#q-prev", function(e) {
@@ -288,6 +315,84 @@
             var target = $(e.target).attr("href") // activated tab
             alert(target);
         });
+    }
+
+    var bindHistories = (skill_test) => {
+        var tb = $('#tbl-history-tested');
+        var trs = '';
+
+        for (var i = 0; i < skill_test.length; i ++) {
+            var item = skill_test[i];
+            trs += '<tr>';
+            trs += '<td>' + item.skill.name + '</td>';
+            trs += '<td class="text-center">' + moment().format("YYYY-MM-DD") + '</td>';
+            trs += '<td class="text-right">' + item.point + '/100</td>';
+            trs += '</tr>';
+        }
+
+        tb.html(trs);
+    }
+
+    var bindTestAvailable = (skill_test) => {
+        var tb = $('#tbl-available-tested');
+        var trs = '';
+
+        for (var i = 0; i < skill_test.length; i ++) {
+            var item = skill_test[i];
+            trs += '<tr>';
+            trs += '<td>' + item.skill.name + '</td>';
+            trs += '<td class="text-center">' + moment().format("YYYY-MM-DD") + '</td>';
+            trs += '<td class="text-center">';
+            trs += '    <button class="btn btn-sm btn-danger" skill_id="' + item.skill.id + '" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">';
+            trs += '        <i class="fa fa-dot-circle-o"></i> Bắt đầu';
+            trs += '    </button>';
+            trs += '</td>';
+            trs += '</tr>';
+        }
+
+        tb.html(trs);
+    }
+
+    var getHistoryTested = () => {
+        var url = '/skilltest?starttime=1&user_id=' + currentUser.id;
+        serviceInvoker.get(url, {}, {
+            error: function(response){
+                console.log('=================getHistoryTested', response);
+            },
+            success: function(response){
+                if (response.data && response.data.employee_skill_test) {
+                    bindHistories(response.data.employee_skill_test);
+                }
+            }
+        }, null, true)
+    }
+
+    var getAvailableTest = () => {
+        var url = '/skilltest?starttime=0&user_id=' + currentUser.id;
+        serviceInvoker.get(url, {}, {
+            error: function(response){
+                console.log('=================getAvailableTest', response);
+            },
+            success: function(response){
+                if (response.data && response.data.employee_skill_test) {
+                    bindTestAvailable(response.data.employee_skill_test);
+                }
+            }
+        }, null, true)
+    }
+
+    var currentUser = {};
+
+    appName.init = function(){
+        if (!Common.checkAuthen()) {
+            Common.redirect('/login.html');
+        }
+
+        currentUser = Common.currentUser();
+        
+        getHistoryTested();
+        getAvailableTest();
+        bindEvents();
     };
 
 }(jQuery, window.TestModule = window.TestModule || {}));

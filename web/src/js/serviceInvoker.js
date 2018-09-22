@@ -11,72 +11,61 @@
         };
 
     window.serviceInvoker = (function () {
+        var createCORSRequest = (method, url) => {
+            var xhr = new XMLHttpRequest();
+            if ("withCredentials" in xhr) {
+                // Check if the XMLHttpRequest object has a "withCredentials" property.
+                // "withCredentials" only exists on XMLHTTPRequest2 objects.
+                xhr.open(method, url, true);
+        
+            } else if (typeof XDomainRequest != "undefined") {
+                // Otherwise, check if XDomainRequest.
+                // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+                xhr = new XDomainRequest();
+                xhr.open(method, url);
+            } else {
+                // Otherwise, CORS is not supported by the browser.
+                xhr = null;
+            }
+            return xhr;
+        }
+      
         var ajaxRequest = function (httpVerb, method, dataRequest, callbacks, paramName, keepOriginal) {
             var dataToSend = keepOriginal === true ? dataRequest : JSON.stringify(dataRequest);
             dataToSend = paramName ? paramName + '=' + dataToSend : dataToSend;
             
-            return $.get(getSvcUrl(method), function(response){
-                console.log(response);
+            var xhr = createCORSRequest(httpVerb, getSvcUrl(method));
+            if (!xhr) {
+                throw new Error('CORS not supported');
+            }
+            else {
+                // Response handlers.
+                xhr.onload = function() {
+                    try {
+                        var jsonData = JSON.parse(xhr.response);
+                        console.log('=========success', xhr.response);
 
-                try {
-                    if (!response) {
                         if (callbacks && callbacks.success) {
-                            callbacks.error('error');
+                            callbacks.success(jsonData);
                         }
+                    } catch (e) {
+                        console.log(e);
                     }
-                    else {
-                        if (callbacks && callbacks.success) {
-                            callbacks.success(response);
+                };
+
+                xhr.onerror = function() {
+                    try {
+                        if (callbacks && callbacks.error) {
+                            callbacks.error(xhr);
                         }
+                    } catch (e) {
+                        console.log(e);
                     }
-                } catch (e) {
-                    console.log(e);
-                }
-            }, 'json');
+                    console.log('Woops, there was an error making the request.', xhr);
+                };
 
-            // var options = {
-            //     url: getSvcUrl(method),
-            //     type: httpVerb,
-            //     data: dataToSend,
-            //     dataType: "json",
-            //     contentType: "application/json",
-            //     xhrFields: {
-            //         withCredentials: true
-            //     },
-            //     headers: {
-            //         '_token' : Common.getToken(),
-            //         'Access-Control-Allow-Origin': '*'
-            //     }
-            // };
-
-            // options.success = function (response) {
-            //     try {
-            //         if (callbacks && callbacks.success) {
-            //             callbacks.success(response);
-            //         }
-            //     } catch (e) {
-            //         console.log(e);
-            //     }
-            // };
-            // options.error = function (response) {
-            //     try {
-            //         if (callbacks && callbacks.error) {
-            //             callbacks.error(response);
-            //         }
-            //     } catch (e) {
-            //         console.log(e);
-            //     }
-            // };
-            // options.complete = function (response) {
-            //     try {
-            //         if (callbacks && callbacks.complete) {
-            //             callbacks.complete(response);
-            //         }
-            //     } catch (e) {
-            //         console.log(e);
-            //     }
-            // };
-            // return $.ajax(options);
+                xhr.send(dataToSend);
+            }
         },
         get = function (method, request, callback, paramName, keepOriginal) {
             /// <summary>Perform a get request to web api</summary>
