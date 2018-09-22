@@ -1,6 +1,7 @@
 package com.hkt.cwp.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class EmployeeSkillTestServiceImpl extends AbstractServiceBase implements
 		{
 			Map<String, Object> result = new HashMap<>();
 			List<Map<String, Object>> listEmployeeSkillTest = new ArrayList<>();
+			Date date = new Date();
 			for (int i = 0; i < employee.getEmployeeSkillTests().size(); i++) {
 				Map<String, Object> mapResult = new HashMap<>();
 				Map<String, Object> mapSkill = new HashMap<>();
@@ -57,6 +59,11 @@ public class EmployeeSkillTestServiceImpl extends AbstractServiceBase implements
 				skill = employee.getEmployeeSkillTests().get(i).getSkill();
 				Integer id = employee.getEmployeeSkillTests().get(i).getId();
 				Integer point = employee.getEmployeeSkillTests().get(i).getPoint();
+				date = employee.getEmployeeSkillTests().get(i).getStarttime();
+				if(date==null)
+				{
+					continue;
+				}
 				mapSkill.put("id", skill.getId());
 				mapSkill.put("name", skill.getName());
 				
@@ -96,7 +103,6 @@ public class EmployeeSkillTestServiceImpl extends AbstractServiceBase implements
 			status = HttpStatus.NO_CONTENT;
 			return resultBean;
 		}
-		
 		Map<String, Object> result = new HashMap<>();
 		List<Map<String, Object>> listEmployeeSkillTest = new ArrayList<>();
 		for (int i = 0; i < employee.getEmployeeSkillTests().size(); i++) {
@@ -105,8 +111,6 @@ public class EmployeeSkillTestServiceImpl extends AbstractServiceBase implements
 			//Map<String, Object> mapTechical = new HashMap<>();
 			Skill skill = new Skill();
 			skill = employee.getEmployeeSkillTests().get(i).getSkill();
-			Integer id = employee.getEmployeeSkillTests().get(i).getId();
-			Integer point = employee.getEmployeeSkillTests().get(i).getPoint();
 			if(employee.getEmployeeSkillTests().get(i).getStarttime()==null)
 			{
 				mapSkill.put("id", skill.getId());
