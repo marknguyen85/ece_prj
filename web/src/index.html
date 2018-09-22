@@ -60,21 +60,7 @@
           <a class="nav-link" href="#">ECE system</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-              <strong>Account</strong>
-            </div>
-            <a class="dropdown-item" href="/logout.html">
-              <i class="fa fa-envelope-o"></i> Logout
-              <span class="badge badge-success">42</span>
-            </a>
-          </div>
-        </li>
+      <ul class="nav navbar-nav ml-auto" id="account-info">
       </ul>
     </header>
     <div class="app-body">
@@ -105,11 +91,10 @@
               <div class="card-header">
 
                 <div class="img-profile">
-                  <img class="prof-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                  <img class="prof-avatar" src="img/avatars/9.png" alt="admin@bootstrapmaster.com">
                 </div>
                 <div class="info-profile">
-                  <h5>Vi Văn Thức</h5>
-                  <b>Developer</b>
+                  <h5><strong class="header-account">...</strong></h5>
                 </div>
               </div>
               <div class="card-body">
@@ -392,6 +377,7 @@
     <script src="js/capacity.js"></script>
     <script>
       $(document).ready(function(){
+        Common.loadAccountInfo();
         CapaModule.init();
         lotrinhcongdanhModule.init();
         sosanhModule.init();

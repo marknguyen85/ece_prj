@@ -14,16 +14,13 @@
                 alert('login error');
             },
             success: function(response){
-                var dataJson = JSON.stringify(response.data);
-                Common.storeToken(dataJson);
-                //Common.redirect('/index.html');
+                Common.storeToken(response.data);
+                Common.redirect('/index.html');
             }
         }, null, true)
 
         return false;
     }
-
-
 
     appName.init = function(){
         if (Common.checkAuthen()) {
