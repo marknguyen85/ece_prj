@@ -4,10 +4,14 @@
 package com.hkt.cwp.services;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -146,6 +150,11 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 			techEmp.setSkills(lstSkillEmp);
 			lstTechMoreEmp.add(techEmp);
 		}
+		lstTechMoreEmp.sort(Comparator.comparing(TechniqueEmp::getSumPoint).reversed());
+		for (int i = 0; i < lstTechMoreEmp.size(); i++ ) {
+			TechniqueEmp obj= lstTechMoreEmp.get(i);
+			obj.setRank(i + 1);
+		}
 		mapData.put("employees", lstTechMoreEmp);
 		status = HttpStatus.OK;
 		resultBean.setResult(Constants.RESULT_SUCCESS);
@@ -228,18 +237,24 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		paramList.add(userId);
 		TechniqueEmp tech = new TechniqueEmp();
 		lstSkillName.clear();
+		Integer sumPoint = 0;
 		List<Object[]> lstResult = userDao.excuteNativeQuery(sb.toString(), paramList, null, null);
 		for (int i = 0; i < lstResult.size(); i++) {
 			Object[] object = lstResult.get(i);
 			SkillTestResponse skillTest = new SkillTestResponse();
 			String skillName = object[5] != null ? object[5].toString() : null;
+			Integer point = object[6] != null ? Integer.parseInt(object[6].toString()) : 0;
+			if (sumPoint != null) {
+				sumPoint += point;
+			}
 			skillTest.setSkill_name(skillName);
-			skillTest.setSkill_point(object[6] != null ? Integer.parseInt(object[6].toString()) : null);
+			skillTest.setSkill_point(point);
 			lstSkillName.add(skillTest);
 			tech.setTechnique_id(object[2] != null ? Integer.parseInt(object[2].toString()) : null);
 			tech.setTechnique_name(object[3] != null ? object[3].toString() : null);
 			tech.setEmployee_id(userId);
 			tech.setEmployee_name(object[1] != null ? object[1].toString() : null);
+			tech.setSumPoint(sumPoint);
 		}
 		return tech;
 	}
