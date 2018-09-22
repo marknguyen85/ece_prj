@@ -13,11 +13,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import javax.persistence.TemporalType;
+
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -494,4 +498,24 @@ public class DataUtils {
 			return false;
 		}
 	}
+	
+	  /**
+     * Memo set parameter to query
+     *
+     * @author CaoTT
+     * @param paramList List<Object>
+     * @param query Query
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static void setParameterCommon(List<Object> paramList, Query query) {
+        int idx = 0;
+        for (Object obj : paramList) {
+            if (obj instanceof Timestamp) {
+                query.setParameter(idx++, obj, TemporalType.TIMESTAMP);
+            } else {
+                query.setParameter(idx++, obj);
+            }
+
+        }
+    }
 }

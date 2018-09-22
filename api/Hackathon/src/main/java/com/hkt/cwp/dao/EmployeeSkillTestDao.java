@@ -13,4 +13,6 @@ public interface EmployeeSkillTestDao {
 	
 	List<EmployeeSkillTest> getAll() throws Exception;
 	List<EmployeeSkillTest> getESTBySkillId(Integer skillId) throws Exception;
+	
+	List<Object[]> excuteNativeQuery(String sql, List<Object> paramList, Integer offset, Integer limit) throws Exception;
 }

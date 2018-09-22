@@ -89,8 +89,9 @@ public class UserController {
     	resultBean = new ResultBean();
         String key = request.getParameter("key");
         String page = request.getParameter("page");
+        String skillId = request.getParameter("skill_id");
         try {
-            resultBean = service.searchEmp(key, page, null);
+            resultBean = service.searchEmp(key, page, skillId);
         } catch (MessageListException e) {
             resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
             return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
