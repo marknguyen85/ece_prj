@@ -16,7 +16,7 @@ var random = function random() {
 }; // eslint-disable-next-line no-unused-vars
 
 
-var lineChart = new Chart($('#canvas-1'), {
+var lineChart = new Chart($('#monthChartExam'), {
   type: 'line',
   data: {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -25,15 +25,36 @@ var lineChart = new Chart($('#canvas-1'), {
       backgroundColor: 'rgba(220, 220, 220, 0.2)',
       borderColor: 'rgba(220, 220, 220, 1)',
       pointBackgroundColor: 'rgba(220, 220, 220, 1)',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
+      pointBorderColor: '#fff'
+      // data: [random(), random(), random(), random(), random(), random(), random()]
     }, {
       label: 'My Second dataset',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
       borderColor: 'rgba(151, 187, 205, 1)',
       pointBackgroundColor: 'rgba(151, 187, 205, 1)',
       pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
+      // data: [random(), random(), random(), random(), random(), random(), random()]
+    }, {
+      label: 'Database',
+      backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      borderColor: 'red',
+      pointBackgroundColor: 'red',
+      pointBorderColor: '#fff',
+      // data: [random(), random(), random(), random(), random(), random(), random()]
+    }, {
+      label: 'Attitude',
+      backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      borderColor: 'blue',
+      pointBackgroundColor: 'blue',
+      pointBorderColor: '#fff',
+      // data: [random(), random(), random(), random(), random(), random(), random()]
+    }, {
+      label: 'Manager',
+      backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      borderColor: 'yellow',
+      pointBackgroundColor: 'yellow',
+      pointBorderColor: '#fff',
+      // data: [random(), random(), random(), random(), random(), random(), random()]
     }]
   },
   options: {
@@ -81,28 +102,18 @@ var doughnutChart = new Chart($('#canvas-3'), {
   }
 }); // eslint-disable-next-line no-unused-vars
 
-var radarChart = new Chart($('#canvas-4'), {
+var radarChart = new Chart($('#canvasCapaci'), {
   type: 'radar',
   data: {
-    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+    labels: ['Chuyên môn', 'IQ', 'Chuyên cần', 'Thái độ', 'Ngoại ngữ'],
     datasets: [{
-      label: 'My First dataset',
+      label: 'Vi Văn Thức',
       backgroundColor: 'rgba(220, 220, 220, 0.2)',
-      borderColor: 'rgba(220, 220, 220, 1)',
+      borderColor: 'black',
       pointBackgroundColor: 'rgba(220, 220, 220, 1)',
-      pointBorderColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(220, 220, 220, 1)',
-      data: [65, 59, 90, 81, 56, 55, 40]
-    }, {
-      label: 'My Second dataset',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'rgba(151, 187, 205, 1)',
-      pointBackgroundColor: 'rgba(151, 187, 205, 1)',
-      pointBorderColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(151, 187, 205, 1)',
-      data: [28, 48, 40, 19, 96, 27, 100]
+      pointBorderColor: 'black',
+      pointHighlightFill: 'black',
+      pointHighlightStroke: 'rgba(151, 187, 205, 1)'
     }]
   },
   options: {

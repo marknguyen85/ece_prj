@@ -23,6 +23,8 @@
         return false;
     }
 
+
+
     appName.init = function(){
         if (Common.checkAuthen()) {
             Common.redirect('/index.html');

@@ -41,6 +41,9 @@
 
 
     </script>
+    <script type="text/javascript">
+
+    </script>
   </head>
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
     <header class="app-header navbar">
@@ -146,10 +149,10 @@
               <div class="card-body">
                 <ol class="navSkill">
                   <li class="breadcrumb-item">
-                    <a href="/profile.html">Năng lực</a>
+                    <a href="/index.html">Năng lực</a>
                   </li>
                   <li class="breadcrumb-item">
-                    <a href="/history.html">Lịch sử</a>
+                    <a id="historyId" href="/history.html">Lịch sử</a>
                   </li>
                   <li class="breadcrumb-item active">
                     <a href="/sosanh.html">So Sánh</a>
@@ -164,7 +167,7 @@
               </div>
             </div>
 
-            <div class="card">
+            <!-- <div class="card">
               <div class="card-header">
                 <div class="">
                   <b>Trình độ tháng 6</b>
@@ -179,7 +182,7 @@
                   <canvas id="canvas-4"></canvas>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="card">
               <div class="card-header">
                 <div class="">
@@ -194,18 +197,14 @@
                       <input class="form-control" id="toDateRank" type="date" name="" value="">
                     </div>
                     <div class="form-inline" >
-                      <label for="sortRank"><b>Sort by:</b> </label>
-                      <select id="sortRank" class="form-control" name="">
-                        <option value="asc">ASC</option>
-                        <option value="asc">DESC</option>
-                      </select>
+                      <input type="button" class="btn btn-primary" id="searchHistory" value="Search">
                     </div>
                   </div>
                 </div>
               </div>
               <div class="card-body">
                 <div class="chart-wrapper">
-                  <canvas id="canvas-1"></canvas>
+                  <canvas id="monthChartExam"></canvas>
                 </div>
               </div>
             </div>
@@ -520,5 +519,15 @@
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
     <script src="js/charts.js"></script>
+
+
+    <script src="js/common.js"></script>
+    <script src="js/serviceInvoker.js"></script>
+    <script src="js/capacity.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        CapaModule.init()
+      })
+    </script>
   </body>
 </html>
