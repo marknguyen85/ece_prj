@@ -73,4 +73,20 @@ public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements Employe
 		return listEmployeeSkillTest;
 	}
 
+	@Override
+	public EmployeeSkillTest getEmployeeBySkillandEmployee(Integer employee_id, Integer skill_id, Integer point)
+			throws Exception {
+		EmployeeSkillTest employeeSkillTest =new EmployeeSkillTest();
+		try {
+			Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest e WHERE e.skill.id = :skillId AND e.employee.id =:employee_id AND point=:point ");
+			query.setParameter("skillId", skill_id);
+			query.setParameter("employee_id", employee_id);
+			query.setParameter("point", point);
+			employeeSkillTest = (EmployeeSkillTest) query.getSingleResult();
+		} catch (Exception e) {
+			throw e;
+		}
+		return employeeSkillTest;
+	}
+
 }

@@ -9,6 +9,6 @@ import com.hkt.cwp.bean.ResultBean;
 
 public interface TestDetailService {
 	ResultBean insertTest(HttpServletRequest request) throws MessageListException, Exception;
-	ResultBean updateTest(HttpServletRequest request) throws MessageListException, Exception;
+	ResultBean updateTest(String json) throws MessageListException, Exception;
 	HttpStatus getStatus();
 }

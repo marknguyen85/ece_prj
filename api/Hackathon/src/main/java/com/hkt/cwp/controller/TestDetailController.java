@@ -16,6 +16,7 @@ import com.hkt.cwp.Utils.BundleUtils;
 import com.hkt.cwp.Utils.Constants;
 import com.hkt.cwp.bean.MessageListException;
 import com.hkt.cwp.bean.ResultBean;
+import com.hkt.cwp.dao.EmployeeSkillTestDao;
 import com.hkt.cwp.services.TestDetailService;
 
 @RestController
@@ -26,6 +27,7 @@ private ResultBean resultBean;
 	
 	@Autowired
 	private TestDetailService testDetailService;
+	
 	
 	@RequestMapping(value = "/index" ,method = RequestMethod.GET)
     @ResponseBody
@@ -43,12 +45,12 @@ private ResultBean resultBean;
         return new ResponseEntity<>(resultBean, testDetailService.getStatus());
     }
     
-	@RequestMapping(value = "/update" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/update" ,method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<ResultBean> updateTest(HttpServletRequest request) {
+    public ResponseEntity<ResultBean> updateTest(@RequestBody String json) {
     	resultBean = new ResultBean();
         try {
-            resultBean = testDetailService.insertTest(request);
+            resultBean = testDetailService.updateTest(json);
         } catch (MessageListException e) {
             resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
             return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
