@@ -41,7 +41,7 @@ public class EmployeeTestDetail implements Serializable {
 
 	//bi-directional many-to-one association to EmployeeSkillTest
 	@ManyToOne
-	@JoinColumn(name="est_id")
+	@JoinColumn(name="est_id",nullable = false)
 	@JsonIgnore
 	private EmployeeSkillTest employeeSkillTest;
 

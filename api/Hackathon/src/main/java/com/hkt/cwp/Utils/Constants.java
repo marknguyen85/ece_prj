@@ -58,4 +58,7 @@ public class Constants {
     //Technique
     public static final String TECHNIQUE_PATH = "/api/technique";
     
+    // test detail
+    public static final String TEST_PATH = "/api/test";
+    
 }

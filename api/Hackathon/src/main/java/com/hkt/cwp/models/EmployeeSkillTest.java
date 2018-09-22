@@ -7,35 +7,35 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
-
 /**
  * The persistent class for the employee_skill_test database table.
  * 
  */
 @Entity
-@Table(name="employee_skill_test")
-@NamedQuery(name="EmployeeSkillTest.findAll", query="SELECT e FROM EmployeeSkillTest e")
+@Table(name = "employee_skill_test")
+@NamedQuery(name = "EmployeeSkillTest.findAll", query = "SELECT e FROM EmployeeSkillTest e")
 public class EmployeeSkillTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private int point;
 
-	//bi-directional many-to-one association to Employee
+	// bi-directional many-to-one association to Employee
 	@JsonIgnore
 	@ManyToOne
 	private Employee employee;
 
-	//bi-directional many-to-one association to Skill
+	// bi-directional many-to-one association to Skill
 	@JsonIgnore
 	@ManyToOne
 	private Skill skill;
 
-	//bi-directional many-to-one association to EmployeeTestDetail
+	// bi-directional many-to-one association to EmployeeTestDetail
 	@JsonIgnore
-	@OneToMany(mappedBy="employeeSkillTest")
+	@OneToMany(mappedBy = "employeeSkillTest")
 	private List<EmployeeTestDetail> employeeTestDetails;
 
 	public EmployeeSkillTest() {
