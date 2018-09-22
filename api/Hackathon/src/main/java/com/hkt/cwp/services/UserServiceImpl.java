@@ -155,70 +155,13 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		return resultBean;
 	}
 
-	private HashMap<Integer, RankEmployee> searchRankEmp(Integer skillId) throws Exception {
-		StringBuilder sb = new StringBuilder(
-				"select est.employee_id, e.name as employee_name, e.code, est.skill_id, s.name as skill_name, max(est.point) point ");
-		sb.append("from employee_skill_test est ");
-		sb.append("LEFT JOIN employee e on e.id = est.employee_id ");
-		sb.append("LEFT JOIN ece_system.skill s on s.id = est.skill_id ");
-		sb.append("where est. skill_id = ? ");
-		sb.append("group by est.employee_id ");
-		sb.append("order by point desc ; ");
-		List<Object> paramList = new ArrayList<>();
-		paramList.add(skillId);
-
-		HashMap<Integer, RankEmployee> map = new HashMap<Integer, RankEmployee>();
-		List<Object[]> lstResult = eSTDao.excuteNativeQuery(sb.toString(), paramList, null, null);
-		for (int i = 0; i < lstResult.size(); i++) {
-			Object[] object = lstResult.get(i);
-			RankEmployee rE = new RankEmployee();
-			Integer empId = object[0] != null ? Integer.parseInt(object[0].toString()) : null;
-			if (null == empId)
-				continue;
-			rE.setRank(i + 1);
-			rE.setEmployee_id(empId);
-			rE.setEmployy_name(object[1] != null ? object[1].toString() : null);
-			rE.setCode(object[2] != null ? object[1].toString() : null);
-			rE.setSkill_id(object[3] != null ? Integer.parseInt(object[3].toString()) : null);
-			rE.setSkill_name(object[4] != null ? object[4].toString() : null);
-			rE.setMax_point(object[5] != null ? Integer.parseInt(object[5].toString()) : null);
-			map.put(empId, rE);
-		}
-		return map;
-	}
-
 	@Override
 	public ResultBean getCurrentCapacity(String user_id) throws MessageListException, Exception {
 		resultBean = new ResultBean();
-		StringBuilder sb = new StringBuilder();
-		sb.append(
-				"SELECT e.id employee_id, s.id skill_id, e.name employee_name, s.name skill_name, t.name technique_name, max(est.point) point ");
-		sb.append(" from ece_system.employee e ");
-		sb.append(" LEFT JOIN ece_system.technique t on e.technique_id = t.id ");
-		sb.append(" LEFT JOIN ece_system.skill s on s.technique_id = t.id ");
-		sb.append(" LEFT JOIN ece_system.employee_skill_test est on est.employee_id = e.id ");
-		sb.append(" where e.id = ? ");
-		sb.append(" group by e.id,s.id");
-		List<Object> paramList = new ArrayList<>();
-		paramList.add(Integer.parseInt(user_id));
-		List<Object[]> lstResult = userDao.excuteNativeQuery(sb.toString(), paramList, null, null);
-		HashMap<Integer, RankEmployee> map = new HashMap<Integer, RankEmployee>();
-		for (int i = 0; i < lstResult.size(); i++) {
-			Object[] object = lstResult.get(i);
-			EmployeeCapacity rE = new EmployeeCapacity();
-			Integer empId = object[0] != null ? Integer.parseInt(object[0].toString()) : null;
-			if (null == empId)
-				continue;
-			// rE.setRank(i + 1);
-			// rE.setEmployee_id(empId);
-			// rE.setEmployy_name(object[1] != null ? object[1].toString() : null);
-			// rE.setCode(object[2] != null ? object[1].toString() : null);
-			// rE.setSkill_id(object[3] != null ? Integer.parseInt(object[3].toString()) :
-			// null);
-			// rE.setSkill_name(object[4] != null ? object[4].toString() : null);
-			// rE.setMax_point(object[5] != null ? Integer.parseInt(object[5].toString()) :
-			// null);
-			// map.put(empId, rE);
+		lstError.clear();
+		Integer empId = ValidationUtil.validateInt(user_id, lstError, Constants.USER_ID, false, false);
+		if (!lstError.isEmpty()) {
+			throw new MessageListException(lstError);
 		}
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
@@ -294,6 +237,8 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		return tech;
 	}
 
+	
+	
 	private List<String> getListSkill(Integer id) throws Exception {
 		List<String> lstSkill = new ArrayList<>();
 		StringBuilder sb = new StringBuilder(

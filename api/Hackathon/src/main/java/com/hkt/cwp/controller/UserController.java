@@ -82,6 +82,12 @@ public class UserController {
 	}
 
 	// Get Tecnique of Employee
+	/**
+	 * Lấy danh sách kỹ năng của User (Cũng là danh sách bài cần thi)
+	 * @author CaoTT
+	 * @param request
+	 * @return
+	 */
 
 	@RequestMapping(value = "/technique", method = RequestMethod.GET)
 	@ResponseBody
@@ -101,6 +107,30 @@ public class UserController {
 		return new ResponseEntity<>(resultBean, service.getStatus());
 	}
 
+	/**
+	 * Lấy năng lực của nhân viên
+	 * @author CaoTT
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/capacity", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<ResultBean> getCapacity(HttpServletRequest request) {
+		resultBean = new ResultBean();
+		String userId = request.getParameter("user_id");
+		try {
+			resultBean = service.getCurrentCapacity(userId);
+		} catch (MessageListException e) {
+			resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
+			return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			resultBean = new ResultBean(Constants.RESULT_FAIL,
+					BundleUtils.getString(Constants.ERR_ID_INTERNAL_SERVER_ERROR));
+			return new ResponseEntity<>(resultBean, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(resultBean, service.getStatus());
+	}
+	
 	/**
 	 * @author thuan
 	 * @param request
