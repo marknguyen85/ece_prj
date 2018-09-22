@@ -22,6 +22,10 @@
     <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
     <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet">
     <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
@@ -38,11 +42,6 @@
       gtag('config', 'UA-118965717-3');
       // Bootstrap ID
       gtag('config', 'UA-118965717-5');
-
-
-    </script>
-    <script type="text/javascript">
-
     </script>
   </head>
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -147,43 +146,32 @@
                 </div>
               </div>
               <div class="card-body">
-                <ol class="navSkill">
+                <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="/index.html">Năng lực</a>
+                    <a href="/profile1.html">Năng lực</a>
                   </li>
                   <li class="breadcrumb-item">
-                    <a id="historyId" href="/history.html">Lịch sử</a>
+                    <a href="/history.html">Lịch sử</a>
                   </li>
-                  <li class="breadcrumb-item active">
-                    <a href="/sosanh.html">So Sánh</a>
-                  </li>
-
-                  <li class="breadcrumb-item active">
-                    <a href="/lotrinh.html">Lộ trình công danh</a>
+                  <li class="breadcrumb-item">
+                    <a href="/lotrinhcongdanh.html" id = "myCareerPath">Lộ trình công danh</a>
                   </li>
                 </ol>
 
 
               </div>
             </div>
-
-            <!-- <div class="card">
-              <div class="card-header">
-                <div class="">
-                  <b>Trình độ tháng 6</b>
-                  <div class="form-inline">
-                    <label for="rankMonth"> <b>Kiểm tra trình độ theo tháng:</b> </label>
-                    <input id="rankMonth" class="form-control" type="date" name="" value="">
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-wrapper">
-                  <canvas id="canvas-4"></canvas>
-                </div>
-              </div>
-            </div> -->
             
+
+
+
+
+
+
+              </div>
+            </div>
+
+          </div>
         </div>
       </main>
       <aside class="aside-menu">
@@ -489,20 +477,15 @@
     <script src="node_modules/pace-progress/pace.min.js"></script>
     <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
     <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
-
-    <!-- chart -->
-    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
-    <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
-    <script src="js/charts.js"></script>
-
-
-    <script src="js/common.js"></script>
-    <script src="js/serviceInvoker.js"></script>
-    <script src="js/capacity.js"></script>
+    <script src="js/myjs.js"></script>
+    <!-- <script src="js/careerpath.js"></script> -->
+    <script src="js/lotrinhcongdanh.js"></script>
     <script type="text/javascript">
-      $(document).ready(function(){
-        CapaModule.init()
-      })
+      lotrinhcongdanhModule.init();
     </script>
   </body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
+  <script src="js/charts.js"></script>
 </html>

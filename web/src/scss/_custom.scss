@@ -1,3 +1,35 @@
+/* my layout */
+.mylayout{
+  display: flex;
+  flex-direction: row;
+}
+.myProgressBarLayout{
+   width: 700px;
+   margin: auto;
+}
+.mychartBarLayout{
+  margin: auto;
+  height: 500px;
+}
+.myContentLayout{
+  margin: auto;
+  height: 500px;
+  width: 600px;
+}
+/* content layout */
+.graph_container{
+  display:block;
+  width:500px;
+}
+.mycarrerPath{
+  margin-left: 120px;
+}
+.mycarrerBackground{
+  // background-image:url('../img/carrier_path/main.png');
+  width:800px;
+  height:550px;
+  background-size: cover;
+}
 // Here you can add other styles
 
 .logo {
@@ -98,4 +130,9 @@
 }
 .wrapperRank .tblRank td.rank {
 	text-transform: capitalize;
+}
+
+.tab-pane {
+  margin-left: 5px; 
+  margin-right: 5px; 
 }
