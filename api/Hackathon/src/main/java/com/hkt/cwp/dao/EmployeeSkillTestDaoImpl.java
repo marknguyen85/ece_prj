@@ -8,18 +8,17 @@ import org.springframework.stereotype.Repository;
 
 import com.hkt.cwp.models.Employee;
 import com.hkt.cwp.models.EmployeeSkillTest;
+
 @Repository
-public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements EmployeeSkillTestDao{
+public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements EmployeeSkillTestDao {
 
 	@Override
-	public List<EmployeeSkillTest> getListTest(Integer user_id) throws Exception {
-		
-		 Query query = (Query) entityManager.createQuery("FROM Employee WHERE id= :user_id");
-		 query.setParameter("user_id", user_id);
-		 
-		 List<EmployeeSkillTest> listEmployeeSkillTest = new ArrayList<>();
-		 listEmployeeSkillTest = query.getResultList();
-		return listEmployeeSkillTest;
+	public EmployeeSkillTest getListTest(Integer skillTest_id) throws Exception {
+
+		Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest WHERE id= :skillTest_id");
+		query.setParameter("skillTest_id", skillTest_id);
+		EmployeeSkillTest employeeSkillTest = new EmployeeSkillTest();
+		return employeeSkillTest;
 	}
 
 }
