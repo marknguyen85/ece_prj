@@ -5,19 +5,21 @@ package com.hkt.cwp.response;
 
 import java.util.List;
 
-import com.hkt.cwp.models.Skill;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author CaoTT
  *
  */
 public class TechniqueEmp {
-
+	private Integer rank;
 	private Integer employee_id;
 	private String employee_name;
 	private Integer technique_id;
 	private String technique_name;
 	private List<SkillTestResponse> skills;
+	@JsonIgnore
+	private Integer sumPoint;
 	/**
 	 * @return the employee_id
 	 */
@@ -78,6 +80,30 @@ public class TechniqueEmp {
 	 */
 	public void setSkills(List<SkillTestResponse> skills) {
 		this.skills = skills;
+	}
+	/**
+	 * @return the rank
+	 */
+	public Integer getRank() {
+		return rank;
+	}
+	/**
+	 * @param rank the rank to set
+	 */
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+	/**
+	 * @return the sumPoint
+	 */
+	public Integer getSumPoint() {
+		return sumPoint;
+	}
+	/**
+	 * @param sumPoint the sumPoint to set
+	 */
+	public void setSumPoint(Integer sumPoint) {
+		this.sumPoint = sumPoint;
 	}
 	
 }
