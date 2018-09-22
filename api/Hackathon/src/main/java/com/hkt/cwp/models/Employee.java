@@ -48,6 +48,7 @@ public class Employee implements Serializable {
 	private Technique technique;
 
 	//bi-directional many-to-one association to EmployeeSkillTest
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="employee")
 	private List<EmployeeSkillTest> employeeSkillTests;

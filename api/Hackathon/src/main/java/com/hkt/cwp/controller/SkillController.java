@@ -34,8 +34,10 @@ public class SkillController {
 	public ResponseEntity<ResultBean> getListKPI(HttpServletRequest request) {
 		resultBean = new ResultBean();
 		String kpi_id = request.getParameter("kpi_id");
+		String starttime = request.getParameter("starttime");
 		try {
-			resultBean = skillService.getListKPI(kpi_id);
+			resultBean = skillService.getListKPI(kpi_id,starttime);
+			
 		} catch (MessageListException e) {
 			resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
 			return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
@@ -46,6 +48,7 @@ public class SkillController {
 		}
 		return new ResponseEntity<>(resultBean, skillService.getStatus());
 	}
+	
 	@RequestMapping(value="/kpibytime",method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<ResultBean> getListKPIByTime(HttpServletRequest request) {

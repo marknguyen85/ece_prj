@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -39,20 +41,15 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 	private EmployeeTestDetailDao employeeTestDetailDao;
 	@Override
 	@Transactional
-	public ResultBean insertTest(String json) throws MessageListException, Exception {
+	public ResultBean insertTest(HttpServletRequest request) throws MessageListException, Exception {
 		resultBean = new ResultBean();
-		JsonObject jsonData = JsonDataUtil.getJsonObject(json);
 
 		// The JSON format is incorrect.
-		if (null == jsonData) {
-			resultBean = new ResultBean(Constants.RESULT_FAIL, BundleUtils.getString(Constants.ERR_ID_FORMAT_JSON));
-			status = HttpStatus.BAD_REQUEST;
-			return resultBean;
-		}
+		
 		EmployeeSkillTest employeeSkillTest = new EmployeeSkillTest();
 		Employee employee = new Employee();
-		Integer userId = JsonDataUtil.getJsonInteger(jsonData, "employee_id");
-		Integer skillId = JsonDataUtil.getJsonInteger(jsonData, "skill_id");
+		Integer userId = Integer.parseInt(request.getParameter("employee_id"));
+		Integer skillId = Integer.parseInt(request.getParameter( "skill_id"));
 		Skill skill = skillDao.getById(skillId);
 		employee = userDao.getById(userId);
 		employeeSkillTest.setEmployee(employee);
@@ -70,6 +67,14 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		listTestDetail = skill.getTestDetails();
 		Collections.shuffle(listTestDetail);
 		resultBean.setData(listTestDetail);
+		resultBean.setResult(Constants.RESULT_SUCCESS);
+		resultBean.setMessage(Constants.MSG_SUCCESS);
+		status = HttpStatus.CREATED;
+		return resultBean;
+	}
+	@Override
+	public ResultBean updateTest(HttpServletRequest request) throws MessageListException, Exception {
+		resultBean = new ResultBean();
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
 		status = HttpStatus.CREATED;

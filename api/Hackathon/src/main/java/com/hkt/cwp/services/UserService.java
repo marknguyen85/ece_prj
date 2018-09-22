@@ -20,5 +20,6 @@ public interface UserService {
 	ResultBean registerUser(String jsonData) throws MessageListException , Exception;
 	ResultBean searchEmp(String key, String page, String skillIdStr) throws MessageListException , Exception;
     ResultBean getCurrentCapacity(String user_id) throws MessageListException, Exception;
+    ResultBean getHistory(String user_id,String from, String to) throws MessageListException,Exception;
 	HttpStatus getStatus();
 }

@@ -6,8 +6,8 @@ import com.hkt.cwp.bean.MessageListException;
 import com.hkt.cwp.bean.ResultBean;
 
 public interface SkillService {
-	ResultBean getListKPI(String kpi_id) throws MessageListException , Exception;
+	ResultBean getListKPI(String kpi_id,String starttime) throws MessageListException , Exception;
 	ResultBean getListKPIByTime(String user_id,String kpi_id) throws MessageListException, Exception;
-	
+	ResultBean getListKPINotDone(String kpi_id,String starttime) throws MessageListException , Exception;
 	HttpStatus getStatus();
 }

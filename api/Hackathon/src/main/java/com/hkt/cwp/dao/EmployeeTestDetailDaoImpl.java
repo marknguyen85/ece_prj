@@ -13,4 +13,10 @@ public class EmployeeTestDetailDaoImpl extends AbstractBaseDao implements Employ
 		return employeeTestDetail.getId();
 	}
 
+	@Override
+	public int updateEmployeeTestDetail(EmployeeTestDetail employeeTestDetail) throws Exception {
+		entityManager.merge(employeeTestDetail);
+		return employeeTestDetail.getId();
+	}
+
 }

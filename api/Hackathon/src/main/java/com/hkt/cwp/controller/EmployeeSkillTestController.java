@@ -29,8 +29,9 @@ public class EmployeeSkillTestController {
 	public ResponseEntity<ResultBean> getUser(HttpServletRequest request) {
 		resultBean = new ResultBean();
 		String user_id = request.getParameter("user_id");
+		String starttime = request.getParameter("starttime");
 		try {
-			resultBean = employeeSkillTestService.getListTest(user_id);
+			resultBean = employeeSkillTestService.getListTest(user_id,starttime);
 		} catch (MessageListException e) {
 			resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
 			return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
@@ -41,4 +42,5 @@ public class EmployeeSkillTestController {
 		}
 		return new ResponseEntity<>(resultBean, employeeSkillTestService.getStatus());
 	}
+
 }

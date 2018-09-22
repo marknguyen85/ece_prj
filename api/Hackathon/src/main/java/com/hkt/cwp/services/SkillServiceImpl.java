@@ -31,7 +31,7 @@ public class SkillServiceImpl extends AbstractServiceBase implements SkillServic
 	private EmployeeSkillTestDao employeeSkillTestDao;
 
 	@Override
-	public ResultBean getListKPI(String kpi_id) throws MessageListException, Exception {
+	public ResultBean getListKPI(String kpi_id, String starttime) throws MessageListException, Exception {
 		resultBean = new ResultBean();
 		Skill skill = new Skill();
 		// skill =
@@ -53,6 +53,10 @@ public class SkillServiceImpl extends AbstractServiceBase implements SkillServic
 		{
 			EmployeeSkillTest employeeSkillTest = new EmployeeSkillTest();
 			employeeSkillTest = skill.getEmployeeSkillTests().get(i);
+			if(employeeSkillTest.getStarttime()==null)
+			{
+				continue;
+			}
 			Map<String, Object> resultSkillTest = new HashMap<>();
 			resultSkillTest.put("employee_id", employeeSkillTest.getEmployee().getId());
 			resultSkillTest.put("employee_name", employeeSkillTest.getEmployee().getName());
@@ -104,6 +108,12 @@ public class SkillServiceImpl extends AbstractServiceBase implements SkillServic
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
 		status = HttpStatus.OK;
+		return resultBean;
+	}
+
+	@Override
+	public ResultBean getListKPINotDone(String kpi_id, String starttime) throws MessageListException, Exception {
+		
 		return resultBean;
 	}
 

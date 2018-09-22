@@ -27,12 +27,12 @@ private ResultBean resultBean;
 	@Autowired
 	private TestDetailService testDetailService;
 	
-	@RequestMapping(value = "/insert" ,method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value = "/index" ,method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<ResultBean> getUser(@RequestBody String jsonData) {
+    public ResponseEntity<ResultBean> getUser(HttpServletRequest request) {
     	resultBean = new ResultBean();
         try {
-            resultBean = testDetailService.insertTest(jsonData);
+            resultBean = testDetailService.insertTest(request);
         } catch (MessageListException e) {
             resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
             return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
@@ -43,6 +43,20 @@ private ResultBean resultBean;
         return new ResponseEntity<>(resultBean, testDetailService.getStatus());
     }
     
-	
+	@RequestMapping(value = "/update" ,method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResultBean> updateTest(HttpServletRequest request) {
+    	resultBean = new ResultBean();
+        try {
+            resultBean = testDetailService.insertTest(request);
+        } catch (MessageListException e) {
+            resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
+            return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            resultBean = new ResultBean(Constants.RESULT_FAIL, BundleUtils.getString(Constants.ERR_ID_INTERNAL_SERVER_ERROR));
+            return new ResponseEntity<>(resultBean, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(resultBean, testDetailService.getStatus());
+    }
     
 }
