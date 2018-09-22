@@ -58,21 +58,8 @@
           <a class="nav-link" href="#">ECE system</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-              <strong>Account</strong>
-            </div>
-            <a class="dropdown-item" href="/logout.html">
-              <i class="fa fa-envelope-o"></i> Logout
-              <span class="badge badge-success">42</span>
-            </a>
-          </div>
-        </li>
+      <ul class="nav navbar-nav ml-auto" id="account-info">
+        
       </ul>
     </header>
     <div class="app-body">
@@ -110,20 +97,12 @@
                     <table class="table table-responsive-sm table-bordered table-striped table-sm">
                       <thead>
                         <tr>
-                          <th class="text-center">Tên</th>
+                          <th class="text-center">Kỹ năng</th>
                           <th class="text-center">Ngày</th>
                           <th class="text-center">Hành động</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>Thi tiếng anh</td>
-                          <td class="text-center">2012/01/01</td>
-                          <td class="text-center">
-                              <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">
-                                  <i class="fa fa-dot-circle-o"></i> Bắt đầu</button>
-                          </td>
-                        </tr>
+                      <tbody id="tbl-available-tested">
                       </tbody>
                     </table>
                   </div>
@@ -135,38 +114,16 @@
                     <table class="table table-responsive-sm table-bordered table-striped table-sm">
                       <thead>
                         <tr>
-                          <th class="text-center">Tên</th>
+                          <th class="text-center">Kỹ năng</th>
                           <th class="text-center">Ngày làm</th>
                           <th class="text-center">Điểm</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>Thi tiếng anh</td>
-                          <td class="text-center">2012/01/01</td>
-                          <td class="text-right">40/100</td>
-                        </tr>
+                      <tbody id="tbl-history-tested">
+                        
                       </tbody>
                     </table>
                   </div>
-                </div>
-                <ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tab-nangluc">Năng lực</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu1">Link</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">Link</a>
-                  </li>
-                </ul>
-                <!-- Nav tabs -->
-                <!-- Tab panes -->
-                <div class="tab-content">
-                  <div class="tab-pane container active" id="tab-nangluc">123</div>
-                  <div class="tab-pane container fade" id="menu1">321</div>
-                  <div class="tab-pane container fade" id="menu2">...</div>
                 </div>
             </div>
             <div class="modal fade" id="test-start-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
@@ -249,6 +206,7 @@
     <script>
       $(document).ready(function(){
         TestModule.init();
+        Common.loadAccountInfo();
       })
     </script>
   </body>
