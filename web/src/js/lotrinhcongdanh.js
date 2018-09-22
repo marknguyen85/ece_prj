@@ -35,38 +35,33 @@ var myID = 2;
       myRadarChart.update();
     }
 
+
+    function setCoordinate(data){
+        var imageWidth = $("#myPosition").css("width");
+        var imageHeight = $("#myPosition").css("height");
+        var myPositionWidth = parseInt(imageWidth.substring(0,imageWidth.length-2));
+        var myPositionHeight = parseInt(imageHeight.substring(0,imageHeight.length-2));
+        // alert("myPositionWidth: "+myPositionWidth + "  ---  myPositionHeight: "+myPositionHeight);
+        var myLeft = data.toado_x - myPositionWidth/2;
+        var myTop = data.toado_y - myPositionHeight;
+        // alert("top: "+myTop + "  ---  left: "+myLeft);
+        $('#myPosition').css("left",myLeft+"px");
+        $('#myPosition').css("top",myTop+"px");
+      }
+      
+    appName.reIndex = (param) => {
+        var data =
+        {
+          'toado_x':440,
+          'toado_y':364,
+        };
+        setCoordinate(data);
+    }
+
     appName.init = function(){
         // if (Common.checkAuthen()) {
         //     Common.redirect('/index.html');
         // }
-
-        $(document).on("click", '#myCareerPath', function(e) {
-            e.preventDefault();
-            // getRank();
-            // alert("Sdasd");
-            // addTable();
-            var data =
-                {
-                  'toado_x':440,
-                  'toado_y':364,
-                };
-            setCoordinate(data);
-
-         });
     };
 
 }(jQuery, window.lotrinhcongdanhModule = window.lotrinhcongdanhModule || {}));
-
-
-function setCoordinate(data){
-  var imageWidth = $("#myPosition").css("width");
-  var imageHeight = $("#myPosition").css("height");
-  var myPositionWidth = parseInt(imageWidth.substring(0,imageWidth.length-2));
-  var myPositionHeight = parseInt(imageHeight.substring(0,imageHeight.length-2));
-  // alert("myPositionWidth: "+myPositionWidth + "  ---  myPositionHeight: "+myPositionHeight);
-  var myLeft = data.toado_x - myPositionWidth/2;
-  var myTop = data.toado_y - myPositionHeight;
-  // alert("top: "+myTop + "  ---  left: "+myLeft);
-  $('#myPosition').css("left",myLeft+"px");
-  $('#myPosition').css("top",myTop+"px");
-}
