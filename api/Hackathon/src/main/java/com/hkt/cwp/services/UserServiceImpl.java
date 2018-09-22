@@ -262,4 +262,40 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		}
 		return lstSkill;
 	}
+
+	@Override
+	public ResultBean getLocation(String user_id) throws MessageListException, Exception {
+		lstError.clear();
+		Employee employee = new Employee();
+		Integer id = Integer.parseInt(user_id);
+		if(id.equals(null))
+		{
+			resultBean = new ResultBean(Constants.RESULT_FAIL, BundleUtils.getString(Constants.ERR_ID_NULL_OR_BLANK));
+			status = HttpStatus.BAD_REQUEST;
+			return resultBean;
+		}
+		employee = userDao.getById(id);
+		if(employee==null)
+		{
+			status =HttpStatus.NO_CONTENT;
+			return resultBean;
+		}
+		String role = employee.getRole().getLocation();
+		String nameRole = employee.getRole().getName();
+		String []path = role.split(";");
+		
+		String x = path[0];
+		String y = path[1];
+		Map<String, Object> result = new HashMap<>();
+		result.put("employee_id", employee.getId());
+		result.put("employee_name", employee.getName());
+		result.put("name", nameRole);
+		result.put("toado_x", x);
+		result.put("toado_y", y);
+		resultBean.setData(result);
+		resultBean.setResult(Constants.RESULT_SUCCESS);
+		resultBean.setMessage(Constants.MSG_SUCCESS);
+		status = HttpStatus.OK;
+		return resultBean;
+	}
 }

@@ -21,5 +21,6 @@ public interface UserService {
 	ResultBean getTechnique(String useId) throws MessageListException , Exception;
     ResultBean getCurrentCapacity(String user_id) throws MessageListException, Exception;
     ResultBean getHistory(String user_id,String from, String to) throws MessageListException,Exception;
+    ResultBean getLocation(String user_id) throws MessageListException,Exception;
 	HttpStatus getStatus();
 }

@@ -155,4 +155,27 @@ public class UserController {
 		}
 		return new ResponseEntity<>(resultBean, service.getStatus());
 	}
+	/**
+	 * @author thuan
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/location", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<ResultBean> getLocation(HttpServletRequest request) {
+		resultBean = new ResultBean();
+		String user_id = request.getParameter("user_id");
+		try {
+			resultBean = service.getLocation(user_id);
+		} catch (MessageListException e) {
+			resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
+			return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			resultBean = new ResultBean(Constants.RESULT_FAIL,
+					BundleUtils.getString(Constants.ERR_ID_INTERNAL_SERVER_ERROR));
+			return new ResponseEntity<>(resultBean, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(resultBean, service.getStatus());
+	}
+	
 }
