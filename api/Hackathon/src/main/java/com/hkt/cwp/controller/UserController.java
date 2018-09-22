@@ -81,4 +81,26 @@ public class UserController {
         return new ResponseEntity<>(resultBean, service.getStatus());
     }
 	
+    //Get list Employee
+    /**
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResultBean> searchEmp(HttpServletRequest request) {
+    	resultBean = new ResultBean();
+        String key = request.getParameter("key");
+        String page = request.getParameter("page");
+        try {
+            resultBean = service.searchEmp(key, page);
+        } catch (MessageListException e) {
+            resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
+            return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            resultBean = new ResultBean(Constants.RESULT_FAIL, BundleUtils.getString(Constants.ERR_ID_INTERNAL_SERVER_ERROR));
+            return new ResponseEntity<>(resultBean, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(resultBean, service.getStatus());
+    }
 }

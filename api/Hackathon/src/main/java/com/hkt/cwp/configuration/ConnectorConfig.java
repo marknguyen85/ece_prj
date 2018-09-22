@@ -12,6 +12,9 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @author CaoTT 
@@ -19,7 +22,8 @@ import org.springframework.context.annotation.Configuration;
  * Redirect HTTP requests to HTTPS
  */
 @Configuration
-public class ConnectorConfig {
+@EnableWebMvc
+public class ConnectorConfig extends WebMvcConfigurerAdapter{
 
 	@Bean
 	public EmbeddedServletContainerFactory servletContainer() {
@@ -46,4 +50,12 @@ public class ConnectorConfig {
 		connector.setRedirectPort(8443);
 		return connector;
 	}
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedOrigins("*")
+                .allowedHeaders("*");
+    }
+        
+        
 }
