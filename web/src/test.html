@@ -103,6 +103,53 @@
         </ol>
         <div class="container-fluid">
             <div class="animated fadeIn">
+                <div class="card">
+                  <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Các bài thi chưa làm</div>
+                    <div class="card-body">
+                    <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th class="text-center">Tên</th>
+                          <th class="text-center">Ngày</th>
+                          <th class="text-center">Hành động</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Thi tiếng anh</td>
+                          <td class="text-center">2012/01/01</td>
+                          <td class="text-center">
+                              <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">
+                                  <i class="fa fa-dot-circle-o"></i> Bắt đầu</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Các bài thi gần nhất</div>
+                    <div class="card-body">
+                    <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th class="text-center">Tên</th>
+                          <th class="text-center">Ngày làm</th>
+                          <th class="text-center">Điểm</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Thi tiếng anh</td>
+                          <td class="text-center">2012/01/01</td>
+                          <td class="text-right">40/100</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
                 <ul class="nav nav-tabs">
                   <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#tab-nangluc">Năng lực</a>
@@ -121,344 +168,62 @@
                   <div class="tab-pane container fade" id="menu1">321</div>
                   <div class="tab-pane container fade" id="menu2">...</div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                      <div class="card">
-                        <div class="card-header">
-                          <strong>Thi năng lực </strong>
-                          <small>tháng 10</small>
-                        </div>
-                        <div class="card-body">
-                            <button class="btn btn-lg btn-danger" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">
-                                <i class="fa fa-dot-circle-o"></i> Bắt đầu</button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
             </div>
             <div class="modal fade" id="test-start-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-max" role="document">
                 <div class="modal-content modal-content-max">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="q-title">Bạn yêu thích ngôn ngữ nào</h4>
+                    <h4 class="modal-title" id="q-title">Bài kiểm tra đánh giá</h4>
                     <button class="close" type="button">
-                    <span id="q-stt">1</span>/<span id="q-total">60</span>
+                    <span id="count-down-time"></span>
+                    <span id="q-stt">0</span>/<span id="q-total">0</span>
                     </button>
                   </div>
                   <div class="modal-body">
                       <div class="form-group row">
                           <div class="col-md-9 col-form-label" id="q-answer">
-                            <div class="form-check">
-                              <input class="form-check-input" id="radio1" type="radio" value="radio1" name="radios">
-                              <label class="form-check-label" for="radio1">C#</label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" id="radio2" type="radio" value="radio2" name="radios">
-                              <label class="form-check-label" for="radio2">Java</label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" id="radio3" type="radio" value="radio2" name="radios">
-                              <label class="form-check-label" for="radio3">PHP</label>
-                            </div>
+                            <p>Bạn đang bắt đầu thực hiện bài kiểm tra, chú ý bạn nên bố trí thời gian hợp lý.</p>
+                            <p>Bấm nút bắt đầu để làm bài.</p>
                           </div>
                       </div>
+                      <!-- <div class="form-group row" style="bottom:0;">
+                        <nav aria-label="...">
+                          <ul class="pagination">
+                            <li class="page-item disabled">
+                              <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item">
+                              <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item active">
+                              <a class="page-link" href="#">2
+                                <span class="sr-only">(current)</span>
+                              </a>
+                            </li>
+                            <li class="page-item">
+                              <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                              <a class="page-link" href="#">Next</a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div> -->
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-secondary" id="q-prev" type="button">Prev</button>
-                    <button class="btn btn-primary" id="q-next" type="button">Next</button>
-                    <button class="btn btn-primary" id="q-save" style="display: none;" type="button">Save changes</button>
-                    <button class="btn btn-secondary" id="q-close" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn btn-secondary" id="q-prev" style="display: none;" type="button">Trước</button>
+                    <button class="btn btn-primary" id="q-next" style="display: none;" type="button">Tiếp</button>
+                    <button class="btn btn-primary" id="q-save" style="display: none;" type="button">Hoàn thành</button>
+                    <button class="btn btn-lg btn-danger" id="q-start" type="button">
+                        <i class="fa fa-dot-circle-o"></i> Bắt đầu
+                    </button>
+                    <button class="btn btn-secondary" id="q-close" type="button"  ref="#test-start-dialog">Đóng</button>
                   </div>
                 </div>
               </div>
             </div>
         </div>
       </main>
-      <aside class="aside-menu">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">
-              <i class="icon-list"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#messages" role="tab">
-              <i class="icon-speech"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#settings" role="tab">
-              <i class="icon-settings"></i>
-            </a>
-          </li>
-        </ul>
-        <!-- Tab panes-->
-        <div class="tab-content">
-          <div class="tab-pane active" id="timeline" role="tabpanel">
-            <div class="list-group list-group-accent">
-              <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Today</div>
-              <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
-                <div class="avatar float-right">
-                  <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-                </div>
-                <div>Meeting with
-                  <strong>Lucas</strong>
-                </div>
-                <small class="text-muted mr-3">
-                  <i class="icon-calendar"></i>  1 - 3pm</small>
-                <small class="text-muted">
-                  <i class="icon-location-pin"></i>  Palo Alto, CA</small>
-              </div>
-              <div class="list-group-item list-group-item-accent-info">
-                <div class="avatar float-right">
-                  <img class="img-avatar" src="img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
-                </div>
-                <div>Skype with
-                  <strong>Megan</strong>
-                </div>
-                <small class="text-muted mr-3">
-                  <i class="icon-calendar"></i>  4 - 5pm</small>
-                <small class="text-muted">
-                  <i class="icon-social-skype"></i>  On-line</small>
-              </div>
-              <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Tomorrow</div>
-              <div class="list-group-item list-group-item-accent-danger list-group-item-divider">
-                <div>New UI Project -
-                  <strong>deadline</strong>
-                </div>
-                <small class="text-muted mr-3">
-                  <i class="icon-calendar"></i>  10 - 11pm</small>
-                <small class="text-muted">
-                  <i class="icon-home"></i>  creativeLabs HQ</small>
-                <div class="avatars-stack mt-2">
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/2.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/3.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                </div>
-              </div>
-              <div class="list-group-item list-group-item-accent-success list-group-item-divider">
-                <div>
-                  <strong>#10 Startups.Garden</strong> Meetup</div>
-                <small class="text-muted mr-3">
-                  <i class="icon-calendar"></i>  1 - 3pm</small>
-                <small class="text-muted">
-                  <i class="icon-location-pin"></i>  Palo Alto, CA</small>
-              </div>
-              <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
-                <div>
-                  <strong>Team meeting</strong>
-                </div>
-                <small class="text-muted mr-3">
-                  <i class="icon-calendar"></i>  4 - 6pm</small>
-                <small class="text-muted">
-                  <i class="icon-home"></i>  creativeLabs HQ</small>
-                <div class="avatars-stack mt-2">
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/2.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/3.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                  <div class="avatar avatar-xs">
-                    <img class="img-avatar" src="img/avatars/8.jpg" alt="admin@bootstrapmaster.com">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane p-3" id="messages" role="tabpanel">
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-          </div>
-          <div class="tab-pane p-3" id="settings" role="tabpanel">
-            <h6>Settings</h6>
-            <div class="aside-options">
-              <div class="clearfix mt-4">
-                <small>
-                  <b>Option 1</b>
-                </small>
-                <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                  <input class="switch-input" type="checkbox" checked="">
-                  <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-                </label>
-              </div>
-              <div>
-                <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-              </div>
-            </div>
-            <div class="aside-options">
-              <div class="clearfix mt-3">
-                <small>
-                  <b>Option 2</b>
-                </small>
-                <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                  <input class="switch-input" type="checkbox">
-                  <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-                </label>
-              </div>
-              <div>
-                <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-              </div>
-            </div>
-            <div class="aside-options">
-              <div class="clearfix mt-3">
-                <small>
-                  <b>Option 3</b>
-                </small>
-                <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                  <input class="switch-input" type="checkbox">
-                  <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-                </label>
-              </div>
-            </div>
-            <div class="aside-options">
-              <div class="clearfix mt-3">
-                <small>
-                  <b>Option 4</b>
-                </small>
-                <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                  <input class="switch-input" type="checkbox" checked="">
-                  <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-                </label>
-              </div>
-            </div>
-            <hr>
-            <h6>System Utilization</h6>
-            <div class="text-uppercase mb-1 mt-4">
-              <small>
-                <b>CPU Usage</b>
-              </small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">348 Processes. 1/4 Cores.</small>
-            <div class="text-uppercase mb-1 mt-2">
-              <small>
-                <b>Memory Usage</b>
-              </small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">11444GB/16384MB</small>
-            <div class="text-uppercase mb-1 mt-2">
-              <small>
-                <b>SSD 1 Usage</b>
-              </small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">243GB/256GB</small>
-            <div class="text-uppercase mb-1 mt-2">
-              <small>
-                <b>SSD 2 Usage</b>
-              </small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">25GB/256GB</small>
-          </div>
-        </div>
-      </aside>
     </div>
     <footer class="app-footer">
       <div>
@@ -477,6 +242,7 @@
     <script src="node_modules/pace-progress/pace.min.js"></script>
     <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
     <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
+    <script src="js/moment.js"></script>
     <script src="js/common.js"></script>
     <script src="js/serviceInvoker.js"></script>
     <script src="js/test.js"></script>
