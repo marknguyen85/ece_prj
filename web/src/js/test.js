@@ -8,57 +8,48 @@
     var $dialog = {};
     var starting  = false;
 
-    var getRadioItem = function(stt, item_count){
+    var getRadioItem = function(stt, data){
+        var item_count = 5;
         var item = {
             stt: stt,
-            name: 'question_' + stt,
-            title: 'Câu hỏi ' + stt,
+            detail_id: data.id,
+            name: 'q_' + data.id,
+            title: data.question,
             type : 'radio',
             answers : [],
-            answered: []
+            answered: 0
         }
+    
+        for (var i = 1; i <= item_count; i++) { 
+            if(!data['answer' + i]) {
+                continue;
+            }
 
-        for (var i = 1; i <= item_count; i++) {
             item.answers.push({
                 value: i,
-                text: 'Đáp án ' + i
+                text: data['answer' + i]
             })
         }
         return item;
     };
-
-    var getCheckboxItem = function(stt, item_count){
-        var item = {
-            stt: stt,
-            name: 'question_' + stt,
-            title: 'Câu hỏi ' + stt,
-            type : 'checkbox',
-            answers : [],
-            answered: []
-        }
-
-        for (var i = 1; i <= item_count; i++) {
-            item.answers.push({
-                value: i,
-                text: 'Đáp án ' + i
-            })
-        }
-        return item;
+    
+    var getCheckboxItem = function(stt, data){
+        
     };
-
+    
     var parseArray = (data, callback) => {
         console.log('==========parseArray', data);
 
-        for (var i = 1; i <= 10; i++) {
-            var rand = Math.floor((Math.random() * 2) + 1);
+        for (var i = 1; i <= data.length; i++) {
+            var rand = 2;
             switch(rand) {
                 case 1:
-                    questions.push(getCheckboxItem(i, 3))
+                    questions.push(getCheckboxItem(i, data[i - 1]))
                     break;
                 default:
-                    questions.push(getRadioItem(i, 3))
+                    questions.push(getRadioItem(i, data[i - 1]))
                     break;
-            }
+            } 
         }
 
         if (callback){
@@ -86,13 +77,13 @@
         }, null, true)
 
     }
-
+    
     var generateRadio = (item) => {
         var html = '';
         for (var i = 0; i < item.answers.length; i++){
             var id = item.name + '_' + i;
             var answer = item.answers[i];
-            var checked = item.answered.findIndex(val => val == answer.value) > -1 ? 'checked="checked"' : '';
+            var checked = item.answered == answer.value ? 'checked="checked"' : '';
 
             html += '<div class="form-check">';
             html += '<input class="form-check-input" ' + checked + ' type="radio" value="' + answer.value + '" name="'+ item.name +'" id="'+ id +'">';
@@ -120,7 +111,7 @@
     }
 
     var bindQuestion = () => {
-        if (currentIndex < 1 || currentIndex >= questions.length){
+        if (currentIndex < 1 || currentIndex > questions.length){
             currentIndex = 1
         }
 
@@ -142,7 +133,7 @@
     }
 
     var saveItem = () => {
-        if (currentIndex < 1 || currentIndex >= questions.length){
+        if (currentIndex < 1 || currentIndex > questions.length){
             return false;
         }
 
@@ -153,10 +144,11 @@
         }
 
         var index = answers.findIndex(obj => obj.name === item.name)
-
+        
         var answerItem = {
+            detail_id: item.detail_id,
             name: item.name,
-            answer: []
+            answer: 0
         };
 
         if (index > -1) {
@@ -164,7 +156,7 @@
         }
 
         $('#q-answer').find('input[name="' + item.name + '"]:checked').each(function(){
-            answerItem.answer.push($(this).val());
+            answerItem.answer = $(this).val();
         })
 
         if (answerItem.answer.length == 0){
@@ -185,18 +177,10 @@
             console.log(error);
         }
 
-        console.log('=================answers',answerItem);
+        console.log('=================saveItem',answerItem);
         return answerItem;
     }
 
-    var updateObj = ( old, updating ) => {
-        for (var i in old) {
-          if (old[i].value == value) {
-            old[i].desc = desc;
-             break; //Stop this loop, we found it!
-          }
-        }
-     }
     var countdownArray = []
 
     var countDownStart = (elem, minutes = 10) => {
@@ -219,7 +203,7 @@
             var timeLeft = (hours > 0 ? hours + ":" : '') + minutes + ":" + seconds
             $(elem).html(timeLeft);
 
-            // If the count down is finished, write some text
+            // If the count down is finished, write some text 
             if (distance < 0) {
                 clearInterval(x);
                 $(elem).html("EXPIRED");
@@ -230,17 +214,36 @@
     }
 
     var closeDialog = () => {
-        for (var i = 0; i < countdownArray.length; i++) {
-            clearInterval(countdownArray[i]);
-        }
-
-        $('#count-down-time').html("");
-        starting  = false;
-        $dialog = {};
+        Common.redirect('/test.html');
     }
 
     var submit = () => {
-        starting = false;
+        var formData = {
+            data : {
+                user_id: currentUser.id,
+                skill_id: skill_id,
+                details: []
+            }
+        };
+
+        for (var i = 0; i <= answers.length; i ++) {
+            formData.data.details.push({
+                test_detail_id: answers[i].detail_id,
+                answer: answers[i].answer
+            })
+        }
+
+        var url = '/test/insert';
+        serviceInvoker.post(url, formData, {
+            error: function(response){
+                alert('error in submit data');
+            },
+            success: function(response){
+                console.log(response);
+                alert('Gửi kết quả thành công');
+                $dialog.modal('hide');
+            }
+        })
     }
 
     var bindEvents = () => {
@@ -255,13 +258,13 @@
                 closeDialog();
             })
          });
-
+        
          $(document).on("click", '#q-close', function(e) {
             e.preventDefault();
             if (starting) {
                 if (confirm('Bạn có đồng ý gửi kết quả bài kiểm tra?')) {
                     // save
-                    $dialog.modal('hide');
+                    submit();
                 }
             }
             else {
@@ -286,7 +289,7 @@
                 bindQuestion();
             });
          });
-
+         
         $('#test-start-dialog').on("click", "#q-prev", function(e) {
             e.preventDefault();
             saveItem();
@@ -307,7 +310,7 @@
             e.preventDefault();
             if (confirm('Bạn có đồng ý gửi kết quả bài kiểm tra?')) {
                 // save
-                $dialog.modal('hide');
+                submit();
             }
         });
 
@@ -325,7 +328,7 @@
             var item = skill_test[i];
             trs += '<tr>';
             trs += '<td>' + item.skill.name + '</td>';
-            trs += '<td class="text-center">' + moment().format("YYYY-MM-DD") + '</td>';
+            trs += '<td class="text-center">' + item.starttime + '</td>';
             trs += '<td class="text-right">' + item.point + '/100</td>';
             trs += '</tr>';
         }
@@ -388,9 +391,8 @@
             Common.redirect('/login.html');
         }
 
-        //id,name
         currentUser = Common.currentUser();
-
+        
         getHistoryTested();
         getAvailableTest();
         bindEvents();
