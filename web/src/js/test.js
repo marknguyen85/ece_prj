@@ -75,7 +75,7 @@
         for (var i = 0; i < item.answers.length; i++){
             var id = item.name + '_' + i;
             var answer = item.answers[i];
-            
+
             html += '<div class="form-check">';
             html += '<input class="form-check-input" type="checkbox" value="' + answer.value + '" name="'+ item.name +'" id="'+ id +'">';
             html += '<label class="form-check-label" for="' + id + '">'+ answer.text +'</label>';
@@ -149,6 +149,9 @@
     }
 
     appName.init = function(){
+        if (!Common.checkAuthen()) {
+            Common.redirect('/login.html');
+        }
         initArray();
         $(document).on("click", '#test-start', function() {
             var dialog = $(this).attr('ref')
@@ -169,6 +172,10 @@
         });
         $('#test-start-dialog').on("click", "#q-save", function() {
             console.log(answers);
+        });
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            alert(target);
         });
     };
 
