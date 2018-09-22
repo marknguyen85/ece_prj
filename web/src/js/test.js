@@ -11,7 +11,8 @@
             name: 'question_' + stt,
             title: 'Câu hỏi ' + stt,
             type : 'radio',
-            answers : []
+            answers : [],
+            answered: []
         }
     
         for (var i = 1; i <= item_count; i++) { 
@@ -29,7 +30,8 @@
             name: 'question_' + stt,
             title: 'Câu hỏi ' + stt,
             type : 'checkbox',
-            answers : []
+            answers : [],
+            answered: []
         }
     
         for (var i = 1; i <= item_count; i++) { 
@@ -60,9 +62,10 @@
         for (var i = 0; i < item.answers.length; i++){
             var id = item.name + '_' + i;
             var answer = item.answers[i];
+            var checked = item.answered.findIndex(val => val == answer.value) > -1 ? 'checked="checked"' : '';
 
             html += '<div class="form-check">';
-            html += '<input class="form-check-input" type="radio" value="' + answer.value + '" name="'+ item.name +'" id="'+ id +'">';
+            html += '<input class="form-check-input" ' + checked + ' type="radio" value="' + answer.value + '" name="'+ item.name +'" id="'+ id +'">';
             html += '<label class="form-check-label" for="' + id + '">'+ answer.text +'</label>';
             html += '</div>';
         }
@@ -75,9 +78,10 @@
         for (var i = 0; i < item.answers.length; i++){
             var id = item.name + '_' + i;
             var answer = item.answers[i];
+            var checked = item.answered.findIndex(val => val == answer.value) > -1 ? 'checked="checked"' : '';
 
             html += '<div class="form-check">';
-            html += '<input class="form-check-input" type="checkbox" value="' + answer.value + '" name="'+ item.name +'" id="'+ id +'">';
+            html += '<input class="form-check-input" ' + checked + 'type="checkbox" value="' + answer.value + '" name="'+ item.name +'" id="'+ id +'">';
             html += '<label class="form-check-label" for="' + id + '">'+ answer.text +'</label>';
             html += '</div>';
         }
@@ -114,7 +118,7 @@
 
         var item = questions[currentIndex - 1];
 
-        if (!item.name){
+        if (!item || !item.name){
             return false;
         }
 
@@ -144,35 +148,142 @@
             answers.push(answerItem);
         }
 
-        console.log('=================answers',answerItem)
+        // gán giấ trị đã chọn
+        try {
+            questions[currentIndex - 1].answered = answerItem.answer;
+        } catch (error) {
+            console.log(error);
+        }
+
+        console.log('=================answers',answerItem);
         return answerItem;
     }
 
-    appName.init = function(){
-        if (!Common.checkAuthen()) {
-            Common.redirect('/login.html');
+    var updateObj = ( old, updating ) => {
+        for (var i in old) {
+          if (old[i].value == value) {
+            old[i].desc = desc;
+             break; //Stop this loop, we found it!
+          }
         }
+     }
+    var countdownArray = []
+
+    var countDownStart = (elem, minutes = 10) => {
+        // Set the date we're counting down to
+        var countDownDate = moment().add(minutes, 'm').valueOf();
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            var timeLeft = (hours > 0 ? hours + ":" : '') + minutes + ":" + seconds
+            $(elem).html(timeLeft);
+
+            // If the count down is finished, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                $(elem).html("EXPIRED");
+            }
+        }, 1000);
+
+        countdownArray.push(x);
+    }
+
+    var starting  = false;
+    var closeDialog = () => {
+        for (var i = 0; i < countdownArray.length; i++) {
+            clearInterval(countdownArray[i]);
+        }
+        
+        $('#count-down-time').html("");
+        starting  = false;
+        $dialog = {};
+    }
+
+    var submit = () => {
+        starting = false;
+    }
+
+    var $dialog = {};
+
+    appName.init = function(){
+        // if (!Common.checkAuthen()) {
+        //     Common.redirect('/login.html');
+        // }
         initArray();
-        $(document).on("click", '#test-start', function() {
-            var dialog = $(this).attr('ref')
-            $(dialog).modal('show');
+        $(document).on("click", '#test-start', function(e) {
+            e.preventDefault();
+            var dialog = $(this).attr('ref');
+            $dialog = $(dialog);
+            $dialog.modal('show');
+
+            $(dialog).on('hidden.bs.modal', function (e) {
+                closeDialog();
+            })
+         });
+        
+         $(document).on("click", '#q-close', function(e) {
+            e.preventDefault();
+            if (starting) {
+                if (confirm('Bạn có đồng ý gửi kết quả bài kiểm tra?')) {
+                    // save
+                    $dialog.modal('hide');
+                }
+            }
+            else {
+                $dialog.modal('hide');
+            }
+         });
+
+        $(document).on("click", '#q-start', function(e) {
+            e.preventDefault();
+            if (!confirm("Bắt đầu làm bài thi?")) {
+                return false;
+            }
+            //set flag
+            starting  = true;
+
+            $('#q-start, #q-close').hide();
+            $('#q-prev, #q-next, #q-save').show();
+
+            countDownStart('#count-down-time', 10);
             bindQuestion();
          });
          
-        $('#test-start-dialog').on("click", "#q-prev", function() {
+        $('#test-start-dialog').on("click", "#q-prev", function(e) {
+            e.preventDefault();
             saveItem();
             currentIndex = currentIndex - 1;
             bindQuestion();
         });
-        $('#test-start-dialog').on("click", "#q-next", function() {
-            if (saveItem()) {
-                currentIndex = currentIndex + 1;
-                bindQuestion();
+
+        // next
+        $('#test-start-dialog').on("click", "#q-next", function(e) {
+            e.preventDefault();
+            saveItem();
+            currentIndex = currentIndex + 1;
+            bindQuestion();
+        });
+
+        // submit
+        $('#test-start-dialog').on("click", "#q-save", function(e) {
+            e.preventDefault();
+            if (confirm('Bạn có đồng ý gửi kết quả bài kiểm tra?')) {
+                // save
+                $dialog.modal('hide');
             }
         });
-        $('#test-start-dialog').on("click", "#q-save", function() {
-            console.log(answers);
-        });
+
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab
             alert(target);

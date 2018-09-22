@@ -19,48 +19,22 @@ var random = function random() {
 var lineChart = new Chart($('#canvas-1'), {
   type: 'line',
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [{
-      label: 'Codding',
+      label: 'My First dataset',
       backgroundColor: 'rgba(220, 220, 220, 0.2)',
-      borderColor: 'green',
-      pointBackgroundColor: 'green',
+      borderColor: 'rgba(220, 220, 220, 1)',
+      pointBackgroundColor: 'rgba(220, 220, 220, 1)',
       pointBorderColor: '#fff',
       data: [random(), random(), random(), random(), random(), random(), random()]
     }, {
-      label: 'IQ',
+      label: 'My Second dataset',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'black',
-      pointBackgroundColor: 'black',
+      borderColor: 'rgba(151, 187, 205, 1)',
+      pointBackgroundColor: 'rgba(151, 187, 205, 1)',
       pointBorderColor: '#fff',
       data: [random(), random(), random(), random(), random(), random(), random()]
-    },
-    {
-      label: 'Database',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'red',
-      pointBackgroundColor: 'red',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    },
-    {
-      label: 'Attitude',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'blue',
-      pointBackgroundColor: 'blue',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }
-    ,
-    {
-      label: 'Manager',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'yellow',
-      pointBackgroundColor: 'yellow',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }
-  ]
+    }]
   },
   options: {
     responsive: true
@@ -108,47 +82,32 @@ var doughnutChart = new Chart($('#canvas-3'), {
 var radarChart = new Chart($('#canvas-4'), {
   type: 'radar',
   data: {
-    labels: ['Coding', 'Database', 'IQ', 'Attitude', 'Manager'],
+    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
     datasets: [{
-      label: 'Nguyễn Văn A',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'black',
-      pointBackgroundColor: 'black',
+      label: 'My First dataset',
+      backgroundColor: 'rgba(220, 220, 220, 0.2)',
+      borderColor: 'rgba(220, 220, 220, 1)',
+      pointBackgroundColor: 'rgba(220, 220, 220, 1)',
       pointBorderColor: '#fff',
       pointHighlightFill: '#fff',
       pointHighlightStroke: 'rgba(220, 220, 220, 1)',
-      data: [65, 59, 90, 81, 56]
-    }]
-  },
-  options: {
-    responsive: true
-  }
-}); // eslint-disable-next-line no-unused-vars
-//radar Char capacity
-
-var radarChartCapa = new Chart($('#canvasCapaci'), {
-  type: 'radar',
-  data: {
-    labels: ['Chuyên môn', 'IQ', 'ABC', 'Chuyên cần', 'Thái độ', 'Ngoại ngữ'],
-    datasets: [{
-      label: 'Nguyễn Văn A',
+      data: [65, 59, 90, 81, 56, 55, 40]
+    }, {
+      label: 'My Second dataset',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'black',
-      pointBackgroundColor: 'black',
+      borderColor: 'rgba(151, 187, 205, 1)',
+      pointBackgroundColor: 'rgba(151, 187, 205, 1)',
       pointBorderColor: '#fff',
       pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(220, 220, 220, 1)'
-
+      pointHighlightStroke: 'rgba(151, 187, 205, 1)',
+      data: [28, 48, 40, 19, 96, 27, 100]
     }]
   },
   options: {
     responsive: true
   }
 }); // eslint-disable-next-line no-unused-vars
-//Load data and update data in dataset---------------------------------
-console.log(radarChartCapa.data.datasets[0].data = [65, 59, 90, 81, 56, 56]);
-radarChartCapa.update();
-//----------------------------------------------------------------------------
+
 var pieChart = new Chart($('#canvas-5'), {
   type: 'pie',
   data: {
