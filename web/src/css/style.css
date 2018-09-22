@@ -14176,6 +14176,46 @@ body {
   breakpoint-xl: 1200px;
 }
 
+/* my layout */
+.mylayout {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.myProgressBarLayout {
+  width: 700px;
+  margin: auto;
+}
+
+.mychartBarLayout {
+  margin: auto;
+  height: 500px;
+}
+
+.myContentLayout {
+  margin: auto;
+  height: 500px;
+  width: 600px;
+}
+
+/* content layout */
+.graph_container {
+  display: block;
+  width: 500px;
+}
+
+.mycarrerPath {
+  margin-left: 120px;
+}
+
+.mycarrerBackground {
+  width: 800px;
+  height: 550px;
+  background-size: cover;
+}
+
 .logo {
   text-align: center;
   padding-bottom: 50px;

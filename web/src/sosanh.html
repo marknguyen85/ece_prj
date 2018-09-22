@@ -13,16 +13,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="ECE system">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword" content="ECE system">
-    <title>ECE system</title>
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>CoreUI Free Bootstrap Admin Template</title>
     <!-- Icons-->
     <link href="node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
     <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
     <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet">
     <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
@@ -40,6 +43,14 @@
       // Bootstrap ID
       gtag('config', 'UA-118965717-5');
     </script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/pace-progress/pace.min.js"></script>
+    <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+    <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
+    <script src="js/myjs.js"></script>
+    <script src="js/sosanh.js"></script>
   </head>
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
     <header class="app-header navbar">
@@ -47,8 +58,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-          <img class="navbar-brand-full" src="img/logo.png" width="89" height="25" alt="CoreUI Logo">
-          <img class="navbar-brand-minimized" src="img/logo.png" width="30" height="30" alt="CoreUI Logo">
+        <img class="navbar-brand-full" src="img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
+        <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
       </a>
       <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
@@ -67,10 +78,42 @@
             <div class="dropdown-header text-center">
               <strong>Account</strong>
             </div>
-            <a class="dropdown-item" href="/logout.html">
-              <i class="fa fa-envelope-o"></i> Logout
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-bell-o"></i> Updates
+              <span class="badge badge-info">42</span>
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-envelope-o"></i> Messages
               <span class="badge badge-success">42</span>
             </a>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-tasks"></i> Tasks
+              <span class="badge badge-danger">42</span>
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-comments"></i> Comments
+              <span class="badge badge-warning">42</span>
+            </a>
+            <div class="dropdown-header text-center">
+              <strong>Settings</strong>
+            </div>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-user"></i> Profile</a>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-wrench"></i> Settings</a>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-usd"></i> Payments
+              <span class="badge badge-secondary">42</span>
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-file"></i> Projects
+              <span class="badge badge-primary">42</span>
+            </a>
+            <div class="divider"></div>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-shield"></i> Lock Account</a>
+            <a class="dropdown-item" href="#">
+              <i class="fa fa-lock"></i> Logout</a>
           </div>
         </li>
       </ul>
@@ -86,7 +129,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="test.html">
+              <a class="nav-link" href="blank.html">
                 <i class="nav-icon icon-drop"></i>Thi năng lực</a>
             </li>
             <li class="divider"></li>
@@ -99,93 +142,6 @@
 
         <div class="container-fluid">
           <div class="animated fadeIn">
-<<<<<<< HEAD
-            <div class="row">
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-primary">
-                  <div class="card-body pb-0">
-                    <div class="btn-group float-right">
-                      <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon-settings"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
-                    <div class="text-value">9.823</div>
-                    <div>Members online</div>
-                  </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-                    <canvas class="chart" id="card-chart1" height="70"></canvas>
-                  </div>
-                </div>
-              </div>
-              <!-- /.col-->
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-info">
-                  <div class="card-body pb-0">
-                    <button class="btn btn-transparent p-0 float-right" type="button">
-                      <i class="icon-location-pin"></i>
-                    </button>
-                    <div class="text-value">9.823</div>
-                    <div>Members online</div>
-                  </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-                    <canvas class="chart" id="card-chart2" height="70"></canvas>
-                  </div>
-                </div>
-              </div>
-              <!-- /.col-->
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-warning">
-                  <div class="card-body pb-0">
-                    <div class="btn-group float-right">
-                      <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon-settings"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
-                    <div class="text-value">9.823</div>
-                    <div>Members online</div>
-                  </div>
-                  <div class="chart-wrapper mt-3" style="height:70px;">
-                    <canvas class="chart" id="card-chart3" height="70"></canvas>
-                  </div>
-                </div>
-              </div>
-              <!-- /.col-->
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-danger">
-                  <div class="card-body pb-0">
-                    <div class="btn-group float-right">
-                      <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon-settings"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="lotrinhcongdanh.html">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
-                    <div class="text-value">9.823</div>
-                    <div>Members online</div>
-                  </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-                    <canvas class="chart" id="card-chart4" height="70"></canvas>
-                  </div>
-                </div>
-              </div>
-              <!-- /.col-->
-            </div>
-            <!-- /.row-->
-=======
->>>>>>> e60c4c4fba445f821416ffa8cdbf6596f684a323
             <div class="card">
               <div class="card-header">
 
@@ -198,173 +154,191 @@
                 </div>
               </div>
               <div class="card-body">
-                <ol class="navSkill">
+                <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="/profile.html">Năng lực</a>
+                    <a href="/profile1.html">Năng lực</a>
                   </li>
                   <li class="breadcrumb-item">
                     <a href="/history.html">Lịch sử</a>
                   </li>
-                  <li class="breadcrumb-item active">
-                    <a href="/sosanh.html">So Sánh</a>
-                  </li>
-
-                  <li class="breadcrumb-item active">
-                    <a href="/lotrinh.html">Lộ trình công danh</a>
-                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="/sosanh.html" id="mySoSanh">So sánh</a>
+                    </li>
                 </ol>
 
 
               </div>
             </div>
             <div class="card">
+              <!-- cart header ranking -->
               <div class="card-header">
-                <div class="">
-                  <b>Năng lực</b>
-
-                </div>
+                Ranking
               </div>
+              <!-- cart header body -->
               <div class="card-body">
-                <div class="chart-wrapper">
-
-                  <canvas id="canvasCapaci"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Năng lực</div>
-              <div class="card-body">
-                <div class="form-inline search-container" >
-                  <input id="searcRank" type="text" class="form-control" placeholder="Tìm kiếm" name="" value="">
-                  <button class="form-control"><i class="fa fa-search">Search</i></button>
-                </div>
-                <div class="wrapperRank">
-                 <table class="tblRank">
-                   <thead>
-                     <tr>
-                       <th>Rank</th>
-                       <th>Username</th>
-                       <th>Coding</th>
-                       <th>Database</th>
-                       <th>IQ</th>
-                       <th>Attitude</th>
-                       <th>Manager</th>
-                     </tr>
-                   </thead>
-                   <tbody>
-                     <tr>
-                         <td class="rank">1</td>
-                         <td class="team">Vi Văn Thức</td>
-                         <td class="points">90</td>
-                         <td class="up-down">92</td>
-                         <td class="points">100</td>
-                         <td class="up-down">91</td>
-                         <td class="up-down">98</td>
-                      </tr>
-                    <tr>
-                      <td class="rank">2</td>
-                      <td class="team">Nguyễn Văn A</td>
-                      <td class="points">76</td>
-                      <td class="up-down">92</td>
-                      <td class="points">69</td>
-                      <td class="up-down">91</td>
-                      <td class="up-down">98</td>
-                     </tr>
-                      <tr>
-                       <td class="rank">3</td>
-                       <td class="team">Nguyễn Văn B</td>
-                       <td class="points">90</td>
-                       <td class="up-down">92</td>
-                       <td class="points">67</td>
-                       <td class="up-down">97</td>
-                       <td class="up-down">78</td>
-                      </tr>
-                      <tr>
-                        <td class="rank">4</td>
-                        <td class="team">Nguyễn Văn C</td>
-                        <td class="points">90</td>
-                        <td class="up-down">92</td>
-                        <td class="points">67</td>
-                        <td class="up-down">97</td>
-                        <td class="up-down">78</td>
-                       </tr>
+                  <div class="form-inline search-container" >
+                    <input id="mySearchBar" type="text" class="form-control" placeholder="Tìm kiếm" name="" value="">
+                    <button class="form-control" id="mySearchBtn"><i class="fa fa-search">Search</i></button>
+                  </div>
+                  <div class="wrapperRank">
+                   <table class="tblRank" id="myRankTable">
+                     <thead>
                        <tr>
-                         <td class="rank">5</td>
-                         <td class="team">Nguyễn Văn D</td>
-                         <td class="points">90</td>
-                         <td class="up-down">92</td>
-                         <td class="points">67</td>
-                         <td class="up-down">97</td>
-                         <td class="up-down">78</td>
-                      </tr>
-                      <tr>
-                        <td class="rank">6</td>
-                        <td class="team">Nguyễn Văn E</td>
-                        <td class="points">90</td>
-                        <td class="up-down">92</td>
-                        <td class="points">67</td>
-                        <td class="up-down">97</td>
-                        <td class="up-down">78</td>
-                     </tr>
-                     <tr>
-                       <td class="rank">7</td>
-                       <td class="team">Nguyễn Văn G</td>
-                       <td class="points">90</td>
-                       <td class="up-down">92</td>
-                       <td class="points">67</td>
-                       <td class="up-down">97</td>
-                       <td class="up-down">78</td>
-                    </tr>
-                    <tr>
-                      <td class="rank">8</td>
-                      <td class="team">Nguyễn Văn G</td>
-                      <td class="points">90</td>
-                      <td class="up-down">92</td>
-                      <td class="points">67</td>
-                      <td class="up-down">97</td>
-                      <td class="up-down">78</td>
-                   </tr>
-                   <tr>
-                     <td class="rank">9</td>
-                     <td class="team">Nguyễn Văn G</td>
-                     <td class="points">90</td>
-                     <td class="up-down">92</td>
-                     <td class="points">67</td>
-                     <td class="up-down">97</td>
-                     <td class="up-down">78</td>
-                  </tr>
-                      <tr>
-                        <td class="rank">10</td>
-                        <td class="team">Nguyễn Văn G</td>
-                        <td class="points">90</td>
-                        <td class="up-down">92</td>
-                        <td class="points">67</td>
-                        <td class="up-down">97</td>
-                        <td class="up-down">78</td>
-                     </tr>
-                     <tr>
-                       <td class="rank">...</td>
-                       <td class="team">...</td>
-                       <td class="points">...</td>
-                       <td class="up-down">...</td>
-                       <td class="points">...</td>
-                       <td class="up-down">...</td>
-                       <td class="up-down">...</td>
-                    </tr>
-                    <tr>
-                      <td class="rank">101</td>
-                      <td class="team">Nguyễn Văn F</td>
-                      <td class="points">90</td>
-                      <td class="up-down">92</td>
-                      <td class="points">67</td>
-                      <td class="up-down">97</td>
-                      <td class="up-down">78</td>
-                   </tr>
-                   </tbody>
-                 </table>
-               </div>
+                         <th>Rank</th>
+                         <th>Name</th>
+                         <th>Coding</th>
+                         <th>Database</th>
+                         <th>IQ</th>
+                         <th>Attitude</th>
+                         <th>Language</th>
+                       </tr>
+                     </thead>
+                     <tbody id="myTableRankBody">
+
+                     </tbody>
+                   </table>
+                 </div>
+
+
               </div>
             </div>
+            <div  id="formSoSanh" class="card">
+              <div class="card-header">So Sánh</div>
+              <div class="card-body">
+                <!-- show head sosanh -->
+                <!-- <div class="">
+                  <div class="">
+                    <div class="form-inline" style="">
+                      <label for=""><span> </span> <h5>Type </h5> </label>
+                      <select class="form-control" name="">
+                        <option value="coding">Coding</option>
+                        <option value="db">DB</option>
+                        <option value="iq">IQ</option>
+                        <option value="attitute">Attitute</option>
+                        <option value="language">Language</option>
+                      </select>
+                    </div>
+                  </div>
+                </div> -->
+                <div >
+
+                  <div class="chart-wrapper myContentLayout"  >
+                    <canvas id="canvas-9"></canvas>
+                  </div>
+
+                </div>
+
+                <!-- show content sosanh -->
+                <div >
+                  <div class="chart-wrapper myContentLayout"  >
+                    <canvas id="canvas-2"></canvas>
+                  </div>
+                </div>
+
+                <div class="myProgressBarLayout">
+
+
+                  <div class="row ">
+                    <div class="col-sm-6">
+                      <div class="callout callout-info">
+                        <small class="text-muted" id = "mySmallName">New Clients</small>
+                        <br>
+                        <strong class="h4" id = "myPointAverage">9,123</strong>
+                        <div class="chart-wrapper">
+                          <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.col-->
+                    <div class="col-sm-6">
+                      <div class="callout callout-danger">
+                        <small class="text-muted" id = "yourSmallName">Recuring Clients</small>
+                        <br>
+                        <strong class="h4" id = "yourPointAverage">22,643</strong>
+                        <div class="chart-wrapper">
+                          <canvas id="sparkline-chart-2" width="100" height="30"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.col-->
+                  </div>
+                  <hr class="mt-0">
+              </div>
+                <!-- chart bar layout -->
+                <div class="myProgressBarLayout">
+                  <div class="progress-group mb-4">
+                    <div class="progress-group-prepend">
+                      <span class="progress-group-text">Coding</span>
+                    </div>
+                    <div class="progress-group-bars">
+                      <div class="progress progress-xs">
+                        <div id="mycoding" class="progress-bar bg-info" role="progressbar" style="width: 34%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="progress progress-xs">
+                        <div id="yourcoding" class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-group mb-4">
+                    <div class="progress-group-prepend">
+                      <span class="progress-group-text">Database</span>
+                    </div>
+                    <div class="progress-group-bars">
+                      <div class="progress progress-xs">
+                        <div id="mydatabase" class="progress-bar bg-info" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="progress progress-xs">
+                        <div id="yourdatabase" class="progress-bar bg-danger" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-group mb-4">
+                    <div class="progress-group-prepend">
+                      <span class="progress-group-text">IQ</span>
+                    </div>
+                    <div class="progress-group-bars">
+                      <div class="progress progress-xs">
+                        <div id="myiq" class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="progress progress-xs">
+                        <div id="youriq" class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-group mb-4">
+                    <div class="progress-group-prepend">
+                      <span class="progress-group-text">Attitute</span>
+                    </div>
+                    <div class="progress-group-bars">
+                      <div class="progress progress-xs">
+                        <div id="myattitude" class="progress-bar bg-info" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="progress progress-xs">
+                        <div id="yourattitude" class="progress-bar bg-danger" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-group mb-4">
+                    <div class="progress-group-prepend">
+                      <span class="progress-group-text">Language</span>
+                    </div>
+                    <div class="progress-group-bars">
+                      <div class="progress progress-xs">
+                        <div id="mylanguage" class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="progress progress-xs">
+                        <div id="yourlanguage" class="progress-bar bg-danger" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+
           </div>
         </div>
       </main>
@@ -665,16 +639,20 @@
       </div>
     </footer>
     <!-- CoreUI and necessary plugins-->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/pace-progress/pace.min.js"></script>
-    <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
 
-    <!-- chart -->
-    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
-    <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
-    <script src="js/charts.js"></script>
   </body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#formSoSanh').hide();
+    });
+  </script>
+  <script>
+    $(document).ready(function(){
+      sosanhModule.init();
+    });
+  </script>
 </html>
