@@ -6,7 +6,6 @@ package com.hkt.cwp.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,6 @@ import com.hkt.cwp.Utils.BundleUtils;
 import com.hkt.cwp.Utils.Constants;
 import com.hkt.cwp.bean.MessageListException;
 import com.hkt.cwp.bean.ResultBean;
-import com.hkt.cwp.configuration.TokenAuthentication;
-import com.hkt.cwp.models.Employee;
 import com.hkt.cwp.services.UserService;
 
 /**
@@ -65,12 +62,12 @@ public class UserController {
     	resultBean = new ResultBean();
         try {
             resultBean = service.authority(jsonData);
-            if (resultBean.getResult() == Constants.RESULT_SUCCESS) {
-            	String token = TokenAuthentication.addAuthentication((Employee) resultBean.getData());
-            	HttpHeaders headers = new HttpHeaders();
-                headers.set("token", token);
-                return new ResponseEntity<>(resultBean, headers, HttpStatus.CREATED);
-            }
+//            if (resultBean.getResult() == Constants.RESULT_SUCCESS) {
+//            	String token = TokenAuthentication.addAuthentication((Employee) resultBean.getData());
+//            	HttpHeaders headers = new HttpHeaders();
+//                headers.set("token", token);
+//                return new ResponseEntity<>(resultBean, headers, HttpStatus.CREATED);
+//            }
         } catch (MessageListException e) {
             resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
             return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
@@ -93,7 +90,7 @@ public class UserController {
         String key = request.getParameter("key");
         String page = request.getParameter("page");
         try {
-            resultBean = service.searchEmp(key, page);
+            resultBean = service.searchEmp(key, page, null);
         } catch (MessageListException e) {
             resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
             return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
