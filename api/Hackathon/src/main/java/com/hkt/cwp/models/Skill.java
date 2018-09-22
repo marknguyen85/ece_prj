@@ -21,6 +21,7 @@ public class Skill implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to EmployeeSkillTest
+	 @OrderBy("point DESC")
 	@OneToMany(mappedBy="skill")
 	private List<EmployeeSkillTest> employeeSkillTests;
 
@@ -80,7 +81,6 @@ public class Skill implements Serializable {
 	public void setTechnique(Technique technique) {
 		this.technique = technique;
 	}
-
 	public List<TestDetail> getTestDetails() {
 		return this.testDetails;
 	}

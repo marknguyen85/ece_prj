@@ -1,10 +1,15 @@
 package com.hkt.cwp.dao;
-
+/**
+ * @author thuan
+ */
 import java.util.List;
 
 import com.hkt.cwp.models.EmployeeSkillTest;
 
 public interface EmployeeSkillTestDao {
-	List<EmployeeSkillTest> getListTest(Integer user_id) throws Exception;
+	EmployeeSkillTest getListTest(Integer skillTest_id) throws Exception;
+	int insertEmployeeSkillTest(EmployeeSkillTest employeeSkillTest) throws Exception;
+	int updateEmployeeSkillTest(EmployeeSkillTest employeeSkillTest) throws Exception;
+	EmployeeSkillTest getEmployeeSkillTestBySkill(Integer skill_id) throws Exception;
 	
 }
