@@ -16,7 +16,7 @@
             success: function(response){
                 var dataJson = JSON.stringify(response.data);
                 Common.storeToken(dataJson);
-                //Common.redirect('/index.html');
+                Common.redirect('/index.html');
             }
         }, null, true)
 

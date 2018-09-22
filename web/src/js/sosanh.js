@@ -1,6 +1,7 @@
 
 var myID = 2;
 var myData = null;
+var mySkill = null;
 var dataCompare = null;
 var allData = null;
 (function ($, appName) {
@@ -16,24 +17,66 @@ var allData = null;
                 else {
                 }
             },
-            success: function (response) {
-                Common.storeToken('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-                Common.redirect('/index.html');
+            success: function (data) {
+              allData = data.employee;
+              mySkill = data.skill;
+              $("#myTableRankHead").html("");
+              addHead(mySkill);
+              $("#myTableRankBody").html("");
+              for (var i = 0; i < allData.length; i++) {
+                if(myID == allData[i].employee_id){
+                  myData = allData[i];
+                }
+                  addRow(allData[i]);
+              }
+                // Common.storeToken('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+                // Common.redirect('/index.html');
             }
         });
     }
 
     //add table
     function addRow(rowData){
-      var row = $("<tr id='Rank"+rowData.Rank+"' />")
+      var row = $("<tr id='Rank"+rowData.employee_rank+"' />")
         $("#myTableRankBody").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-        row.append($("<td>" + rowData.Rank + "</td>"));
-        row.append($("<td>" + rowData.Name + "</td>"));
-        row.append($("<td>" + rowData.Coding + "</td>"));
-        row.append($("<td>" + rowData.Database + "</td>"));
-        row.append($("<td>" + rowData.IQ + "</td>"));
-        row.append($("<td>" + rowData.Attitude + "</td>"));
-        row.append($("<td>" + rowData.Language + "</td>"));
+        row.append($("<td>" + rowData.employee_rank + "</td>"));
+        row.append($("<td>" + rowData.employee_id + "</td>"));
+        row.append($("<td>" + rowData.employee_name + "</td>"));
+        for (var i = 0; i < rowData.skill.length; i++) {
+          row.append($("<td>" + rowData.skill[i].skill_point + "</td>"));
+        }
+    }
+
+    //add table
+    function addHead(headData){
+      var row = $("<tr />")
+        $("#myTableRankHead").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+        row.append($("<td>" + "Rank" + "</td>"));
+        row.append($("<td>" + "EmployeeID" + "</td>"));
+        row.append($("<td>" + "EmployeeName" + "</td>"));
+        for (var i = 0; i < headData.length; i++) {
+          row.append($("<td>" + headData[i].skill_name + "</td>"));
+        }
+    }
+
+    //add progress bar
+    function addProgressBar(name,myProgress,yourProgress){
+      // $("#myProgressBar").html("");
+      // var row = $(' <div class="progress-group mb-4" />');
+      var  row = ($('<div class="progress-group mb-4"> '+
+          ' <div class="progress-group-prepend"> ' +
+          '  <span class="progress-group-text">'+ name +'</span>' +
+          ' </div> ' +
+        '  <div class="progress-group-bars"> ' +
+          '  <div class="progress progress-xs"> ' +
+            '  <div id="mycoding" class="progress-bar bg-info" role="progressbar" style="width: '+myProgress+'%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div> ' +
+          '  </div> ' +
+          '  <div class="progress progress-xs"> ' +
+            '  <div id="yourcoding" class="progress-bar bg-danger" role="progressbar" style="width: '+yourProgress+'%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div> ' +
+          '  </div> ' +
+        '  </div> ' +
+      '  </div>'));
+      $("#myProgressBar").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
     }
 
     //-----------------------------------------------------------------------------//
@@ -64,79 +107,142 @@ var allData = null;
       // getRank();
       // alert("Sdasd");
       // addTable();
-      var data =
-        [
+      var data ={
+        skill:[
           {
-            'Id':1,
-            'Rank': 1,
-            'Name':'Nguyễn Huy Văn',
-            'Coding': 80,
-            'Database': 70,
-            'IQ':90,
-            'Attitude': 13,
-            'Language': 34
-          },{
-            'Id':2,
-            'Rank': 2,
-            'Name':'Vi Văn Thức',
-            'Coding': 15,
-            'Database': 20,
-            'IQ':40,
-            'Attitude': 90,
-            'Language': 74
+            skill_name:'Java',
+            skill_id:'1',
           },
           {
-            'Id':3,
-            'Rank': 3,
-            'Name':'Nguyễn Văn Thuần',
-            'Coding': 80,
-            'Database': 70,
-            'IQ':90,
-            'Attitude': 10,
-            'Language': 40
+            skill_name:'DB',
+            skill_id:'2',
+          },
+          {
+            skill_name:'Language',
+            skill_id:'3',
           }
-      ];
-      allData = data;
-      for (var i = 0; i < data.length; i++) {
-        if(myID == data[i].Id){
-          myData = data[i];
+        ],
+        employee:[
+          {
+            employee_id:1,
+            employee_rank:1,
+            employee_name:'Nguyen Huy Van',
+            skill:[
+              {
+                skill_name:'Java',
+                skill_point:80
+              },
+              {
+                skill_name:'BD',
+                skill_point:70
+              },
+              {
+                skill_name:'Language',
+                skill_point:50
+              }
+            ]
+          },
+          {
+            employee_id:2,
+            employee_rank:2,
+            employee_name:'Nguyen Van Thuan',
+            skill:[
+              {
+                skill_name:'Java',
+                skill_point:50
+              },
+              {
+                skill_name:'BD',
+                skill_point:50
+              },
+              {
+                skill_name:'Language',
+                skill_point:80
+              }
+            ]
+          },
+          {
+            employee_id:3,
+            employee_rank:3,
+            employee_name:'Vi Van Thuc',
+            skill:[
+              {
+                skill_name:'Java',
+                skill_point:20
+              },
+              {
+                skill_name:'BD',
+                skill_point:25
+              },
+              {
+                skill_name:'Language',
+                skill_point:90
+              }
+            ]
+          }
+        ]
+      }
+      // getRank();
+      allData = data.employee;
+      mySkill = data.skill;
+      $("#myTableRankHead").html("");
+      addHead(mySkill);
+      $("#myTableRankBody").html("");
+      for (var i = 0; i < allData.length; i++) {
+        if(myID == allData[i].employee_id){
+          myData = allData[i];
         }
-          addRow(data[i]);
+          addRow(allData[i]);
       }
     }
-    
+
     //-----------------------------------------------------------------------------//
-  
+
     function setChartData(myData, secondData) {
       //set radarChart
-      myRadarChart.data.datasets[0].label = myData.Name;
-      myRadarChart.data.datasets[0].data = [myData.Coding, myData.Database, myData.IQ, myData.Attitude, myData.Language];
-      myRadarChart.data.datasets[1].label = secondData.Name;
-      myRadarChart.data.datasets[1].data = [secondData.Coding, secondData.Database, secondData.IQ, secondData.Attitude, secondData.Language];
+      var labels = [];
+      var myPointAverage = 0;
+      var yourPointAverage = 0;
+      for (var i = 0; i < mySkill.length; i++) {
+        labels[i] = mySkill[i].skill_name;
+      }
+      myRadarChart.data.labels = labels;
+      myRadarChart.data.datasets[0].label = myData.employee_name;
+      var myDatas = [];
+      for (var i = 0; i < myData.skill.length; i++) {
+        myDatas[i] = myData.skill[i].skill_point;
+        myPointAverage += myData.skill[i].skill_point;
+      }
+      myPointAverage = myPointAverage/myData.skill.length;
+      myPointAverage = myPointAverage.toFixed(2);
+      myRadarChart.data.datasets[0].data = myDatas;
+      myRadarChart.data.datasets[1].label = secondData.employee_name;
+      var yourDatas = [];
+      for (var i = 0; i < secondData.skill.length; i++) {
+        yourDatas[i] = secondData.skill[i].skill_point;
+        yourPointAverage +=  secondData.skill[i].skill_point;
+      }
+      yourPointAverage = yourPointAverage/secondData.skill.length;
+      yourPointAverage = yourPointAverage.toFixed(2);
+      myRadarChart.data.datasets[1].data = yourDatas;
       //set barChart
-      barChart.data.datasets[0].label = myData.Name;
-      barChart.data.datasets[0].data = [myData.Coding, myData.Database, myData.IQ, myData.Attitude, myData.Language];
-      barChart.data.datasets[1].label = secondData.Name;
-      barChart.data.datasets[1].data = [secondData.Coding, secondData.Database, secondData.IQ, secondData.Attitude, secondData.Language];
+      barChart.data.labels = labels;
+      barChart.data.datasets[0].label = myData.employee_name;
+      barChart.data.datasets[0].data = myDatas;
+      barChart.data.datasets[1].label = secondData.employee_name;
+      barChart.data.datasets[1].data = yourDatas;
       myRadarChart.update();
       barChart.update();
       //set rowChart
-      $('#mySmallName').text(myData.Name);
-      var myAverage = (myData.Coding + myData.Database +myData.IQ + myData.Attitude +myData.Language)/5;
-      $('#myPointAverage').text(myAverage + "%");
-      $('#mycoding').css("width",myData.Coding+"%");
-      $('#mydatabase').css("width",myData.Database+"%");
-      $('#myiq').css("width",myData.IQ+"%");
-      $('#myattitude').css("width",myData.Attitude+"%");
-      $('#mylanguage').css("width",myData.Language+"%");
-      $('#yourSmallName').text(secondData.Name);
-      var yourAverage = (secondData.Coding + secondData.Database +secondData.IQ + secondData.Attitude +secondData.Language)/5;
-      $('#yourPointAverage').text(yourAverage + "%");
-      $('#yourcoding').css("width",secondData.Coding+"%");
-      $('#yourdatabase').css("width",secondData.Database+"%");
-      $('#youriq').css("width",secondData.IQ+"%");
-      $('#yourattitude').css("width",secondData.Attitude+"%");
-      $('#yourlanguage').css("width",secondData.Language+"%");
+      $("#myProgressBar").html("");
+      for (var i = 0; i < mySkill.length; i++) {
+
+        addProgressBar(mySkill[i].skill_name,myData.skill[i].skill_point,secondData.skill[i].skill_point);
+      }
+      $('#mySmallName').text(myData.employee_name);
+      $('#myPointAverage').text(myPointAverage + "%");
+      $('#yourSmallName').text(secondData.employee_name);
+      $('#yourPointAverage').text(yourPointAverage + "%");
     }
 
     appName.reloadData = () => {
@@ -144,28 +250,32 @@ var allData = null;
     }
 
     appName.init = function(){
-        // if (Common.checkAuthen()) {
-        //     Common.redirect('/index.html');
-        // }
+        if (!Common.checkAuthen()) {
+            Common.redirect('/login.html');
+        }
         $(document).ready(function () {
           $('#myTableRankBody').on('click', 'tr', function (event) {
               $('#formSoSanh').show();
               var getID= $(this).attr('id');
+              // alert("getID: "+ getID);
               if(myData != null){
-                if('Rank'+myData.Rank == getID){
+                if('Rank'+myData.employee_rank == getID){
                   alert("dont click that field!");
                 }else{
                   for (var i = 0; i < allData.length; i++) {
-                    if('Rank'+ allData[i].Rank == getID){
+                    if('Rank'+ allData[i].employee_rank == getID){
                       dataCompare = allData[i];
                       break;
                     }
                   }
+                  // alert("myData: "+myData.employee_id + "dataCompare: "+ dataCompare.employee_id);
                   setChartData(myData,dataCompare);
                 }
+              }else{
+                alert("mydata == null");
               }
               // alert($(this).attr('id')); //trying to alert id of the clicked row
-    
+
           });
         });
 
@@ -180,5 +290,3 @@ var allData = null;
 
 }(jQuery, window.sosanhModule = window.sosanhModule || {}));
 //-----------------------------------------------------------------------------//
-
-
