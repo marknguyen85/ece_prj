@@ -1,5 +1,5 @@
 
-var myID = 2;
+var myID = Common.currentUser().id;
 var myData = null;
 var mySkill = null;
 var dataCompare = null;
@@ -9,7 +9,7 @@ var allData = null;
     'use strict';
     //get ranking
     var getRank = () => {
-        var url = '/getRanking?id=2'
+        var url = '/user/technique?user_id='+ myID;
         serviceInvoker.get(url, {}, {
             error: function (response) {
                 if (response.responseJSON && response.responseJSON.ErrorCode > 0) {
@@ -17,9 +17,9 @@ var allData = null;
                 else {
                 }
             },
-            success: function (data) {
-              allData = data.employee;
-              mySkill = data.skill;
+            success: function (response) {
+              allData = response.data.employees;
+              mySkill = response.data.skills;
               $("#myTableRankHead").html("");
               addHead(mySkill);
               $("#myTableRankBody").html("");
@@ -37,13 +37,13 @@ var allData = null;
 
     //add table
     function addRow(rowData){
-      var row = $("<tr id='Rank"+rowData.employee_rank+"' />")
+      var row = $("<tr id='Rank"+rowData.rank+"' />")
         $("#myTableRankBody").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-        row.append($("<td>" + rowData.employee_rank + "</td>"));
+        row.append($("<td>" + rowData.rank + "</td>"));
         row.append($("<td>" + rowData.employee_id + "</td>"));
         row.append($("<td>" + rowData.employee_name + "</td>"));
-        for (var i = 0; i < rowData.skill.length; i++) {
-          row.append($("<td>" + rowData.skill[i].skill_point + "</td>"));
+        for (var i = 0; i < rowData.skills.length; i++) {
+          row.append($("<td>" + rowData.skills[i].skill_point + "</td>"));
         }
     }
 
@@ -182,18 +182,18 @@ var allData = null;
           }
         ]
       }
-      // getRank();
-      allData = data.employee;
-      mySkill = data.skill;
-      $("#myTableRankHead").html("");
-      addHead(mySkill);
-      $("#myTableRankBody").html("");
-      for (var i = 0; i < allData.length; i++) {
-        if(myID == allData[i].employee_id){
-          myData = allData[i];
-        }
-          addRow(allData[i]);
-      }
+      getRank();
+      // allData = data.employee;
+      // mySkill = data.skill;
+      // $("#myTableRankHead").html("");
+      // addHead(mySkill);
+      // $("#myTableRankBody").html("");
+      // for (var i = 0; i < allData.length; i++) {
+      //   if(myID == allData[i].employee_id){
+      //     myData = allData[i];
+      //   }
+      //     addRow(allData[i]);
+      // }
     }
 
     //-----------------------------------------------------------------------------//
@@ -209,20 +209,20 @@ var allData = null;
       myRadarChart.data.labels = labels;
       myRadarChart.data.datasets[0].label = myData.employee_name;
       var myDatas = [];
-      for (var i = 0; i < myData.skill.length; i++) {
-        myDatas[i] = myData.skill[i].skill_point;
-        myPointAverage += myData.skill[i].skill_point;
+      for (var i = 0; i < myData.skills.length; i++) {
+        myDatas[i] = myData.skills[i].skill_point;
+        myPointAverage += myData.skills[i].skill_point;
       }
-      myPointAverage = myPointAverage/myData.skill.length;
+      myPointAverage = myPointAverage/myData.skills.length;
       myPointAverage = myPointAverage.toFixed(2);
       myRadarChart.data.datasets[0].data = myDatas;
       myRadarChart.data.datasets[1].label = secondData.employee_name;
       var yourDatas = [];
-      for (var i = 0; i < secondData.skill.length; i++) {
-        yourDatas[i] = secondData.skill[i].skill_point;
-        yourPointAverage +=  secondData.skill[i].skill_point;
+      for (var i = 0; i < secondData.skills.length; i++) {
+        yourDatas[i] = secondData.skills[i].skill_point;
+        yourPointAverage +=  secondData.skills[i].skill_point;
       }
-      yourPointAverage = yourPointAverage/secondData.skill.length;
+      yourPointAverage = yourPointAverage/secondData.skills.length;
       yourPointAverage = yourPointAverage.toFixed(2);
       myRadarChart.data.datasets[1].data = yourDatas;
       //set barChart
@@ -237,7 +237,7 @@ var allData = null;
       $("#myProgressBar").html("");
       for (var i = 0; i < mySkill.length; i++) {
 
-        addProgressBar(mySkill[i].skill_name,myData.skill[i].skill_point,secondData.skill[i].skill_point);
+        addProgressBar(mySkill[i].skill_name,myData.skills[i].skill_point,secondData.skills[i].skill_point);
       }
       $('#mySmallName').text(myData.employee_name);
       $('#myPointAverage').text(myPointAverage + "%");
@@ -246,6 +246,7 @@ var allData = null;
     }
 
     appName.reloadData = () => {
+      $('#formSoSanh').hide();
       initData();
     }
 
@@ -255,15 +256,16 @@ var allData = null;
         }
         $(document).ready(function () {
           $('#myTableRankBody').on('click', 'tr', function (event) {
-              $('#formSoSanh').show();
+
               var getID= $(this).attr('id');
               // alert("getID: "+ getID);
               if(myData != null){
-                if('Rank'+myData.employee_rank == getID){
+                if('Rank'+myData.rank == getID){
                   alert("dont click that field!");
                 }else{
+                  $('#formSoSanh').show();
                   for (var i = 0; i < allData.length; i++) {
-                    if('Rank'+ allData[i].employee_rank == getID){
+                    if('Rank'+ allData[i].rank == getID){
                       dataCompare = allData[i];
                       break;
                     }

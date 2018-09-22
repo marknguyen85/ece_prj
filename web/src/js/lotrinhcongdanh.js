@@ -7,12 +7,12 @@
 // techM:589,366
 // cto:686,366
 // qal1:349,457
-var myID = 2;
+var myID = Common.currentUser().id;
 (function ($, appName) {
     /// <param name="appName">namespace of application.</param>
     'use strict';
-    var getRank = () => {
-        var url = '/getRanking?id=2'
+    var getCareerPath = () => {
+        var url = '/user/location?user_id='+myID;
         serviceInvoker.get(url, {}, {
             error: function (response) {
                 if (response.responseJSON && response.responseJSON.ErrorCode > 0) {
@@ -21,20 +21,12 @@ var myID = 2;
                 }
             },
             success: function (response) {
-                Common.storeToken('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-                Common.redirect('/index.html');
+              setCoordinate(response.data);
+                // Common.storeToken('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+                // Common.redirect('/index.html');
             }
         });
     }
-
-
-    var addTable = () => {
-      console.log("Sad")
-      myRadarChart.data.datasets[0].data =  [65, 59, 90, 81, 56];
-      console.log("mysj" + myRadarChart.data.datasets[0].data);
-      myRadarChart.update();
-    }
-
 
     function setCoordinate(data){
         var imageWidth = $("#myPosition").css("width");
@@ -48,20 +40,21 @@ var myID = 2;
         $('#myPosition').css("left",myLeft+"px");
         $('#myPosition').css("top",myTop+"px");
       }
-      
+
     appName.reIndex = (param) => {
-        var data =
-        {
-          'toado_x':440,
-          'toado_y':364,
-        };
-        setCoordinate(data);
+        // var data =
+        // {
+        //   'toado_x':440,
+        //   'toado_y':364,
+        // };
+        // setCoordinate(data);
+        getCareerPath();
     }
 
     appName.init = function(){
-        // if (Common.checkAuthen()) {
-        //     Common.redirect('/index.html');
-        // }
+        if (!Common.checkAuthen()) {
+            Common.redirect('/login.html');
+        }
     };
 
 }(jQuery, window.lotrinhcongdanhModule = window.lotrinhcongdanhModule || {}));

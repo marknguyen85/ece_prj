@@ -17,8 +17,8 @@
             answers : [],
             answered: []
         }
-    
-        for (var i = 1; i <= item_count; i++) { 
+
+        for (var i = 1; i <= item_count; i++) {
             item.answers.push({
                 value: i,
                 text: 'Đáp án ' + i
@@ -26,7 +26,7 @@
         }
         return item;
     };
-    
+
     var getCheckboxItem = function(stt, item_count){
         var item = {
             stt: stt,
@@ -36,8 +36,8 @@
             answers : [],
             answered: []
         }
-    
-        for (var i = 1; i <= item_count; i++) { 
+
+        for (var i = 1; i <= item_count; i++) {
             item.answers.push({
                 value: i,
                 text: 'Đáp án ' + i
@@ -45,11 +45,11 @@
         }
         return item;
     };
-    
+
     var parseArray = (data, callback) => {
         console.log('==========parseArray', data);
 
-        for (var i = 1; i <= 10; i++) { 
+        for (var i = 1; i <= 10; i++) {
             var rand = Math.floor((Math.random() * 2) + 1);
             switch(rand) {
                 case 1:
@@ -58,7 +58,7 @@
                 default:
                     questions.push(getRadioItem(i, 3))
                     break;
-            } 
+            }
         }
 
         if (callback){
@@ -86,7 +86,7 @@
         }, null, true)
 
     }
-    
+
     var generateRadio = (item) => {
         var html = '';
         for (var i = 0; i < item.answers.length; i++){
@@ -153,7 +153,7 @@
         }
 
         var index = answers.findIndex(obj => obj.name === item.name)
-        
+
         var answerItem = {
             name: item.name,
             answer: []
@@ -219,7 +219,7 @@
             var timeLeft = (hours > 0 ? hours + ":" : '') + minutes + ":" + seconds
             $(elem).html(timeLeft);
 
-            // If the count down is finished, write some text 
+            // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
                 $(elem).html("EXPIRED");
@@ -233,7 +233,7 @@
         for (var i = 0; i < countdownArray.length; i++) {
             clearInterval(countdownArray[i]);
         }
-        
+
         $('#count-down-time').html("");
         starting  = false;
         $dialog = {};
@@ -255,7 +255,7 @@
                 closeDialog();
             })
          });
-        
+
          $(document).on("click", '#q-close', function(e) {
             e.preventDefault();
             if (starting) {
@@ -286,7 +286,7 @@
                 bindQuestion();
             });
          });
-         
+
         $('#test-start-dialog').on("click", "#q-prev", function(e) {
             e.preventDefault();
             saveItem();
@@ -388,8 +388,9 @@
             Common.redirect('/login.html');
         }
 
+        //id,name
         currentUser = Common.currentUser();
-        
+
         getHistoryTested();
         getAvailableTest();
         bindEvents();
