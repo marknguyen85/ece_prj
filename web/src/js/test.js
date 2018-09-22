@@ -233,7 +233,7 @@
             })
         }
 
-        var url = '/test/insert';
+        var url = '/test/update';
         serviceInvoker.post(url, formData, {
             error: function(response){
                 alert('error in submit data');
