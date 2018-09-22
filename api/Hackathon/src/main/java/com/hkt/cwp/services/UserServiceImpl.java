@@ -142,8 +142,9 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		mapData.put("skills", lstSkill);
 		List<TechniqueEmp> lstTechMoreEmp = new ArrayList<>();
 		for (Employee emp : lstEmp) {
-			TechniqueEmp techEmp = searchRankEmp(emp.getId(), lstSkill);
-			techEmp.setSkills(lstSkill);
+			List<SkillTestResponse> lstSkillEmp = new ArrayList<>();
+			TechniqueEmp techEmp = searchRankEmp(emp.getId(), lstSkillEmp);
+			techEmp.setSkills(lstSkillEmp);
 			lstTechMoreEmp.add(techEmp);
 		}
 		mapData.put("employees", lstTechMoreEmp);
@@ -163,6 +164,14 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		if (!lstError.isEmpty()) {
 			throw new MessageListException(lstError);
 		}
+		List<SkillTestResponse> lstSkill = new ArrayList<>();
+		TechniqueEmp techEmpCurent = searchRankEmp(empId, lstSkill);
+		if (techEmpCurent != null && techEmpCurent.getEmployee_id() == null) {
+			this.status = HttpStatus.NO_CONTENT;
+			return resultBean;
+		}
+		techEmpCurent.setSkills(lstSkill);
+		resultBean.setData(techEmpCurent);
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
 		status = HttpStatus.OK;
@@ -237,32 +246,6 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		return tech;
 	}
 
-	
-	
-	private List<String> getListSkill(Integer id) throws Exception {
-		List<String> lstSkill = new ArrayList<>();
-		StringBuilder sb = new StringBuilder(
-				"select e.id employee_id, s.id skill_id, e.name employee_name, s.name skill_name, t.name technique_name, ");
-		sb.append(
-				"(select point from ece_system.employee_skill_test est where est.employee_id = e.id and est.skill_id = s.id order by starttime desc limit 1) point ");
-		sb.append("from employee e ");
-		sb.append("LEFT JOIN technique t on e.technique_id = t.id ");
-		sb.append("LEFT JOIN skill s on s.technique_id = t.id ");
-		sb.append("LEFT JOIN employee_skill_test est on est.employee_id = e.id ");
-		sb.append("where e.id = ? ");
-		List<Object> paramList = new ArrayList<>();
-		paramList.add(id);
-
-		List<Object[]> lstResult = userDao.excuteNativeQuery(sb.toString(), paramList, null, null);
-		for (int i = 0; i < lstResult.size(); i++) {
-			// Object[] object = lstResult.get(i);
-			if (StringUtil.isEmpty(lstResult.get(i).toString())) {
-				lstSkill.add(lstResult.get(i).toString());
-			}
-		}
-		return lstSkill;
-	}
-
 	@Override
 	public ResultBean getLocation(String user_id) throws MessageListException, Exception {
 		lstError.clear();
@@ -298,4 +281,5 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		status = HttpStatus.OK;
 		return resultBean;
 	}
+
 }
