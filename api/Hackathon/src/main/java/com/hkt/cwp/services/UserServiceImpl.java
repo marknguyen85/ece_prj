@@ -12,7 +12,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.google.gson.JsonObject;
 import com.hkt.cwp.Utils.BundleUtils;
@@ -23,13 +22,15 @@ import com.hkt.cwp.Utils.ValidationUtil;
 import com.hkt.cwp.bean.MessageListException;
 import com.hkt.cwp.bean.ResultBean;
 import com.hkt.cwp.dao.EmployeeSkillTestDao;
+import com.hkt.cwp.dao.TechniqueDao;
 import com.hkt.cwp.dao.UserDao;
 import com.hkt.cwp.models.Employee;
 import com.hkt.cwp.models.EmployeeSkillTest;
-import com.hkt.cwp.models.Skill;
+import com.hkt.cwp.models.Technique;
 import com.hkt.cwp.response.EmployeeCapacity;
 import com.hkt.cwp.response.RankEmployee;
-
+import com.hkt.cwp.response.SkillTestResponse;
+import com.hkt.cwp.response.TechniqueEmp;
 
 /**
  * @author HP
@@ -43,6 +44,9 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 
 	@Autowired
 	private transient EmployeeSkillTestDao eSTDao;
+
+	@Autowired
+	private transient TechniqueDao techDao;
 
 	@Override
 	public ResultBean getUser(String userName, String password) throws MessageListException, Exception {
@@ -116,42 +120,38 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 
 	}
 
-	// Search Employee
 	@Override
-	public ResultBean searchEmp(String key, String page, String skillIdStr) throws MessageListException, Exception {
-		resultBean = new ResultBean();
+	public ResultBean getTechnique(String userId) throws MessageListException, Exception {
 		lstError.clear();
-		int offset = 0;
-		List<Employee> lstEmp = new ArrayList<Employee>();
-		if (!StringUtil.isEmpty(page)) {
-			offset = Integer.parseInt(page) * Constants.LIMIT - 1;
+		Integer empId = ValidationUtil.validateInt(userId, lstError, Constants.USER_ID, false, false);
+		if (!lstError.isEmpty()) {
+			throw new MessageListException(lstError);
 		}
-		lstEmp = userDao.searchEmp(key, offset);
-		if (StringUtils.isEmpty(skillIdStr)) {
-			lstEmp = userDao.searchEmp(key, offset);
-			resultBean.setData(lstEmp);
-		} else {
-			// searh rank
-			Integer skillId = ValidationUtil.validateInt(skillIdStr, lstError, "skill_id", false, false);
-			if (!lstError.isEmpty()) {
-				throw new MessageListException(lstError);
-			}
-			HashMap<Integer, RankEmployee> mapRankEmp = searchRankEmp(skillId);
-			List<RankEmployee> lstResult = new ArrayList<>();
-			for (Employee emp : lstEmp) {
-				if (mapRankEmp.containsKey(emp.getId())) {
-					lstResult.add(mapRankEmp.get(emp.getId()));
-				}
-			}
-			resultBean.setData(lstResult);
-		}
-		if (lstEmp == null || lstEmp.size() == 0) {
-			status = HttpStatus.NO_CONTENT;
+
+		List<SkillTestResponse> lstSkill = new ArrayList<>();
+		TechniqueEmp techEmpCurent = searchRankEmp(empId, lstSkill);
+		if (techEmpCurent != null && techEmpCurent.getEmployee_id() == null) {
+			this.status = HttpStatus.NO_CONTENT;
 			return resultBean;
 		}
+		Integer techId = techEmpCurent.getTechnique_id();
+		Technique technique = techDao.getTechniqueById(techId);
+		List<Employee> lstEmp = technique.getEmployees();
+		HashMap<String, Object> mapResult = new HashMap<>();
+		HashMap<String, Object> mapData = new HashMap<>();
+		mapData.put("skills", lstSkill);
+		List<TechniqueEmp> lstTechMoreEmp = new ArrayList<>();
+		for (Employee emp : lstEmp) {
+			TechniqueEmp techEmp = searchRankEmp(emp.getId(), lstSkill);
+			techEmp.setSkills(lstSkill);
+			lstTechMoreEmp.add(techEmp);
+		}
+		mapData.put("employees", lstTechMoreEmp);
+		mapResult.put("data", mapData);
+		status = HttpStatus.OK;
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
-		status = HttpStatus.OK;
+		resultBean.setData(mapResult);
 		return resultBean;
 	}
 
@@ -209,14 +209,16 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 			Integer empId = object[0] != null ? Integer.parseInt(object[0].toString()) : null;
 			if (null == empId)
 				continue;
-//			rE.setRank(i + 1);
-//			rE.setEmployee_id(empId);
-//			rE.setEmployy_name(object[1] != null ? object[1].toString() : null);
-//			rE.setCode(object[2] != null ? object[1].toString() : null);
-//			rE.setSkill_id(object[3] != null ? Integer.parseInt(object[3].toString()) : null);
-//			rE.setSkill_name(object[4] != null ? object[4].toString() : null);
-//			rE.setMax_point(object[5] != null ? Integer.parseInt(object[5].toString()) : null);
-//			map.put(empId, rE);
+			// rE.setRank(i + 1);
+			// rE.setEmployee_id(empId);
+			// rE.setEmployy_name(object[1] != null ? object[1].toString() : null);
+			// rE.setCode(object[2] != null ? object[1].toString() : null);
+			// rE.setSkill_id(object[3] != null ? Integer.parseInt(object[3].toString()) :
+			// null);
+			// rE.setSkill_name(object[4] != null ? object[4].toString() : null);
+			// rE.setMax_point(object[5] != null ? Integer.parseInt(object[5].toString()) :
+			// null);
+			// map.put(empId, rE);
 		}
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
@@ -240,7 +242,7 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		for (int i = 0; i < listSkillTest.size(); i++) {
 			Map<String, Object> resultSkill = new HashMap<>();
 			Map<String, Object> skillForMonth = new HashMap<>();
-			skillId =  listSkillTest.get(i).getSkill().getId();
+			skillId = listSkillTest.get(i).getSkill().getId();
 			date = listSkillTest.get(i).getStarttime();
 			if (date != null) {
 				if (date.getMonth() >= fromDate && date.getMonth() <= toDate) {
@@ -261,5 +263,58 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		resultBean.setMessage(Constants.MSG_SUCCESS);
 		status = HttpStatus.OK;
 		return resultBean;
+	}
+
+	private TechniqueEmp searchRankEmp(Integer userId, List<SkillTestResponse> lstSkillName) throws Exception {
+		StringBuilder sb = new StringBuilder(
+				"select e.id employee_id, e.name employee_name, t.id technique_id, t.name technique_name, s.id skill_id, s.name skill_name, ");
+		sb.append(
+				"(select point from ece_system.employee_skill_test est where est.employee_id = e.id and est.skill_id = s.id order by starttime desc limit 1) point ");
+		sb.append("from employee e ");
+		sb.append("LEFT JOIN technique t on e.technique_id = t.id ");
+		sb.append("LEFT JOIN skill s on s.technique_id = t.id ");
+		sb.append("where e.id = ? ");
+		List<Object> paramList = new ArrayList<>();
+		paramList.add(userId);
+		TechniqueEmp tech = new TechniqueEmp();
+		lstSkillName.clear();
+		List<Object[]> lstResult = userDao.excuteNativeQuery(sb.toString(), paramList, null, null);
+		for (int i = 0; i < lstResult.size(); i++) {
+			Object[] object = lstResult.get(i);
+			SkillTestResponse skillTest = new SkillTestResponse();
+			String skillName = object[5] != null ? object[5].toString() : null;
+			skillTest.setSkill_name(skillName);
+			skillTest.setSkill_point(object[6] != null ? Integer.parseInt(object[6].toString()) : null);
+			lstSkillName.add(skillTest);
+			tech.setTechnique_id(object[2] != null ? Integer.parseInt(object[2].toString()) : null);
+			tech.setTechnique_name(object[3] != null ? object[3].toString() : null);
+			tech.setEmployee_id(userId);
+			tech.setEmployee_name(object[1] != null ? object[1].toString() : null);
+		}
+		return tech;
+	}
+
+	private List<String> getListSkill(Integer id) throws Exception {
+		List<String> lstSkill = new ArrayList<>();
+		StringBuilder sb = new StringBuilder(
+				"select e.id employee_id, s.id skill_id, e.name employee_name, s.name skill_name, t.name technique_name, ");
+		sb.append(
+				"(select point from ece_system.employee_skill_test est where est.employee_id = e.id and est.skill_id = s.id order by starttime desc limit 1) point ");
+		sb.append("from employee e ");
+		sb.append("LEFT JOIN technique t on e.technique_id = t.id ");
+		sb.append("LEFT JOIN skill s on s.technique_id = t.id ");
+		sb.append("LEFT JOIN employee_skill_test est on est.employee_id = e.id ");
+		sb.append("where e.id = ? ");
+		List<Object> paramList = new ArrayList<>();
+		paramList.add(id);
+
+		List<Object[]> lstResult = userDao.excuteNativeQuery(sb.toString(), paramList, null, null);
+		for (int i = 0; i < lstResult.size(); i++) {
+			// Object[] object = lstResult.get(i);
+			if (StringUtil.isEmpty(lstResult.get(i).toString())) {
+				lstSkill.add(lstResult.get(i).toString());
+			}
+		}
+		return lstSkill;
 	}
 }

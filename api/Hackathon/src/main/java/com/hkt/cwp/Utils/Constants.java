@@ -61,4 +61,8 @@ public class Constants {
     // test detail
     public static final String TEST_PATH = "/api/test";
     
+    //Rank 
+    public static final String RANK_PATH = "/api/rank";
+    public static final String SEARCH = "/search";
+    
 }

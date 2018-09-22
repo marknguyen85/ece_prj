@@ -16,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.hkt.cwp.Utils.Constants;
+import com.hkt.cwp.Utils.StringUtil;
 import com.hkt.cwp.models.Employee;
 import static org.hibernate.hql.internal.antlr.HqlSqlTokenTypes.LIKE;
 
@@ -57,7 +59,11 @@ public class UserDaoImpl extends AbstractBaseDao implements UserDao {
             employee = entityManager.find(Employee.class, user_id);
         } catch (NoResultException ex) {
             employee = null;
-        }
+        } finally {
+			if (entityManager != null) {
+				entityManager.close();
+			}
+		}
         return employee;
     }
 

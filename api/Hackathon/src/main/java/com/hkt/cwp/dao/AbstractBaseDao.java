@@ -49,6 +49,10 @@ public class AbstractBaseDao {
 			lst = (List<T>) query.getResultList();
 		} catch (Exception e) {
 			throw e;
+		} finally {
+			if (entityManager != null) {
+				entityManager.close();
+			}
 		}
 		return lst;
 	}
@@ -78,6 +82,10 @@ public class AbstractBaseDao {
 			lst = query.getResultList();
 		} catch (Exception e) {
 			throw e;
+		} finally {
+			if (entityManager != null) {
+				entityManager.close();
+			}
 		}
 
 		return lst;
