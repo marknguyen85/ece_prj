@@ -1,12 +1,12 @@
 (function ($, appName) {
     /// <param name="appName">namespace of application.</param>
     'use strict';
-    appName.BASE_URL_API = 'http://httpbin.org'
+    appName.BASE_URL_API = 'http://localhost:5000'
 
     appName.init = function(){
-        
+
     };
-    
+
     var getToken = () => {
         var token = localStorage.getItem('_token');
         if (token == 'undefined' || token == '') {
@@ -46,5 +46,5 @@
 
         location.href = url;
     };
-    
+
 }(jQuery, window.Common = window.Common || {}));

@@ -21,7 +21,7 @@
                 dataType: "json",
                 contentType: "application/json",
                 headers: {
-                    '_token' : Common.getToken(),
+                    // '_token' : Common.getToken() 
                 }
             };
 
