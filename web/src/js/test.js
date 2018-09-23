@@ -259,9 +259,7 @@
 
                     $('#q-close').show();
                     $('#q-start, #q-prev, #q-next, #q-save').hide();
-                    
-                    starting = false;
-                    clearTimers();
+                    closeDialog();
                 } catch (error) {
                     console.log(error);
                 }
