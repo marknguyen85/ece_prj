@@ -1,8 +1,7 @@
 (function ($, appName) {
     /// <param name="appName">namespace of application.</param>
     'use strict';
-    // appName.BASE_URL_API = 'http://13.251.131.35:8080/api'
-    appName.BASE_URL_API = 'http://192.168.1.74:8080/api'
+    appName.BASE_URL_API = 'http://13.251.131.35:8080/api' 
 
     appName.init = function(){
 

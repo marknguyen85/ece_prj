@@ -124,13 +124,13 @@
         // }
         $(document).ready(function(e){
           let uid = Common.currentUser().id;
-          var url = '/api/user/capacity?user_id='+uid;
-          getCapacity(url); 
+          var url = '/user/capacity?user_id='+uid;
+          getCapacity(url);
           e.preventDefault();
         })
         $(document).on("click", '#capacityId', function(e) {
           let uid = Common.currentUser().id;
-          var url = '/api/user/capacity?user_id='+uid;
+          var url = '/user/capacity?user_id='+uid;
           getCapacity(url);
           e.preventDefault();
         });
@@ -144,7 +144,7 @@
           let uid = Common.currentUser().id;
 
           let tailUrl = 'user_id='+uid+'&'+'from='+bBeforeDate+'&'+'to='+currentDate;
-          const url = '/api/user/history?'+tailUrl;
+          const url = '/user/history?'+tailUrl;
           getHistory(url);
 
 
@@ -166,7 +166,7 @@
           //tail Url
           let tailUrl = 'user_id='+uid+'&'+'from='+from+'&'+'to='+to;
           //url
-          const url = '/api/history?'+tailUrl;
+          const url = '/user/history?'+tailUrl;
           //get history
           getHistory(url);
           e.preventDefault();
