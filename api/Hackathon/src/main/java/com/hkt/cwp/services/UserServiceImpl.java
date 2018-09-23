@@ -198,14 +198,21 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 		resultBean = new ResultBean();
 		Integer empId = ValidationUtil.validateInt(user_id, lstError, Constants.USER_ID, false, false);
 		Date fromDate = null, toDate = null;
+		Integer fromM =0, toM = 0;
 		if (!StringUtil.isEmpty(from)) {
 			fromDate = DataUtils.convertStringToDate(from);
+			fromM = fromDate.getMonth() + 1;
+		} else {
+			fromM = 1;
 		}
 		if (!StringUtil.isEmpty(to)) {
 			toDate = DataUtils.convertStringToDate(to);
+			toM = toDate.getMonth() + 1;
+		} else {
+			toM = 12;
 		}
-		if (from == null && toDate == null) {
-			lstError.add(new ErrorBean("1", "from", "from is bank"));
+		if (fromDate == null && toDate == null) {
+			lstError.add(new ErrorBean("1", "to", "to is bank"));
 		}
 		if (null != fromDate) {
 			from = DataUtils.convertDateToString(Constants.YYYYMMDD_WITH_HYPHEN_FORMAT, fromDate);
@@ -219,7 +226,7 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 			throw new MessageListException(lstError);
 		}
 		Map<String, List<EmployeeSkillTestResponse>> mapSkillTest = new HashMap<>();
-		HistoryEmployee history = searchHistory(empId, mapSkillTest, from, to);
+		HistoryEmployee history = searchHistory(empId, mapSkillTest, from, to, fromM, toM);
 		if (history == null) {
 			this.status = HttpStatus.NO_CONTENT;
 			return resultBean;
@@ -314,7 +321,7 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 	}
 
 	
-	private HistoryEmployee searchHistory(Integer userId, Map<String, List<EmployeeSkillTestResponse>> mapSkillTest, String from, String to) throws Exception {
+	private HistoryEmployee searchHistory(Integer userId, Map<String, List<EmployeeSkillTestResponse>> mapSkillTest, String from, String to, Integer fromM, Integer toM) throws Exception {
 		List<Object> paramList = new ArrayList<>();
 		paramList.add(userId);
 		StringBuilder sb = new StringBuilder(
@@ -346,14 +353,34 @@ public class UserServiceImpl extends AbstractServiceBase implements UserService 
 			String skillName = object[5] != null ? object[5].toString() : null;
 			Integer point = object[6] != null ? Integer.parseInt(object[6].toString()) : null;
 			Integer month = object[7] != null ? Integer.parseInt(object[7].toString()) : null;
-			EmployeeSkillTestResponse sKTR = new EmployeeSkillTestResponse();
-			sKTR.setPoint(point);
-			sKTR.setMonth(month);
-			lstSKTR.add(sKTR);
-			SkillHistory skillHistory = new SkillHistory();
-			skillHistory.setSkill_name(skillName);
-			skillHistory.setSkillForMonth(lstSKTR);
+			
 			mapSkillTest.put(skillName, lstSKTR);
+			Iterator<Entry<String, List<EmployeeSkillTestResponse>>> iterator = mapSkillTest.entrySet().iterator();
+			while (iterator.hasNext()) {
+				Entry<String, List<EmployeeSkillTestResponse>> entry = iterator.next();
+				if (skillName.equals(entry.getKey())) {
+					for (int j = fromM; j <= toM; j++) {
+						EmployeeSkillTestResponse sKTR = new EmployeeSkillTestResponse();
+						if (month != null && j == month ) {
+							sKTR.setPoint(point);
+							sKTR.setMonth(month);
+						} else {
+							sKTR.setPoint(0);
+							sKTR.setMonth(j);
+						}
+						entry.getValue().add(sKTR);
+					}
+				} else {
+					lstSKTR = new ArrayList<>();
+				}
+				
+			}
+			
+//			SkillHistory skillHistory = new SkillHistory();
+//			skillHistory.setSkill_name(skillName);
+//			skillHistory.setSkillForMonth(lstSKTR);
+			
+			
 			//HistoryEmployee
 			history.setId(employeeId);
 			history.setName(employeeName);
