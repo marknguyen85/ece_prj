@@ -272,6 +272,8 @@ var allData = null;
                   }
                   // alert("myData: "+myData.employee_id + "dataCompare: "+ dataCompare.employee_id);
                   setChartData(myData,dataCompare);
+
+                  location.href = '/index.html#formSoSanh'
                 }
               }else{
                 alert("mydata == null");

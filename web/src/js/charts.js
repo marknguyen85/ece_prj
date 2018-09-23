@@ -19,43 +19,41 @@ var random = function random() {
 var lineChart = new Chart($('#monthChartExam'), {
   type: 'line',
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [{
-      label: 'Codding',
-      backgroundColor: 'rgba(220, 220, 220, 0.2)',
-      borderColor: 'green',
-      pointBackgroundColor: 'green',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }, {
-      label: 'IQ',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'black',
-      pointBackgroundColor: 'black',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }, {
-      label: 'Database',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'red',
-      pointBackgroundColor: 'red',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }, {
-      label: 'Attitude',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'blue',
-      pointBackgroundColor: 'blue',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }, {
-      label: 'Manager',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'yellow',
-      pointBackgroundColor: 'yellow',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }]
+    // labels : ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [// {
+      // backgroundColor: 'rgba(220, 220, 220, 0.2)',
+      //   borderColor: 'green',
+      //   pointBackgroundColor: 'green',
+      //   pointBorderColor: '#fff'
+      // }, {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'black',
+      //   pointBackgroundColor: 'black',
+      //   pointBorderColor: '#fff'
+      // },
+      // {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'red',
+      //   pointBackgroundColor: 'red',
+      //   pointBorderColor: '#fff'
+      // },
+      // {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'blue',
+      //   pointBackgroundColor: 'blue',
+      //   pointBorderColor: '#fff'
+      // },
+      // {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'yellow',
+      //   pointBackgroundColor: 'yellow',
+      //   pointBorderColor: '#fff'
+      // }
+    ]
   },
   options: {
     responsive: true
@@ -119,16 +117,14 @@ var doughnutChart = new Chart($('#canvas-3'), {
 var radarChart = new Chart($('#canvasCapaci'), {
   type: 'radar',
   data: {
-    labels: ['Chuyên môn', 'IQ', 'Chuyên cần', 'Thái độ', 'Ngoại ngữ'],
     datasets: [{
-      label: 'Nguyễn Văn A',
+      label: ' ',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
       borderColor: 'black',
       pointBackgroundColor: 'black',
       pointBorderColor: '#fff',
       pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(220, 220, 220, 1)',
-      data: [50, 60, 70, 60, 50]
+      pointHighlightStroke: 'rgba(220, 220, 220, 1)'
     }]
   },
   options: {
