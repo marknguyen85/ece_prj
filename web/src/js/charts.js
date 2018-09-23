@@ -172,18 +172,18 @@ var myRadarChart = new Chart($('#canvas-9'), {
       label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(220, 220, 220, 0.2)',
       borderColor: 'blue',
-      pointBackgroundColor: 'rgba(220, 220, 220, 1)',
+      pointBackgroundColor: 'blue',
       pointBorderColor: '#fff',
-      pointHighlightFill: '#fff',
+      pointHighlightFill: 'blue',
       pointHighlightStroke: 'rgba(220, 220, 220, 1)',
       data: []
     }, {
       label: 'Nguyễn Văn B',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
       borderColor: 'green',
-      pointBackgroundColor: 'rgba(151, 187, 205, 1)',
+      pointBackgroundColor: 'green',
       pointBorderColor: '#fff',
-      pointHighlightFill: '#fff',
+      pointHighlightFill: 'green',
       pointHighlightStroke: 'rgba(151, 187, 205, 1)',
       data: []
     }]

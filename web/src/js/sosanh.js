@@ -261,7 +261,7 @@ var allData = null;
               // alert("getID: "+ getID);
               if(myData != null){
                 if('Rank'+myData.rank == getID){
-                  alert("dont click that field!");
+                  // alert("dont click that field!");
                 }else{
                   $('#formSoSanh').show();
                   for (var i = 0; i < allData.length; i++) {
