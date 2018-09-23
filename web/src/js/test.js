@@ -7,6 +7,7 @@
     var skill_id = 0;
     var $dialog = {};
     var starting  = false;
+    var employee_skill_test_id = 0;
 
     var getRadioItem = function(stt, data){
         var item_count = 5;
@@ -39,17 +40,23 @@
     
     var parseArray = (data, callback) => {
         console.log('==========parseArray', data);
+        employee_skill_test_id = data.employee_skill_test_id;
 
-        for (var i = 1; i <= data.length; i++) {
+        for (var i = 1; i <= data.details.length; i++) {
             var rand = 2;
             switch(rand) {
                 case 1:
-                    questions.push(getCheckboxItem(i, data[i - 1]))
+                    questions.push(getCheckboxItem(i, data.details[i - 1]))
                     break;
                 default:
-                    questions.push(getRadioItem(i, data[i - 1]))
+                    questions.push(getRadioItem(i, data.details[i - 1]))
                     break;
             } 
+        }
+
+        if (data.details.length == 0) {
+            alert('Đanh sách câu hỏi chưa sẵn sàng, hãy liên hệ quản trị viên');
+            return false;
         }
 
         if (callback){
@@ -58,12 +65,7 @@
     }
 
     var initData = function(callback){
-        var formData = {
-            employee_id: currentUser.id,
-            skill_id: skill_id
-        }
-
-        var url = '/test/index?employee_id=' + formData.employee_id + '&skill_id=' + formData.skill_id;
+        var url = '/test/index?employee_skill_test_id=' + employee_skill_test_id;
         serviceInvoker.get(url, {}, {
             error: function(response){
                 console.log('=================initData', response);
@@ -213,6 +215,12 @@
         countdownArray.push(x);
     }
 
+    var clearTimers = () => {
+        for (var i = 0; i < countdownArray.length; i ++) {
+            clearInterval(countdownArray[i]);
+        }
+    }
+
     var closeDialog = () => {
         Common.redirect('/test.html');
     }
@@ -220,16 +228,17 @@
     var submit = () => {
         var formData = {
             data : {
-                user_id: currentUser.id,
+                employee_skill_test_id: employee_skill_test_id + '',
+                user_id: currentUser.id + '',
                 skill_id: skill_id,
                 details: []
             }
         };
 
-        for (var i = 0; i <= answers.length; i ++) {
+        for (var i = 0; i < answers.length; i ++) {
             formData.data.details.push({
                 test_detail_id: answers[i].detail_id,
-                answer: answers[i].answer
+                answer: answers[i].answer + ''
             })
         }
 
@@ -239,9 +248,23 @@
                 alert('error in submit data');
             },
             success: function(response){
-                console.log(response);
-                alert('Gửi kết quả thành công');
-                $dialog.modal('hide');
+                try {
+                    console.log(response);
+                    if (response.result == 1) {
+                        alert(response.message);
+                        return false;
+                    }
+
+                    alert('Chúc mừng bạn đã hoàn thành bài thi số điểm đạt được:' + response.data.point)
+
+                    $('#q-close').show();
+                    $('#q-start, #q-prev, #q-next, #q-save').hide();
+                    
+                    starting = false;
+                    clearTimers();
+                } catch (error) {
+                    console.log(error);
+                }
             }
         })
     }
@@ -251,6 +274,7 @@
             e.preventDefault();
             var dialog = $(this).attr('ref');
             skill_id = $(this).attr('skill_id');
+            employee_skill_test_id = $(this).attr('employee_skill_test_id');
             $dialog = $(dialog);
             $dialog.modal('show');
 
@@ -346,7 +370,7 @@
             trs += '<td>' + item.skill.name + '</td>';
             trs += '<td class="text-center">' + moment().format("YYYY-MM-DD") + '</td>';
             trs += '<td class="text-center">';
-            trs += '    <button class="btn btn-sm btn-danger" skill_id="' + item.skill.id + '" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">';
+            trs += '    <button class="btn btn-sm btn-danger" employee_skill_test_id="' + item.skill.employee_skill_test_id + '" skill_id="' + item.skill.id + '" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">';
             trs += '        <i class="fa fa-dot-circle-o"></i> Bắt đầu';
             trs += '    </button>';
             trs += '</td>';

@@ -43,7 +43,7 @@
                 xhr.onload = function() {
                     try {
                         var jsonData = JSON.parse(xhr.response);
-                        console.log('=========success', xhr.response);
+                        console.log('=========api return success', jsonData);
 
                         if (callbacks && callbacks.success) {
                             callbacks.success(jsonData);
