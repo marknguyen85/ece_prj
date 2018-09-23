@@ -55,7 +55,7 @@
       </button>
       <ul class="nav navbar-nav d-md-down-none">
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">ECE system</a>
+          <a class="nav-link" href="http://13.251.131.35">ECE system</a>
         </li>
       </ul>
       <ul class="nav navbar-nav ml-auto" id="account-info">
@@ -64,31 +64,11 @@
     </header>
     <div class="app-body">
       <div class="sidebar">
-        <nav class="sidebar-nav">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <i class="nav-icon icon-speedometer"></i> Dashboard
-                <span class="badge badge-primary">NEW</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="test.html">
-                <i class="nav-icon icon-drop"></i>Thi năng lực</a>
-            </li>
-            <li class="divider"></li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="nav-icon icon-drop"></i>E-learning</a>
-            </li>
-          </ul>
-        </nav>
-        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
       </div>
       <main class="main">
         <!-- Breadcrumb-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item"><a href="http://13.251.131.35">ECE system</a></li>
           <li class="breadcrumb-item active">Thi năng lực</li>
           <!-- Breadcrumb Menu-->
         </ol>
@@ -210,6 +190,7 @@
     <script>
       $(document).ready(function(){
         TestModule.init();
+        Common.loadSidebar();
         Common.loadAccountInfo();
       })
     </script>

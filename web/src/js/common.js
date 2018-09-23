@@ -11,7 +11,7 @@
     var getToken = () => {
         var token = localStorage.getItem('_token');
         if (token == 'undefined' || token == '') {
-            return ''
+            return {};
         }
 
         var dataJson = JSON.parse(token);
@@ -57,9 +57,14 @@
     appName.loadAccountInfo = () => {
         $.get('/userinfo.html', function(html){
             var accInfo = getToken();
-            //console.log('==========================', accInfo);
             $('#account-info').html(html);
-            $('.header-account').html(accInfo.name);
+            $('.header-account').html(accInfo.name || 'Khách');
+        });
+    }
+
+    appName.loadSidebar = () => {
+        $.get('/menu.html', function(html){
+            $('.sidebar').html(html);
         });
     }
 
