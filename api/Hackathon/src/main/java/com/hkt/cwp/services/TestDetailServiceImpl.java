@@ -138,10 +138,12 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		Date date = new Date();
 		employeeSkillTest.setStarttime(date);
 		employeeSkillTest.setEmployeeTestDetails(null);
-		
+		Map<String, Object> resultdata = new HashMap<>();
+		resultdata.put("point", point);
+		resultBean.setData(resultdata);
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
-		status = HttpStatus.CREATED;
+		status = HttpStatus.OK;
 		return resultBean;
 	}
 
