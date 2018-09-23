@@ -3,7 +3,7 @@
 * CoreUI - Free Bootstrap Admin Template
 * @version v2.0.0
 * @link https://coreui.io
-* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Copyright (c) 2018 Co-well Łukasz Holeczek
 * Licensed under MIT (https://coreui.io/license)
 -->
 
@@ -57,59 +57,33 @@
       </button>
       <ul class="nav navbar-nav d-md-down-none">
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">ECE system</a>
+          <a class="nav-link nav-logo" href="http://13.251.131.35"><img src="img/kpi_person.png" /></a>
         </li>
       </ul>
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-              <strong>Account</strong>
-            </div>
-            <a class="dropdown-item" href="/logout.html">
-              <i class="fa fa-envelope-o"></i> Logout
-              <span class="badge badge-success">42</span>
-            </a>
-          </div>
-        </li>
+      <ul class="nav navbar-nav ml-auto" id="account-info">
       </ul>
     </header>
     <div class="app-body">
       <div class="sidebar">
-        <nav class="sidebar-nav">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <i class="nav-icon icon-speedometer"></i> Dashboard
-                <span class="badge badge-primary">NEW</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="test.html">
-                <i class="nav-icon icon-drop"></i>Thi năng lực</a>
-            </li>
-            <li class="divider"></li>
-          </ul>
-        </nav>
-        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+
       </div>
       <main class="main">
         <!-- Breadcrumb-->
-
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="http://13.251.131.35">ECE system</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+          <!-- Breadcrumb Menu-->
+        </ol>
         <div class="container-fluid">
           <div class="animated fadeIn">
             <div class="card">
               <div class="card-header">
 
                 <div class="img-profile">
-                  <img class="prof-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                  <img class="prof-avatar" src="img/avatars/9.png" alt="admin@bootstrapmaster.com">
                 </div>
                 <div class="info-profile">
-                  <h5>Vi Văn Thức</h5>
-                  <b>Developer</b>
+                  <h5><strong class="header-account">...</strong></h5>
                 </div>
               </div>
               <div class="card-body">
@@ -179,22 +153,13 @@
                             </div>
                             <!-- cart header body -->
                             <div class="card-body">
-                                <div class="form-inline search-container" >
+                                <!-- <div class="form-inline search-container" >
                                   <input id="mySearchBar" type="text" class="form-control" placeholder="Tìm kiếm" name="" value="">
                                   <button class="form-control" id="mySearchBtn"><i class="fa fa-search">Search</i></button>
-                                </div>
+                                </div> -->
                                 <div class="wrapperRank">
                                  <table class="tblRank" id="myRankTable">
-                                   <thead>
-                                     <tr>
-                                       <th>Rank</th>
-                                       <th>Name</th>
-                                       <th>Coding</th>
-                                       <th>Database</th>
-                                       <th>IQ</th>
-                                       <th>Attitude</th>
-                                       <th>Language</th>
-                                     </tr>
+                                   <thead id="myTableRankHead">
                                    </thead>
                                    <tbody id="myTableRankBody">
 
@@ -208,21 +173,6 @@
                           <div  id="formSoSanh" class="card">
                             <div class="card-header">So Sánh</div>
                             <div class="card-body">
-                              <!-- show head sosanh -->
-                              <!-- <div class="">
-                                <div class="">
-                                  <div class="form-inline" style="">
-                                    <label for=""><span> </span> <h5>Type </h5> </label>
-                                    <select class="form-control" name="">
-                                      <option value="coding">Coding</option>
-                                      <option value="db">DB</option>
-                                      <option value="iq">IQ</option>
-                                      <option value="attitute">Attitute</option>
-                                      <option value="language">Language</option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div> -->
                               <div >
                                 <div class="chart-wrapper myContentLayout"  >
                                   <canvas id="canvas-9"></canvas>
@@ -267,72 +217,7 @@
                                 <hr class="mt-0">
                             </div>
                               <!-- chart bar layout -->
-                              <div class="myProgressBarLayout">
-                                <div class="progress-group mb-4">
-                                  <div class="progress-group-prepend">
-                                    <span class="progress-group-text">Coding</span>
-                                  </div>
-                                  <div class="progress-group-bars">
-                                    <div class="progress progress-xs">
-                                      <div id="mycoding" class="progress-bar bg-info" role="progressbar" style="width: 34%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-xs">
-                                      <div id="yourcoding" class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="progress-group mb-4">
-                                  <div class="progress-group-prepend">
-                                    <span class="progress-group-text">Database</span>
-                                  </div>
-                                  <div class="progress-group-bars">
-                                    <div class="progress progress-xs">
-                                      <div id="mydatabase" class="progress-bar bg-info" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-xs">
-                                      <div id="yourdatabase" class="progress-bar bg-danger" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="progress-group mb-4">
-                                  <div class="progress-group-prepend">
-                                    <span class="progress-group-text">IQ</span>
-                                  </div>
-                                  <div class="progress-group-bars">
-                                    <div class="progress progress-xs">
-                                      <div id="myiq" class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-xs">
-                                      <div id="youriq" class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="progress-group mb-4">
-                                  <div class="progress-group-prepend">
-                                    <span class="progress-group-text">Attitute</span>
-                                  </div>
-                                  <div class="progress-group-bars">
-                                    <div class="progress progress-xs">
-                                      <div id="myattitude" class="progress-bar bg-info" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-xs">
-                                      <div id="yourattitude" class="progress-bar bg-danger" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="progress-group mb-4">
-                                  <div class="progress-group-prepend">
-                                    <span class="progress-group-text">Language</span>
-                                  </div>
-                                  <div class="progress-group-bars">
-                                    <div class="progress progress-xs">
-                                      <div id="mylanguage" class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-xs">
-                                      <div id="yourlanguage" class="progress-bar bg-danger" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                  </div>
-                                </div>
+                              <div class="myProgressBarLayout" id="myProgressBar">
                               </div>
                             </div>
                           </div>
@@ -364,7 +249,7 @@
     <footer class="app-footer">
       <div>
         <a href="http://13.251.131.35">ECE system</a>
-        <span>&copy; 2018 creativeLabs.</span>
+        <span>&copy; 2018 Co-well.</span>
       </div>
       <div class="ml-auto">
         <span>Powered by</span>
@@ -392,6 +277,8 @@
     <script src="js/capacity.js"></script>
     <script>
       $(document).ready(function(){
+        Common.loadAccountInfo();
+        Common.loadSidebar();
         CapaModule.init();
         lotrinhcongdanhModule.init();
         sosanhModule.init();

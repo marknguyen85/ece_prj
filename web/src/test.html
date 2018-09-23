@@ -3,7 +3,7 @@
 * CoreUI - Free Bootstrap Admin Template
 * @version v2.0.0
 * @link http://13.251.131.35
-* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Copyright (c) 2018 Co-well Łukasz Holeczek
 * Licensed under MIT (http://13.251.131.35/license)
 -->
 
@@ -55,49 +55,20 @@
       </button>
       <ul class="nav navbar-nav d-md-down-none">
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">ECE system</a>
+          <a class="nav-link nav-logo" href="http://13.251.131.35"><img src="img/kpi_person.png" /></a>
         </li>
       </ul>
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-              <strong>Account</strong>
-            </div>
-            <a class="dropdown-item" href="/logout.html">
-              <i class="fa fa-envelope-o"></i> Logout
-              <span class="badge badge-success">42</span>
-            </a>
-          </div>
-        </li>
+      <ul class="nav navbar-nav ml-auto" id="account-info">
+        
       </ul>
     </header>
     <div class="app-body">
       <div class="sidebar">
-        <nav class="sidebar-nav">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <i class="nav-icon icon-speedometer"></i> Dashboard
-                <span class="badge badge-primary">NEW</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="test.html">
-                <i class="nav-icon icon-drop"></i>Thi năng lực</a>
-            </li>
-            <li class="divider"></li>
-          </ul>
-        </nav>
-        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
       </div>
       <main class="main">
         <!-- Breadcrumb-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item"><a href="http://13.251.131.35">ECE system</a></li>
           <li class="breadcrumb-item active">Thi năng lực</li>
           <!-- Breadcrumb Menu-->
         </ol>
@@ -110,20 +81,12 @@
                     <table class="table table-responsive-sm table-bordered table-striped table-sm">
                       <thead>
                         <tr>
-                          <th class="text-center">Tên</th>
+                          <th class="text-center">Kỹ năng</th>
                           <th class="text-center">Ngày</th>
                           <th class="text-center">Hành động</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>Thi tiếng anh</td>
-                          <td class="text-center">2012/01/01</td>
-                          <td class="text-center">
-                              <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" id="test-start" ref="#test-start-dialog">
-                                  <i class="fa fa-dot-circle-o"></i> Bắt đầu</button>
-                          </td>
-                        </tr>
+                      <tbody id="tbl-available-tested">
                       </tbody>
                     </table>
                   </div>
@@ -135,41 +98,19 @@
                     <table class="table table-responsive-sm table-bordered table-striped table-sm">
                       <thead>
                         <tr>
-                          <th class="text-center">Tên</th>
+                          <th class="text-center">Kỹ năng</th>
                           <th class="text-center">Ngày làm</th>
                           <th class="text-center">Điểm</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>Thi tiếng anh</td>
-                          <td class="text-center">2012/01/01</td>
-                          <td class="text-right">40/100</td>
-                        </tr>
+                      <tbody id="tbl-history-tested">
+                        
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tab-nangluc">Năng lực</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu1">Link</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">Link</a>
-                  </li>
-                </ul>
-                <!-- Nav tabs -->
-                <!-- Tab panes -->
-                <div class="tab-content">
-                  <div class="tab-pane container active" id="tab-nangluc">123</div>
-                  <div class="tab-pane container fade" id="menu1">321</div>
-                  <div class="tab-pane container fade" id="menu2">...</div>
-                </div>
             </div>
-            <div class="modal fade" id="test-start-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" id="test-start-dialog" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-max" role="document">
                 <div class="modal-content modal-content-max">
                   <div class="modal-header">
@@ -182,7 +123,7 @@
                   <div class="modal-body">
                       <div class="form-group row">
                           <div class="col-md-9 col-form-label" id="q-answer">
-                            <p>Bạn đang bắt đầu thực hiện bài kiểm tra, chú ý bạn nên bố trí thời gian hợp lý.</p>
+                            <p>Bạn đang bắt đầu thực hiện bài kiểm tra, chú ý bạn nên bố trí thời gian hợp lý vì trong quá trình làm không thể dừng lại hoặc làm lại.</p>
                             <p>Bấm nút bắt đầu để làm bài.</p>
                           </div>
                       </div>
@@ -228,7 +169,7 @@
     <footer class="app-footer">
       <div>
         <a href="http://13.251.131.35">ECE system</a>
-        <span>&copy; 2018 creativeLabs.</span>
+        <span>&copy; 2018 Co-well.</span>
       </div>
       <div class="ml-auto">
         <span>Powered by</span>
@@ -249,6 +190,8 @@
     <script>
       $(document).ready(function(){
         TestModule.init();
+        Common.loadSidebar();
+        Common.loadAccountInfo();
       })
     </script>
   </body>

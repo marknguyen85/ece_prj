@@ -63,25 +63,39 @@ var lineChart = new Chart($('#monthChartExam'), {
 var barChart = new Chart($('#canvas-2'), {
   type: 'bar',
   data: {
-    labels: ['Coding', 'Database', 'IQ', 'Attitude', 'Language'],
+    labels: [],
     datasets: [{
       label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(220, 220, 220, 0.5)',
       borderColor: 'rgba(220, 220, 220, 0.8)',
       highlightFill: 'rgba(220, 220, 220, 0.75)',
       highlightStroke: 'rgba(220, 220, 220, 1)',
-      data: [random(), random(), random(), random(), random()]
+      data: []
     }, {
       label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(151, 187, 205, 0.5)',
       borderColor: 'rgba(151, 187, 205, 0.8)',
       highlightFill: 'rgba(151, 187, 205, 0.75)',
       highlightStroke: 'rgba(151, 187, 205, 1)',
-      data: [random(), random(), random(), random(), random()]
+      data: []
     }]
   },
   options: {
-    responsive: true
+    responsive: true,
+    title: {
+      display: true,
+      text: 'Biểu đồ cột'
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          // the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+          suggestedMin: 0,
+          // the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+          suggestedMax: 100
+        }
+      }]
+    }
   }
 }); // eslint-disable-next-line no-unused-vars
 
@@ -149,29 +163,40 @@ var polarAreaChart = new Chart($('#canvas-6'), {
 var myRadarChart = new Chart($('#canvas-9'), {
   type: 'radar',
   data: {
-    labels: ['Coding', 'Database', 'IQ', 'Attitude', 'Language'],
+    labels: [],
     datasets: [{
       label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(220, 220, 220, 0.2)',
-      borderColor: 'rgba(220, 220, 220, 1)',
-      pointBackgroundColor: 'rgba(220, 220, 220, 1)',
+      borderColor: 'blue',
+      pointBackgroundColor: 'blue',
       pointBorderColor: '#fff',
-      pointHighlightFill: '#fff',
+      pointHighlightFill: 'blue',
       pointHighlightStroke: 'rgba(220, 220, 220, 1)',
       data: []
     }, {
       label: 'Nguyễn Văn B',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'rgba(151, 187, 205, 1)',
-      pointBackgroundColor: 'rgba(151, 187, 205, 1)',
+      borderColor: 'green',
+      pointBackgroundColor: 'green',
       pointBorderColor: '#fff',
-      pointHighlightFill: '#fff',
+      pointHighlightFill: 'green',
       pointHighlightStroke: 'rgba(151, 187, 205, 1)',
-      data: [28, 48, 40, 19, 96]
+      data: []
     }]
   },
   options: {
-    responsive: true
+    responsive: true,
+    title: {
+      display: true,
+      text: 'Biểu đồ hình'
+    },
+    scales: {
+      yaxis: {
+        min: 0,
+        max: 100,
+        axisLabel: 'yaxis'
+      }
+    }
   }
 });
 //# sourceMappingURL=charts.js.map
