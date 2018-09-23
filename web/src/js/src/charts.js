@@ -179,7 +179,7 @@ const myRadarChart = new Chart($('#canvas-9'), {
         borderColor: 'blue',
         pointBackgroundColor: 'blue',
         pointBorderColor: '#fff',
-        pointHighlightFill: '#fff',
+        pointHighlightFill: 'blue',
         pointHighlightStroke: 'rgba(220, 220, 220, 1)',
         data: []
       },
@@ -189,7 +189,7 @@ const myRadarChart = new Chart($('#canvas-9'), {
         borderColor: 'green',
         pointBackgroundColor: 'green',
         pointBorderColor: '#fff',
-        pointHighlightFill: '#fff',
+        pointHighlightFill: 'green',
         pointHighlightStroke: 'rgba(151, 187, 205, 1)',
         data: []
       }
