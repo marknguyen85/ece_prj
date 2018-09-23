@@ -52,7 +52,7 @@ public class DataUtils {
      *
      */
     public static boolean isValidDate(String date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.YYYYMMDD_WITH_HYPHEN_FORMAT);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DDMMYY_FORMAT);
         dateFormat.setLenient(false);
         try {
             dateFormat.parse(date.trim());
@@ -194,13 +194,11 @@ public class DataUtils {
      * @return
      *
      */
-    public static String convertDate9ToString(String pattern, Date date) {
+    public static String convertDateToString(String pattern, Date date) {
         if (date == null) {
             return null;
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        TimeZone timezone = TimeZone.getTimeZone("GMT+9");
-        dateFormat.setTimeZone(timezone);
         dateFormat.setLenient(false);
         return dateFormat.format(date);
     }
@@ -214,7 +212,7 @@ public class DataUtils {
      */
     public static Date convertStringToDate(String dateString) {
         Date date = null;
-        DateFormat dateFormat = new SimpleDateFormat(Constants.YYYYMMDD_WITH_HYPHEN_FORMAT);
+        DateFormat dateFormat = new SimpleDateFormat(Constants.DDMMYY_FORMAT);
         try {
             if (isValidDate(dateString)) {
                 date = dateFormat.parse(dateString);
