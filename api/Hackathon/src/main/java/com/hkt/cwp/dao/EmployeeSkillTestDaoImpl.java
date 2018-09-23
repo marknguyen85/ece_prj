@@ -1,4 +1,5 @@
 package com.hkt.cwp.dao;
+
 /**
  * @author thuan
  */
@@ -21,22 +22,27 @@ public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements Employe
 
 	@Override
 	public EmployeeSkillTest getListTest(Integer skillTest_id) throws Exception {
-
-		Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest WHERE id= :skillTest_id");
-		query.setParameter("skillTest_id", skillTest_id);
 		EmployeeSkillTest employeeSkillTest = new EmployeeSkillTest();
+
+		try {
+			Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest WHERE id= :skillTest_id");
+			query.setParameter("skillTest_id", skillTest_id);
+			employeeSkillTest = (EmployeeSkillTest) query.getSingleResult();
+		} catch (Exception e) {
+			throw e;
+		}
 		return employeeSkillTest;
 	}
 
 	@Override
 	public int insertEmployeeSkillTest(EmployeeSkillTest employeeSkillTest) throws Exception {
 		try {
-			 entityManager.persist(employeeSkillTest);
+			entityManager.persist(employeeSkillTest);
 		} catch (Exception e) {
 			e.getMessage();
 			throw e;
 		}
-		
+
 		return employeeSkillTest.getId();
 	}
 
@@ -45,7 +51,7 @@ public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements Employe
 		entityManager.merge(employeeSkillTest);
 		return employeeSkillTest.getId();
 	}
-	
+
 	@Override
 	public List<EmployeeSkillTest> getAll() throws Exception {
 		List<EmployeeSkillTest> listEmployeeSkillTest = new ArrayList<>();
@@ -55,7 +61,7 @@ public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements Employe
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 		return listEmployeeSkillTest;
 	}
 
@@ -63,22 +69,24 @@ public class EmployeeSkillTestDaoImpl extends AbstractBaseDao implements Employe
 	public List<EmployeeSkillTest> getESTBySkillId(Integer skillId) throws Exception {
 		List<EmployeeSkillTest> listEmployeeSkillTest = new ArrayList<>();
 		try {
-			Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest e WHERE e.skill.id = :skillId order by point desc");
+			Query query = (Query) entityManager
+					.createQuery("FROM EmployeeSkillTest e WHERE e.skill.id = :skillId order by point desc");
 			query.setParameter("skillId", skillId);
 			listEmployeeSkillTest = query.getResultList();
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 		return listEmployeeSkillTest;
 	}
 
 	@Override
 	public EmployeeSkillTest getEmployeeBySkillandEmployee(Integer employee_id, Integer skill_id, Integer point)
 			throws Exception {
-		EmployeeSkillTest employeeSkillTest =new EmployeeSkillTest();
+		EmployeeSkillTest employeeSkillTest = new EmployeeSkillTest();
 		try {
-			Query query = (Query) entityManager.createQuery("FROM EmployeeSkillTest e WHERE e.skill.id = :skillId AND e.employee.id =:employee_id AND point=:point ");
+			Query query = (Query) entityManager.createQuery(
+					"FROM EmployeeSkillTest e WHERE e.skill.id = :skillId AND e.employee.id =:employee_id AND point=:point ");
 			query.setParameter("skillId", skill_id);
 			query.setParameter("employee_id", employee_id);
 			query.setParameter("point", point);

@@ -3,7 +3,9 @@ package com.hkt.cwp.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,7 +73,10 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		List<TestDetail> listTestDetail = new ArrayList<>();
 		listTestDetail = skill.getTestDetails();
 		Collections.shuffle(listTestDetail);
-		resultBean.setData(listTestDetail);
+		Map<String, Object> resultdata = new HashMap<>();
+		resultdata.put("employee_skill_test_id", result);
+		resultdata.put("details", listTestDetail);
+		resultBean.setData(resultdata);
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
 		status = HttpStatus.CREATED;
@@ -95,17 +100,15 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		}
 		String user_Id = JsonDataUtil.getJsonString(jsonData, "user_id");
 		String skill_id = JsonDataUtil.getJsonString(jsonData, "skill_id");
-		Skill skill = skillDao.getById(Integer.parseInt(skill_id));
-		Employee employee = new Employee();
-		employee = userDao.getById(Integer.parseInt(user_Id));
+		String employee_skill_test_id = JsonDataUtil.getJsonString(jsonData, "employee_skill_test_id");
+		
 		JsonArray jsonarray = jsonData.getAsJsonArray("details");
 		TestDetail testDetail = new TestDetail();
 		
 		
 		EmployeeSkillTest employeeSkillTest = new EmployeeSkillTest();
 		EmployeeTestDetail employeeTestDetail = new EmployeeTestDetail();
-		employeeSkillTest = employeeSkillTestDao.getEmployeeBySkillandEmployee(Integer.parseInt(user_Id), Integer.parseInt(skill_id), 0);
-		
+		employeeSkillTest = employeeSkillTestDao.getListTest(Integer.parseInt(employee_skill_test_id));
 		String test_detail_id = null;
 		String answer = null;
 		int point = 0;
