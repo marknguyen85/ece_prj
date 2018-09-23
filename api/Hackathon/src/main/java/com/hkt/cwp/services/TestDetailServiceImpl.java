@@ -60,10 +60,19 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		Integer employee_skill_test_id = Integer.parseInt(request.getParameter("employee_skill_test_id"));
 		employeeSkillTest = employeeSkillTestDao.getListTest(employee_skill_test_id);
 		Skill skill = skillDao.getById(employeeSkillTest.getSkill().getId());
-		//employee = userDao.getById(userId);
-	//	employeeSkillTest.setEmployee(employee);
-		//employeeSkillTest.setSkill(skill);
-		//employeeSkillTest.setPoint(0);
+		List<TestDetail> listTestDetail = testDetailDao.getListTestDetailBySkill(employeeSkillTest.getSkill().getId());
+		listTestDetail = skill.getTestDetails();
+		Map<String, Object> resultdata = new HashMap<>();
+		if(listTestDetail.isEmpty())
+		{
+			resultdata.put("employee_skill_test_id", employee_skill_test_id);
+			resultdata.put("details", listTestDetail);
+			resultBean.setData(resultdata);
+			resultBean.setResult(Constants.RESULT_SUCCESS);
+			resultBean.setMessage(Constants.MSG_SUCCESS);
+			status = HttpStatus.OK;
+			return resultBean;
+		}
 		Date date = new Date();
 		employeeSkillTest.setStarttime(date);
 		employeeSkillTest.setEmployeeTestDetails(null);
@@ -72,16 +81,15 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		EmployeeTestDetail employeeTestDetail = new EmployeeTestDetail();
 		employeeTestDetail.setEmployeeSkillTest(employeeSkillTest);
 		int a = employeeTestDetailDao.insertEmployeeTestDetail(employeeTestDetail);
-		List<TestDetail> listTestDetail = testDetailDao.getListTestDetailBySkill(employeeSkillTest.getSkill().getId());
-		listTestDetail = skill.getTestDetails();
+		
 		Collections.shuffle(listTestDetail);
-		Map<String, Object> resultdata = new HashMap<>();
+		
 		resultdata.put("employee_skill_test_id", result);
 		resultdata.put("details", listTestDetail);
 		resultBean.setData(resultdata);
 		resultBean.setResult(Constants.RESULT_SUCCESS);
 		resultBean.setMessage(Constants.MSG_SUCCESS);
-		status = HttpStatus.CREATED;
+		status = HttpStatus.OK;
 		return resultBean;
 	}
 	/**
