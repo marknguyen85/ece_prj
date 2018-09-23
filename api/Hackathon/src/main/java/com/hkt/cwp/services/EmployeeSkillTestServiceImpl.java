@@ -115,6 +115,7 @@ public class EmployeeSkillTestServiceImpl extends AbstractServiceBase implements
 			{
 				mapSkill.put("id", skill.getId());
 				mapSkill.put("name", skill.getName());
+				mapSkill.put("employee_skill_test_id", employee.getEmployeeSkillTests().get(i).getId());
 				mapResult.put("skill", mapSkill);
 				listEmployeeSkillTest.add(mapResult);
 			}

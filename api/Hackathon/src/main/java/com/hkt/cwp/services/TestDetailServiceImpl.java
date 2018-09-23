@@ -54,14 +54,16 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		// The JSON format is incorrect.
 
 		EmployeeSkillTest employeeSkillTest = new EmployeeSkillTest();
-		Employee employee = new Employee();
-		Integer userId = Integer.parseInt(request.getParameter("employee_id"));
-		Integer skillId = Integer.parseInt(request.getParameter("skill_id"));
-		Skill skill = skillDao.getById(skillId);
-		employee = userDao.getById(userId);
-		employeeSkillTest.setEmployee(employee);
-		employeeSkillTest.setSkill(skill);
-		employeeSkillTest.setPoint(0);
+		//Employee employee = new Employee();
+		//Integer userId = Integer.parseInt(request.getParameter("employee_id"));
+		//Integer skillId = Integer.parseInt(request.getParameter("skill_id"));
+		Integer employee_skill_test_id = Integer.parseInt(request.getParameter("employee_skill_test_id"));
+		employeeSkillTest = employeeSkillTestDao.getListTest(employee_skill_test_id);
+		Skill skill = skillDao.getById(employeeSkillTest.getSkill().getId());
+		//employee = userDao.getById(userId);
+	//	employeeSkillTest.setEmployee(employee);
+		//employeeSkillTest.setSkill(skill);
+		//employeeSkillTest.setPoint(0);
 		Date date = new Date();
 		employeeSkillTest.setStarttime(date);
 		employeeSkillTest.setEmployeeTestDetails(null);
@@ -70,7 +72,7 @@ public class TestDetailServiceImpl extends AbstractServiceBase implements TestDe
 		EmployeeTestDetail employeeTestDetail = new EmployeeTestDetail();
 		employeeTestDetail.setEmployeeSkillTest(employeeSkillTest);
 		int a = employeeTestDetailDao.insertEmployeeTestDetail(employeeTestDetail);
-		List<TestDetail> listTestDetail = new ArrayList<>();
+		List<TestDetail> listTestDetail = testDetailDao.getListTestDetailBySkill(employeeSkillTest.getSkill().getId());
 		listTestDetail = skill.getTestDetails();
 		Collections.shuffle(listTestDetail);
 		Map<String, Object> resultdata = new HashMap<>();
