@@ -40,7 +40,7 @@ var allData = null;
       var row = $("<tr id='Rank"+rowData.rank+"' />")
         $("#myTableRankBody").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
         row.append($("<td>" + rowData.rank + "</td>"));
-        row.append($("<td>" + rowData.employee_id + "</td>"));
+        // row.append($("<td>" + rowData.employee_id + "</td>"));
         row.append($("<td>" + rowData.employee_name + "</td>"));
         for (var i = 0; i < rowData.skills.length; i++) {
           row.append($("<td>" + rowData.skills[i].skill_point + "</td>"));
@@ -51,9 +51,9 @@ var allData = null;
     function addHead(headData){
       var row = $("<tr />")
         $("#myTableRankHead").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-        row.append($("<td>" + "Rank" + "</td>"));
-        row.append($("<td>" + "EmployeeID" + "</td>"));
-        row.append($("<td>" + "EmployeeName" + "</td>"));
+        row.append($("<td>" + "Xếp hạng" + "</td>"));
+        // row.append($("<td>" + "EmployeeID" + "</td>"));
+        row.append($("<td>" + "Tên Nhân viên" + "</td>"));
         for (var i = 0; i < headData.length; i++) {
           row.append($("<td>" + headData[i].skill_name + "</td>"));
         }
