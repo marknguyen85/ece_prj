@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.0.0
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Co-Well KPI">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Co-Well KPI">
+    <title>Co-Well KPI</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Icons-->
+  </head>
+  <body class="app flex-row align-items-center  bg-primary">
+    <!-- CoreUI and necessary plugins-->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/serviceInvoker.js"></script>
+    <script src="js/logout.js"></script>
+    <script>
+      $(document).ready(function(){
+        LogoutModule.init();
+      })
+    </script>
+  </body>
+</html>

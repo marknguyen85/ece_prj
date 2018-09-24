@@ -16,25 +16,44 @@ var random = function random() {
 }; // eslint-disable-next-line no-unused-vars
 
 
-var lineChart = new Chart($('#canvas-1'), {
+var lineChart = new Chart($('#monthChartExam'), {
   type: 'line',
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgba(220, 220, 220, 0.2)',
-      borderColor: 'rgba(220, 220, 220, 1)',
-      pointBackgroundColor: 'rgba(220, 220, 220, 1)',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }, {
-      label: 'My Second dataset',
-      backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'rgba(151, 187, 205, 1)',
-      pointBackgroundColor: 'rgba(151, 187, 205, 1)',
-      pointBorderColor: '#fff',
-      data: [random(), random(), random(), random(), random(), random(), random()]
-    }]
+    // labels : ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [// {
+      // backgroundColor: 'rgba(220, 220, 220, 0.2)',
+      //   borderColor: 'green',
+      //   pointBackgroundColor: 'green',
+      //   pointBorderColor: '#fff'
+      // }, {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'black',
+      //   pointBackgroundColor: 'black',
+      //   pointBorderColor: '#fff'
+      // },
+      // {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'red',
+      //   pointBackgroundColor: 'red',
+      //   pointBorderColor: '#fff'
+      // },
+      // {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'blue',
+      //   pointBackgroundColor: 'blue',
+      //   pointBorderColor: '#fff'
+      // },
+      // {
+      //
+      //   backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      //   borderColor: 'yellow',
+      //   pointBackgroundColor: 'yellow',
+      //   pointBorderColor: '#fff'
+      // }
+    ]
   },
   options: {
     responsive: true
@@ -44,23 +63,39 @@ var lineChart = new Chart($('#canvas-1'), {
 var barChart = new Chart($('#canvas-2'), {
   type: 'bar',
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: [],
     datasets: [{
+      label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(220, 220, 220, 0.5)',
       borderColor: 'rgba(220, 220, 220, 0.8)',
       highlightFill: 'rgba(220, 220, 220, 0.75)',
       highlightStroke: 'rgba(220, 220, 220, 1)',
-      data: [random(), random(), random(), random(), random(), random(), random()]
+      data: []
     }, {
+      label: 'Nguyễn Văn A',
       backgroundColor: 'rgba(151, 187, 205, 0.5)',
       borderColor: 'rgba(151, 187, 205, 0.8)',
       highlightFill: 'rgba(151, 187, 205, 0.75)',
       highlightStroke: 'rgba(151, 187, 205, 1)',
-      data: [random(), random(), random(), random(), random(), random(), random()]
+      data: []
     }]
   },
   options: {
-    responsive: true
+    responsive: true,
+    title: {
+      display: true,
+      text: 'Biểu đồ cột'
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          // the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+          suggestedMin: 0,
+          // the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+          suggestedMax: 100
+        }
+      }]
+    }
   }
 }); // eslint-disable-next-line no-unused-vars
 
@@ -79,28 +114,17 @@ var doughnutChart = new Chart($('#canvas-3'), {
   }
 }); // eslint-disable-next-line no-unused-vars
 
-var radarChart = new Chart($('#canvas-4'), {
+var radarChart = new Chart($('#canvasCapaci'), {
   type: 'radar',
   data: {
-    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
     datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgba(220, 220, 220, 0.2)',
-      borderColor: 'rgba(220, 220, 220, 1)',
-      pointBackgroundColor: 'rgba(220, 220, 220, 1)',
-      pointBorderColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(220, 220, 220, 1)',
-      data: [65, 59, 90, 81, 56, 55, 40]
-    }, {
-      label: 'My Second dataset',
+      label: ' ',
       backgroundColor: 'rgba(151, 187, 205, 0.2)',
-      borderColor: 'rgba(151, 187, 205, 1)',
-      pointBackgroundColor: 'rgba(151, 187, 205, 1)',
+      borderColor: 'black',
+      pointBackgroundColor: 'black',
       pointBorderColor: '#fff',
       pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(151, 187, 205, 1)',
-      data: [28, 48, 40, 19, 96, 27, 100]
+      pointHighlightStroke: 'rgba(220, 220, 220, 1)'
     }]
   },
   options: {
@@ -134,6 +158,45 @@ var polarAreaChart = new Chart($('#canvas-6'), {
   },
   options: {
     responsive: true
+  }
+});
+var myRadarChart = new Chart($('#canvas-9'), {
+  type: 'radar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Nguyễn Văn A',
+      backgroundColor: 'rgba(220, 220, 220, 0.2)',
+      borderColor: 'blue',
+      pointBackgroundColor: 'blue',
+      pointBorderColor: '#fff',
+      pointHighlightFill: 'blue',
+      pointHighlightStroke: 'rgba(220, 220, 220, 1)',
+      data: []
+    }, {
+      label: 'Nguyễn Văn B',
+      backgroundColor: 'rgba(151, 187, 205, 0.2)',
+      borderColor: 'green',
+      pointBackgroundColor: 'green',
+      pointBorderColor: '#fff',
+      pointHighlightFill: 'green',
+      pointHighlightStroke: 'rgba(151, 187, 205, 1)',
+      data: []
+    }]
+  },
+  options: {
+    responsive: true,
+    title: {
+      display: true,
+      text: 'Biểu đồ hình'
+    },
+    scales: {
+      yaxis: {
+        min: 0,
+        max: 100,
+        axisLabel: 'yaxis'
+      }
+    }
   }
 });
 //# sourceMappingURL=charts.js.map
