@@ -1,8 +1,18 @@
 package com.hkt.cwp.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -16,19 +26,23 @@ public class Skill implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String name;
 
 	//bi-directional many-to-one association to EmployeeSkillTest
+	@JsonIgnore
 	@OneToMany(mappedBy="skill")
 	private List<EmployeeSkillTest> employeeSkillTests;
 
 	//bi-directional many-to-one association to Technique
+	@JsonIgnore
 	@ManyToOne
 	private Technique technique;
 
 	//bi-directional many-to-one association to TestDetail
+	@JsonIgnore
 	@OneToMany(mappedBy="skill")
 	private List<TestDetail> testDetails;
 

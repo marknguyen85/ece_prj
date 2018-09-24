@@ -13,11 +13,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import javax.persistence.TemporalType;
+
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +52,7 @@ public class DataUtils {
      *
      */
     public static boolean isValidDate(String date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.YYYYMMDD_WITH_HYPHEN_FORMAT);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DDMMYY_FORMAT);
         dateFormat.setLenient(false);
         try {
             dateFormat.parse(date.trim());
@@ -190,13 +194,11 @@ public class DataUtils {
      * @return
      *
      */
-    public static String convertDate9ToString(String pattern, Date date) {
+    public static String convertDateToString(String pattern, Date date) {
         if (date == null) {
             return null;
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        TimeZone timezone = TimeZone.getTimeZone("GMT+9");
-        dateFormat.setTimeZone(timezone);
         dateFormat.setLenient(false);
         return dateFormat.format(date);
     }
@@ -210,7 +212,7 @@ public class DataUtils {
      */
     public static Date convertStringToDate(String dateString) {
         Date date = null;
-        DateFormat dateFormat = new SimpleDateFormat(Constants.YYYYMMDD_WITH_HYPHEN_FORMAT);
+        DateFormat dateFormat = new SimpleDateFormat(Constants.DDMMYY_FORMAT);
         try {
             if (isValidDate(dateString)) {
                 date = dateFormat.parse(dateString);
@@ -494,4 +496,24 @@ public class DataUtils {
 			return false;
 		}
 	}
+	
+	  /**
+     * Memo set parameter to query
+     *
+     * @author CaoTT
+     * @param paramList List<Object>
+     * @param query Query
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static void setParameterCommon(List<Object> paramList, Query query) {
+        int idx = 0;
+        for (Object obj : paramList) {
+            if (obj instanceof Timestamp) {
+                query.setParameter(idx++, obj, TemporalType.TIMESTAMP);
+            } else {
+                query.setParameter(idx++, obj);
+            }
+
+        }
+    }
 }

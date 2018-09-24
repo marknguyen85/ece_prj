@@ -14,12 +14,15 @@ public class Constants {
     public static String MSG_SUCCESS = "Successfully!";
     public static final int RESULT_FAIL = 1;
     public static final String BUSINESS_CONFIG = "configuration";
+    public static final String DDMMYY_FORMAT = "dd/MM/yyyy";
     public static final String YYYYMMDD_WITH_HYPHEN_FORMAT = "yyyy-MM-dd";
     public static String ERR_ID_INTERNAL_SERVER_ERROR = "Server error!";
     
     public static final String AUTH_EMP = "E";
     public static final String AUTH_MANAGE = "M";
     public static final String ALL = "A";
+    
+    public static final int LIMIT = 2;
     
     /* JWT Authen Constant */
     // public static final long EXPIRATIONTIME = 169200000; // 2 days
@@ -45,5 +48,22 @@ public class Constants {
     public static final String CODE = "code";
     public static final String USER = "user";
     public static final String ERR_ID_REQUEST_TIMEOUT = "505";
+    
+    // Employee Skill Test
+    
+    public static final String EMPLOYEE_SKILL_TEST = "/api/skilltest";
+    
+    //Skill
+    public static final String SKILL_PATH = "/api/skill";
+    
+    //Technique
+    public static final String TECHNIQUE_PATH = "/api/technique";
+    
+    // test detail
+    public static final String TEST_PATH = "/api/test";
+    
+    //Rank 
+    public static final String RANK_PATH = "/api/rank";
+    public static final String SEARCH = "/search";
     
 }
