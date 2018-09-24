@@ -14,9 +14,6 @@
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 //import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 //
-//import com.cowell.digitallab.authentication.CustomBasicAuthenticationEntryPoint;
-//import com.cowell.digitallab.authentication.JWTAuthenticationFilter;
-//
 ///**
 // * It is the entry point of the application. All the requests are intercepted by
 // * this class
@@ -29,24 +26,25 @@
 //	
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf().disable().authorizeRequests()
-//  		.antMatchers(HttpMethod.POST, "/api/users/authorize")
-//          .permitAll()
-//          .anyRequest().authenticated()
-//          .and()
-//          .addFilterBefore(new JWTAuthenticationFilter(),
-//                  UsernamePasswordAuthenticationFilter.class);
+////		http.csrf().disable().authorizeRequests()
+////  		.antMatchers(HttpMethod.POST, "/api/user/authorize")
+////          .permitAll()
+////          .anyRequest().authenticated()
+////          .and()
+////          .addFilterBefore(new JWTAuthenticationFilter(),
+////                  UsernamePasswordAuthenticationFilter.class);
+//		
+//		http.csrf().disable();
 //	}
 //
-//	@Bean
-//	public CustomBasicAuthenticationEntryPoint getBasicAuthEntryPoint() {
-//		return new CustomBasicAuthenticationEntryPoint();
-//	}
-//
-//	/* To allow Pre-flight [OPTIONS] request from browser */
-//	@Override
-//	public void configure(WebSecurity web) throws Exception {
-//	}
-//
+////	@Bean
+////	public CustomBasicAuthenticationEntryPoint getBasicAuthEntryPoint() {
+////		return new CustomBasicAuthenticationEntryPoint();
+////	}
+////
+////	/* To allow Pre-flight [OPTIONS] request from browser */
+////	@Override
+////	public void configure(WebSecurity web) throws Exception {
+////	}
 //	
 //}

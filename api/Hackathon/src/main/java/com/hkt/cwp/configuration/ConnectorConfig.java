@@ -1,4 +1,4 @@
-///*
+/*///*
 // * Copyright (C) 2018 Co-Well Asia. All rights reserved.
 // * CO-WELL PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 // */
@@ -12,6 +12,9 @@
 //import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
+//import org.springframework.web.servlet.config.annotation.CorsRegistry;
+//import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 //
 ///**
 // * @author CaoTT 
@@ -19,7 +22,7 @@
 // * Redirect HTTP requests to HTTPS
 // */
 //@Configuration
-//public class ConnectorConfig {
+//public class ConnectorConfig{
 //
 //	@Bean
 //	public EmbeddedServletContainerFactory servletContainer() {
@@ -46,4 +49,4 @@
 //		connector.setRedirectPort(8443);
 //		return connector;
 //	}
-//}
+//}*/

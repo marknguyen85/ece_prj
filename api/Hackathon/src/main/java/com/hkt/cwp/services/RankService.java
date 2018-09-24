@@ -12,8 +12,9 @@ import com.hkt.cwp.bean.ResultBean;
  * @author CaoTT
  *
  */
-public interface LoginService {
+public interface RankService {
 
-	ResultBean login(String userName, String password) throws MessageListException , Exception;
+	public ResultBean searchEmp(String key, String page, String skillIdStr) throws MessageListException, Exception;
+	
 	HttpStatus getStatus();
 }

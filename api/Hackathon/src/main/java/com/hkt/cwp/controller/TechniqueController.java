@@ -1,10 +1,17 @@
-/**
- * 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.hkt.cwp.controller;
 
+import com.hkt.cwp.Utils.BundleUtils;
+import com.hkt.cwp.Utils.Constants;
+import com.hkt.cwp.bean.MessageListException;
+import com.hkt.cwp.bean.ResultBean;
+import com.hkt.cwp.services.TechniqueService;
+import com.hkt.cwp.services.UserService;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,37 +20,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hkt.cwp.Utils.BundleUtils;
-import com.hkt.cwp.Utils.Constants;
-import com.hkt.cwp.bean.MessageListException;
-import com.hkt.cwp.bean.ResultBean;
-import com.hkt.cwp.services.LoginService;
-
 /**
- * @author HP
  *
+ * @author HP
  */
 @RestController
-@RequestMapping(Constants.USER_PATH)
-public class LoginController {
-
-	private ResultBean resultBean;
+@RequestMapping(Constants.TECHNIQUE_PATH)
+public class TechniqueController {
+    private ResultBean resultBean;
 	
 	@Autowired
-	private LoginService service;
+	private TechniqueService service;
 	
-	 /**
+	/**
      * @param request
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<ResultBean> login(HttpServletRequest request) {
+    public ResponseEntity<ResultBean> getTechniqueById(HttpServletRequest request) {
     	resultBean = new ResultBean();
-        String userName = request.getParameter("user_name");
-        String password = request.getParameter("password");
+        String empId = request.getParameter("userId");
         try {
-            resultBean = service.login(userName, password);
+            resultBean = service.getTechniqueById(empId);
         } catch (MessageListException e) {
             resultBean = new ResultBean(Constants.RESULT_FAIL, "", null, e.getLstError());
             return new ResponseEntity<>(resultBean, HttpStatus.BAD_REQUEST);
@@ -53,5 +52,4 @@ public class LoginController {
         }
         return new ResponseEntity<>(resultBean, service.getStatus());
     }
-	
 }
